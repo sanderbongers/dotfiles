@@ -2,10 +2,13 @@
 
 set -euo pipefail
 
-echo "Updating system..."
-sudo apt update -y
+if [[ "$SHELL" != *fish ]]; then
+    echo 'deb http://download.opensuse.org/repositories/shells:/fish/Debian_12/ /' | sudo tee /etc/apt/sources.list.d/shells:fish.list
+    curl -fsSL https://download.opensuse.org/repositories/shells:fish/Debian_12/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/shells_fish.gpg >/dev/null
+fi
 
 echo "Installing packages..."
+sudo apt update -y
 sudo apt install -y \
     build-essential \
     fish \
@@ -21,7 +24,7 @@ if [[ "$LANG" != "en_US.UTF-8" ]]; then
     sudo update-locale LANG=en_US.UTF-8
 fi
 
-if [[ $(basename "$SHELL") != "fish" ]]; then
+if [[ "$SHELL" != *fish ]]; then
     echo "Setting Fish as default shell..."
     grep -q "$(which fish)" /etc/shells || which fish | sudo tee -a /etc/shells
     chsh -s "$(which fish)"
@@ -41,7 +44,7 @@ if ! command -v cargo &>/dev/null; then
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path
     grep -q cargo ~/.config/fish/config.fish.local || echo "fish_add_path -g ~/.cargo/env.fish" | tee -a ~/.config/fish/config.fish.local
     # shellcheck disable=SC1090
-    if [[ "$SHELL" == fish* ]]; then
+    if [[ "$SHELL" == *fish ]]; then
         . ~/.cargo/env.fish
     else
         . ~/.cargo/env
