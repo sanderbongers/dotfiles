@@ -3,8 +3,13 @@
 set -euo pipefail
 
 if [[ "$SHELL" != *fish ]]; then
-    echo 'deb http://download.opensuse.org/repositories/shells:/fish/Debian_12/ /' | sudo tee /etc/apt/sources.list.d/shells:fish.list
-    curl -fsSL https://download.opensuse.org/repositories/shells:fish/Debian_12/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/shells_fish.gpg >/dev/null
+    curl -fsSL https://download.opensuse.org/repositories/shells:fish/Debian_12/Release.key | gpg --dearmor | sudo tee /etc/apt/keyrings/shells_fish.gpg >/dev/null
+    printf '%s\n' \
+        "Types: deb" \
+        "URIs: http://download.opensuse.org/repositories/shells:/fish/Debian_12/" \
+        "Suites: /" \
+        "Components:" \
+        "Signed-By: /etc/apt/keyrings/shells_fish.gpg" | sudo tee /etc/apt/sources.list.d/shells:fish.sources >/dev/null
 fi
 
 echo "Installing packages..."
