@@ -1,4 +1,6 @@
-command -q brew || set -x PATH "/opt/homebrew/bin:/home/linuxbrew/.linuxbrew/bin:$PATH"
+string match -q (uname) Darwin; or return
+
+command -q brew; or set -x PATH "/opt/homebrew/bin:$PATH"
 if command -q brew
     eval "$(brew shellenv)"
 
