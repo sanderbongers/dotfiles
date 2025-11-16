@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 echo "Updating system..."
 sudo apt update -y
 
@@ -9,25 +11,8 @@ sudo apt install -y \
     fish \
     fzf \
     keychain \
-    locales \
-    nvim \
+    neovim \
     stow
-
-if ! command -v cargo &>/dev/null; then
-    echo "Installing Rust..."
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path
-    grep -q cargo ~/.config/fish/config.fish.local || echo "fish_add_path -g ~/.cargo/env.fish" | tee -a ~/.config/fish/config.fish.local
-    # shellcheck disable=SC1090
-    . ~/.cargo/env.fish
-fi
-
-echo "Installing Rust packages..."
-cargo install bat fd-find ripgrep git-delta zoxide
-
-echo "Installing Node.js..."
-curl -fsSL https://deb.nodesource.com/setup_lts.x -o nodesource_setup.sh
-sudo bash nodesource_setup.sh
-sudo apt install -y nodejs
 
 if [[ "$LANG" != "en_US.UTF-8" ]]; then
     echo "Setting locale..."
@@ -49,7 +34,27 @@ if [ ! -L ~/.config/fish ]; then
 fi
 
 echo "Stowing dotfiles..."
-make stow
+make link
+
+if ! command -v cargo &>/dev/null; then
+    echo "Installing Rust..."
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path
+    grep -q cargo ~/.config/fish/config.fish.local || echo "fish_add_path -g ~/.cargo/env.fish" | tee -a ~/.config/fish/config.fish.local
+    # shellcheck disable=SC1090
+    if [[ "$SHELL" == fish* ]]; then
+        . ~/.cargo/env.fish
+    else
+        . ~/.cargo/env
+    fi
+fi
+
+echo "Installing Rust packages..."
+cargo install bat fd-find ripgrep git-delta zoxide
+
+echo "Installing Node.js..."
+curl -fsSL https://deb.nodesource.com/setup_lts.x -o nodesource_setup.sh
+sudo bash nodesource_setup.sh
+sudo apt install -y nodejs
 
 echo "Rebuilding bat cache..."
 bat cache --build
