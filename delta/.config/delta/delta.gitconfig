@@ -1,0 +1,12 @@
+[core]
+	pager = delta
+
+[delta]
+	diff-so-fancy = true
+	navigate = true
+	file-decoration-style = ol
+	hunk-header-style = omit
+	line-numbers = true
+
+[interactive]
+	diffFilter = delta --color-only

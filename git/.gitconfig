@@ -1,0 +1,69 @@
+[user]
+	name = Sander Bongers
+	email = sander@bonge.rs
+	signingkey = ~/.ssh/id_ed25519.pub
+
+[init]
+	defaultBranch = main
+
+[blame]
+	coloring = highlightRecent
+	date = relative
+
+[branch]
+	sort = -committerdate
+
+[color "blame"]
+	highlightRecent = 240, 2 years ago, 243, 1 year ago, 246, 6 months ago, 249, 1 month ago, 252, 1 week ago, 255
+
+[commit]
+	gpgsign = true
+	verbose = true
+
+[credential]
+	helper = osxkeychain
+
+[diff]
+	algorithm = histogram
+	colorMoved = plain
+	colorMovedWS = allow-indentation-change
+	mnemonicPrefix = true
+
+[fetch]
+	prune = true
+	pruneTags = true
+
+[gpg]
+	format = ssh
+
+[help]
+	autocorrect = prompt
+
+[log]
+	date = relative
+
+[merge]
+	conflictstyle = zdiff3
+
+[pull]
+	rebase = true
+
+[push]
+	autoSetupRemote = true
+	followTags = true
+
+[rebase]
+	autoSquash = true
+	autoStash = true
+	updateRefs = true
+
+[rerere]
+	autoUpdate = true
+	enabled = true
+
+[tag]
+	sort = -version:refname
+
+[include]
+	path = ~/.config/delta/delta.gitconfig
+	path = ~/.gitconfig.local

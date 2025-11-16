@@ -1,0 +1,4 @@
+--one-file-system
+--exclude /sys --exclude /proc
+--exclude /System/Volumes/Data
+--color dark
