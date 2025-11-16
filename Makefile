@@ -4,7 +4,7 @@ help: # Display help message
 	echo "Available commands:\n"
 	grep -E "^[^#[:space:]]+:" Makefile | grep -v "^\." | sed "s/ #//" | column -t -s ":"
 
-install: # Install packages and dotfiles
+install: # Install dotfiles and packages
 	scripts/install.sh
 
 update: # Update dotfiles and packages
