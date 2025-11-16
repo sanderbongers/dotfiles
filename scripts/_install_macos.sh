@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 if ! grep -qs pam_tid.so /etc/pam.d/sudo_local; then
     echo "Enabling Touch ID for sudo..."
     if [[ ! -f /etc/pam.d/sudo_local ]]; then
@@ -33,10 +35,10 @@ fi
 
 echo "Stowing dotfiles..."
 [[ -x $(command -v stow) ]] || brew install stow
-make stow
+make link
 
 echo "Installing Homebrew packages..."
-brew bundle check --global --no-upgrade || brew bundle install --global --no-upgrade
+make bundle-install
 
 echo "Rebuilding bat cache..."
 bat cache --build
