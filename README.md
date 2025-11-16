@@ -5,7 +5,7 @@ Personal dotfiles and bootstrap scripts for macOS and Linux (Debian).
 ## Installation
 
 ```bash
-git clone git@github.com:sanderbongers/.dotfiles.git ~/.dotfiles
+git clone git@github.com:sanderbongers/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
 make install
 ```
