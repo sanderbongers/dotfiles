@@ -27,6 +27,7 @@ if [[ "$LANG" != "en_US.UTF-8" ]]; then
     sudo sed -i 's/^# \(en_US\.UTF-8 UTF-8\)/\1/' /etc/locale.gen
     sudo locale-gen
     sudo update-locale LANG=en_US.UTF-8
+    sudo timedatectl set-timezone Europe/Amsterdam
 fi
 
 if [[ "$SHELL" != *fish ]]; then
