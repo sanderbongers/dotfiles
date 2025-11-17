@@ -32,6 +32,7 @@ echo "Installing packages..."
 sudo apt update -y
 sudo apt install -y \
     build-essential \
+    caddy \
     fish \
     fzf \
     keychain \
