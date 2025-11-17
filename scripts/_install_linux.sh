@@ -3,7 +3,7 @@
 set -euo pipefail
 
 if [[ "$SHELL" != *fish ]]; then
-    curl -fsSL https://download.opensuse.org/repositories/shells:fish/Debian_13/Release.key | gpg --dearmor | sudo tee /etc/apt/keyrings/shells_fish.gpg >/dev/null
+    curl -fsSL https://download.opensuse.org/repositories/shells:fish/Debian_13/Release.key | gpg --dearmor | sudo tee /usr/share/keyrings/shells_fish.gpg >/dev/null
     printf '%s\n' \
         "Types: deb" \
         "URIs: http://download.opensuse.org/repositories/shells:/fish/Debian_13/" \
