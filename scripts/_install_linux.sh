@@ -3,13 +3,23 @@
 set -euo pipefail
 
 if [[ "$SHELL" != *fish ]]; then
-    curl -fsSL https://download.opensuse.org/repositories/shells:fish/Debian_13/Release.key | gpg --dearmor | sudo tee /usr/share/keyrings/shells_fish.gpg >/dev/null
+    curl -fsSL https://download.opensuse.org/repositories/shells:fish/Debian_13/Release.key | sudo gpg --dearmor -o /usr/share/keyrings/shells_fish.gpg
     printf '%s\n' \
         "Types: deb" \
         "URIs: http://download.opensuse.org/repositories/shells:/fish/Debian_13/" \
         "Suites: /" \
         "Components:" \
         "Signed-By: /etc/apt/keyrings/shells_fish.gpg" | sudo tee /etc/apt/sources.list.d/shells:fish.sources >/dev/null
+fi
+
+if [[ ! -x $(command -v caddy) ]]; then
+    curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | sudo gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg
+    printf '%s\n' \
+        "Types: deb deb-src" \
+        "URIs: https://dl.cloudsmith.io/public/caddy/stable/deb/debian" \
+        "Suites: /" \
+        "Components: main" \
+        "Signed-By: /usr/share/keyrings/caddy-stable-archive-keyring.gpg" | sudo tee /etc/apt/sources.list.d/caddy-stable.sources >/dev/null
 fi
 
 if [[ ! -x $(command -v nodejs) ]]; then
@@ -66,6 +76,10 @@ fi
 
 echo "Installing Rust packages..."
 cargo install bat fd-find ripgrep git-delta zoxide
+test -f /usr/share/fish/completions/bat.fish
+or bat --completion fish | sudo tee /usr/share/fish/completions/bat.fish >/dev/null
+test -f /usr/share/fish/completions/ripgrep.fish
+or rg --generate=complete-fish | sudo tee /usr/share/fish/completions/ripgrep.fish >/dev/null
 
 echo "Rebuilding bat cache..."
 bat cache --build
