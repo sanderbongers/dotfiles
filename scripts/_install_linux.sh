@@ -3,13 +3,19 @@
 set -euo pipefail
 
 if [[ "$SHELL" != *fish ]]; then
-    curl -fsSL https://download.opensuse.org/repositories/shells:fish/Debian_12/Release.key | gpg --dearmor | sudo tee /etc/apt/keyrings/shells_fish.gpg >/dev/null
+    curl -fsSL https://download.opensuse.org/repositories/shells:fish/Debian_13/Release.key | gpg --dearmor | sudo tee /etc/apt/keyrings/shells_fish.gpg >/dev/null
     printf '%s\n' \
         "Types: deb" \
-        "URIs: http://download.opensuse.org/repositories/shells:/fish/Debian_12/" \
+        "URIs: http://download.opensuse.org/repositories/shells:/fish/Debian_13/" \
         "Suites: /" \
         "Components:" \
         "Signed-By: /etc/apt/keyrings/shells_fish.gpg" | sudo tee /etc/apt/sources.list.d/shells:fish.sources >/dev/null
+fi
+
+if [[ ! -x $(command -v nodejs) ]]; then
+    echo "Installing Node.js..."
+    curl -fsSL https://deb.nodesource.com/setup_lts.x -o nodesource_setup.sh
+    sudo bash nodesource_setup.sh
 fi
 
 echo "Installing packages..."
@@ -20,6 +26,7 @@ sudo apt install -y \
     fzf \
     keychain \
     neovim \
+    nodejs \
     stow
 
 if [[ "$LANG" != "en_US.UTF-8" ]]; then
@@ -45,7 +52,7 @@ fi
 echo "Stowing dotfiles..."
 make link
 
-if ! command -v cargo &>/dev/null; then
+if [[ ! -x $(command -v cargo) ]]; then
     echo "Installing Rust..."
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path
     grep -q cargo ~/.config/fish/config.fish.local || echo "fish_add_path -g ~/.cargo/env.fish" | tee -a ~/.config/fish/config.fish.local
@@ -59,11 +66,6 @@ fi
 
 echo "Installing Rust packages..."
 cargo install bat fd-find ripgrep git-delta zoxide
-
-echo "Installing Node.js..."
-curl -fsSL https://deb.nodesource.com/setup_lts.x -o nodesource_setup.sh
-sudo bash nodesource_setup.sh
-sudo apt install -y nodejs
 
 echo "Rebuilding bat cache..."
 bat cache --build
