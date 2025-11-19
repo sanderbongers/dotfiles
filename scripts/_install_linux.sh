@@ -85,4 +85,4 @@ or rg --generate=complete-fish | sudo tee /usr/share/fish/completions/ripgrep.fi
 echo "Rebuilding bat cache..."
 bat cache --build
 
-[[ $SHELL_CHANGED ]] && echo "Changed default shell to Fish, restart terminal to apply changes."
+[[ ${SHELL_CHANGED:-false} ]] && echo "Changed default shell to Fish, restart terminal to apply changes."

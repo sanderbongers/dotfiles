@@ -86,4 +86,4 @@ killall Finder
 chflags nohidden ~/Library
 sudo pmset -a displaysleep 60 ttyskeepawake 1
 
-[[ $SHELL_CHANGED ]] && echo "Changed default shell to Fish, restart terminal to apply changes."
+[[ ${SHELL_CHANGED:-false} ]] && echo "Changed default shell to Fish, restart terminal to apply changes."
