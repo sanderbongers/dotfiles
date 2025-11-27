@@ -37,6 +37,7 @@ sudo apt install -y \
     fzf \
     jq \
     keychain \
+    msmtp msmtp-mta \
     neovim \
     nodejs \
     stow
