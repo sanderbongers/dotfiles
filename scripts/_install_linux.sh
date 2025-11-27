@@ -35,6 +35,7 @@ sudo apt install -y \
     caddy \
     fish \
     fzf \
+    jq \
     keychain \
     neovim \
     nodejs \
