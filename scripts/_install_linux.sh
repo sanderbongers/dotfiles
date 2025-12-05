@@ -31,6 +31,7 @@ fi
 echo "Installing packages..."
 sudo apt update -y
 sudo apt install -y \
+    bind9-dnsutils \
     build-essential \
     caddy \
     fish \
