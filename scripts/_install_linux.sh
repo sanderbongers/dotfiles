@@ -40,7 +40,8 @@ sudo apt install -y \
     msmtp msmtp-mta \
     neovim \
     nodejs \
-    stow
+    stow \
+    unbound
 
 if [[ "$LANG" != "en_US.UTF-8" ]]; then
     echo "Setting locale..."
