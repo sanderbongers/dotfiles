@@ -1,5 +1,5 @@
 if command -q php
-    abbr -a bc "php bin/console"
+    abbr -a "b/c" -p anywhere "bin/console"
 
     if command -q brew
         abbr --command={php7.4,php8.1,php8.2} composer "(brew --prefix)/bin/composer"
