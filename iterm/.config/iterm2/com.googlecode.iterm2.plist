@@ -1189,6 +1189,8 @@
 	<true/>
 	<key>Selection Respects Soft Boundaries</key>
 	<false/>
+	<key>ShowNewOutputIndicator</key>
+	<false/>
 	<key>SoundForEsc</key>
 	<false/>
 	<key>TabStyleWithAutomaticOption</key>
