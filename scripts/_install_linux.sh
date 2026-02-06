@@ -3,23 +3,23 @@
 set -euo pipefail
 
 if [[ "$SHELL" != *fish ]]; then
-    curl -fsSL https://download.opensuse.org/repositories/shells:fish/Debian_13/Release.key | sudo gpg --dearmor -o /usr/share/keyrings/shells_fish.gpg
+    curl -fsSL https://download.opensuse.org/repositories/shells:fish/Debian_13/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/fish-shell.gpg
     printf '%s\n' \
         "Types: deb" \
         "URIs: http://download.opensuse.org/repositories/shells:/fish/Debian_13/" \
         "Suites: /" \
         "Components:" \
-        "Signed-By: /etc/apt/keyrings/shells_fish.gpg" | sudo tee /etc/apt/sources.list.d/shells:fish.sources >/dev/null
+        "Signed-By: /etc/apt/keyrings/fish-shell.gpg" | sudo tee /etc/apt/sources.list.d/shells:fish.sources >/dev/null
 fi
 
 if [[ ! -x $(command -v caddy) ]]; then
-    curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | sudo gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg
+    curl -fsSL 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | sudo gpg --dearmor -o /etc/apt/keyrings/caddy-stable-archive-keyring.gpg
     printf '%s\n' \
         "Types: deb deb-src" \
         "URIs: https://dl.cloudsmith.io/public/caddy/stable/deb/debian" \
         "Suites: /" \
         "Components: main" \
-        "Signed-By: /usr/share/keyrings/caddy-stable-archive-keyring.gpg" | sudo tee /etc/apt/sources.list.d/caddy-stable.sources >/dev/null
+        "Signed-By: /etc/apt/keyrings/caddy-stable-archive-keyring.gpg" | sudo tee /etc/apt/sources.list.d/caddy-stable.sources >/dev/null
 fi
 
 if [[ ! -x $(command -v nodejs) ]]; then
