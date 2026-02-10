@@ -1,8 +1,15 @@
-if command -q php
-    abbr -a "b/c" -p anywhere "bin/console"
+if command -q composer
+    abbr -a ci "symfony composer install"
+    abbr -a cu "symfony composer update"
+end
 
-    if command -q brew
-        abbr --command={php7.4,php8.1,php8.2} composer "(brew --prefix)/bin/composer"
-        abbr --command={php7.4,php8.1,php8.2} wp "(brew --prefix)/bin/wp"
+if command -q symfony; and command -q wp
+    function wp
+        set -l php_bin (string trim (symfony php -r "echo PHP_BINARY;" 2>/dev/null))
+        if test -n "$php_bin"
+            $php_bin (command -v wp) $argv
+        else
+            command wp $argv
+        end
     end
 end
