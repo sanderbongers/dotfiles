@@ -13,6 +13,7 @@ update: # Update dotfiles and packages
 
 link: # Symlink all dotfiles to home directory
 	stow --verbose --ignore \.DS_Store --restow --target ~ */
+	fish -c _agent_skills_link
 
 unlink: # Remove all dotfile symlinks
 	stow --verbose --target ~ --delete */
