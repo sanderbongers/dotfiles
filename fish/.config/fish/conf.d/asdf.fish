@@ -1,3 +1,3 @@
 if command -q asdf
-    fish_add_path -gp ~/.asdf/shims
+    fish_add_path -g ~/.asdf/shims
 end
