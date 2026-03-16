@@ -11,6 +11,7 @@
 	date = relative
 
 [branch]
+	autosetuprebase = always
 	sort = -committerdate
 
 [color "blame"]
