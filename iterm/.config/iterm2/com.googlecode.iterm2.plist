@@ -15,15 +15,17 @@
 	<key>AITermAPI</key>
 	<integer>2</integer>
 	<key>AIVectorStore</key>
-	<integer>0</integer>
+	<integer>1</integer>
+	<key>AIVendor</key>
+	<integer>2</integer>
 	<key>AdjustWindowForFontSizeChange</key>
 	<false/>
 	<key>AiMaxTokens</key>
-	<integer>400000</integer>
+	<integer>1000000</integer>
 	<key>AiModel</key>
-	<string>gpt-5.2</string>
+	<string>gpt-4.1</string>
 	<key>AiResponseMaxTokens</key>
-	<integer>128000</integer>
+	<integer>32768</integer>
 	<key>AitermURL</key>
 	<string>https://api.openai.com/v1/responses</string>
 	<key>AllowClipboardAccess</key>
@@ -1019,7 +1021,7 @@
 			<key>Send Terminal Generated Alerts</key>
 			<true/>
 			<key>Set Local Environment Vars</key>
-			<integer>0</integer>
+			<integer>1</integer>
 			<key>Shortcut</key>
 			<string></string>
 			<key>Show Mark Indicators</key>
