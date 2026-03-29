@@ -2,4 +2,3 @@
 --map-syntax="**/config.fish.local:Fish"
 --style="plain"
 --theme="Catppuccin Mocha"
---no-pager
