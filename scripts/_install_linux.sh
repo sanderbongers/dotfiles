@@ -80,7 +80,13 @@ if [[ ! -x $(command -v cargo) ]]; then
 fi
 
 echo "Installing Rust packages..."
-cargo install bat fd-find ripgrep git-delta zoxide
+cargo install \
+    bat \
+    fd-find \
+    git-delta \
+    ripgrep \
+    tldr \
+    zoxide
 test -f /usr/share/fish/completions/bat.fish
 or bat --completion fish | sudo tee /usr/share/fish/completions/bat.fish >/dev/null
 test -f /usr/share/fish/completions/ripgrep.fish
