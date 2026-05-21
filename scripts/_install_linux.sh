@@ -42,6 +42,7 @@ sudo apt install -y \
     neovim \
     nodejs \
     stow \
+    tmux \
     unbound
 
 if [[ "$LANG" != "en_US.UTF-8" ]]; then
