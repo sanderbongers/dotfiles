@@ -42,6 +42,7 @@ sudo apt install -y \
     neovim \
     nodejs \
     stow \
+    sqlite3 \
     tmux \
     unbound
 
