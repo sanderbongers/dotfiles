@@ -47,12 +47,12 @@ echo "Setting macOS user defaults..."
 defaults -currentHost write -g com.apple.mouse.tapBehavior -bool true
 defaults write -g AppleKeyboardUIMode -int 3
 defaults write -g AppleShowAllExtensions -bool true
-defaults write -g com.apple.trackpad.scaling -float 1.5
 defaults write -g InitialKeyRepeat -int 25
 defaults write -g KeyRepeat -int 2
 defaults write -g NSAutomaticQuoteSubstitutionEnabled -bool false
 defaults write -g NSNavPanelExpandedStateForSaveMode -bool true
 defaults write -g PMPrintingExpandedStateForPrint2 -bool true
+defaults write -g com.apple.trackpad.scaling -float 1.5
 defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
 defaults write com.apple.appleseed.FeedbackAssistant Autogather -bool false
 defaults write com.apple.dock autohide -bool false
