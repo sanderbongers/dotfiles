@@ -36,6 +36,7 @@ sudo apt install -y \
     caddy \
     fish \
     fzf \
+    iotop \
     jq \
     keychain \
     msmtp msmtp-mta \
