@@ -41,8 +41,9 @@ sudo apt install -y \
     msmtp msmtp-mta \
     neovim \
     nodejs \
-    stow \
     sqlite3 \
+    stow \
+    sysstat \
     tmux \
     unbound
 
