@@ -75,30 +75,23 @@ fi
 echo "Stowing dotfiles..."
 make link
 
-if [[ ! -x $(command -v cargo) ]]; then
-    echo "Installing Rust..."
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path
-    grep -q cargo ~/.config/fish/config.fish.local || echo "fish_add_path -g ~/.cargo/env.fish" | tee -a ~/.config/fish/config.fish.local
-    # shellcheck disable=SC1090
-    if [[ "$SHELL" == *fish ]]; then
-        . ~/.cargo/env.fish
-    else
-        . ~/.cargo/env
-    fi
+if [[ ! -x $(command -v cargo-binstall) ]]; then
+    echo "Installing cargo-binstall..."
+    curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
+    grep -q cargo ~/.config/fish/config.fish.local || echo "fish_add_path -g ~/.cargo/bin" | tee -a ~/.config/fish/config.fish.local
 fi
+export PATH="$HOME/.cargo/bin:$PATH"
 
-echo "Installing Rust packages..."
-cargo install \
+echo "Installing prebuilt binaries..."
+cargo-binstall --no-confirm \
     bat \
     fd-find \
     git-delta \
     ripgrep \
-    tldr \
+    tealdeer \
     zoxide
-test -f /usr/share/fish/completions/bat.fish
-or bat --completion fish | sudo tee /usr/share/fish/completions/bat.fish >/dev/null
-test -f /usr/share/fish/completions/ripgrep.fish
-or rg --generate=complete-fish | sudo tee /usr/share/fish/completions/ripgrep.fish >/dev/null
+test -f /usr/share/fish/completions/bat.fish || bat --completion fish | sudo tee /usr/share/fish/completions/bat.fish >/dev/null
+test -f /usr/share/fish/completions/ripgrep.fish || rg --generate=complete-fish | sudo tee /usr/share/fish/completions/ripgrep.fish >/dev/null
 
 echo "Rebuilding bat cache..."
 bat cache --build
