@@ -2,25 +2,29 @@
 
 set -euo pipefail
 
-if [[ "$SHELL" != *fish ]]; then
-    curl -fsSL https://download.opensuse.org/repositories/shells:fish/Debian_13/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/fish-shell.gpg
-    printf '%s\n' \
-        "Types: deb" \
-        "URIs: http://download.opensuse.org/repositories/shells:/fish/Debian_13/" \
-        "Suites: /" \
-        "Components:" \
-        "Signed-By: /etc/apt/keyrings/fish-shell.gpg" | sudo tee /etc/apt/sources.list.d/shells:fish.sources >/dev/null
-fi
+sudo install -d -m 0755 /etc/apt/keyrings
 
-if [[ ! -x $(command -v caddy) ]]; then
-    curl -fsSL 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | sudo gpg --dearmor -o /etc/apt/keyrings/caddy-stable-archive-keyring.gpg
-    printf '%s\n' \
-        "Types: deb deb-src" \
-        "URIs: https://dl.cloudsmith.io/public/caddy/stable/deb/debian" \
-        "Suites: /" \
-        "Components: main" \
-        "Signed-By: /etc/apt/keyrings/caddy-stable-archive-keyring.gpg" | sudo tee /etc/apt/sources.list.d/caddy-stable.sources >/dev/null
-fi
+printf '%s\n' \
+    "Types: deb" \
+    "URIs: http://deb.debian.org/debian/" \
+    "Suites: trixie-backports" \
+    "Components: main" \
+    "Signed-By: /usr/share/keyrings/debian-archive-keyring.pgp" | sudo tee /etc/apt/sources.list.d/backports.sources >/dev/null
+
+curl -fsSL https://download.opensuse.org/repositories/shells:fish/Debian_13/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/fish.gpg
+printf '%s\n' \
+    "Types: deb" \
+    "URIs: http://download.opensuse.org/repositories/shells:/fish/Debian_13/" \
+    "Suites: /" \
+    "Signed-By: /etc/apt/keyrings/fish.gpg" | sudo tee /etc/apt/sources.list.d/fish.sources >/dev/null
+
+curl -fsSL 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | sudo gpg --dearmor -o /etc/apt/keyrings/caddy.gpg
+printf '%s\n' \
+    "Types: deb" \
+    "URIs: https://dl.cloudsmith.io/public/caddy/stable/deb/debian/" \
+    "Suites: any-version" \
+    "Components: main" \
+    "Signed-By: /etc/apt/keyrings/caddy.gpg" | sudo tee /etc/apt/sources.list.d/caddy.sources >/dev/null
 
 if [[ ! -x $(command -v nodejs) ]]; then
     echo "Installing Node.js..."
