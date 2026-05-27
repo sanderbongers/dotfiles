@@ -58,6 +58,11 @@ sudo apt install -y \
     unbound \
     zoxide
 
+# Backports needed to install Samba >= 4.23.
+# Once trixie stable ships >= 4.23, drop this and move samba into the list above.
+echo "Installing Samba from backports..."
+sudo apt install -y -t trixie-backports samba
+
 if [[ "$LANG" != "en_US.UTF-8" ]]; then
     echo "Setting locale..."
     sudo sed -i 's/^# \(en_US\.UTF-8 UTF-8\)/\1/' /etc/locale.gen
