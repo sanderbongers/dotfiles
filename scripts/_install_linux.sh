@@ -87,11 +87,9 @@ echo "Stowing dotfiles..."
 make link
 
 echo "Linking bat and fd to their Debian binary names..."
-sudo ln -sf "$(command -v batcat)" /usr/local/bin/bat
-sudo ln -sf "$(command -v fdfind)" /usr/local/bin/fd
-
-test -f /usr/share/fish/completions/bat.fish || bat --completion fish | sudo tee /usr/share/fish/completions/bat.fish >/dev/null
-test -f /usr/share/fish/completions/ripgrep.fish || rg --generate=complete-fish | sudo tee /usr/share/fish/completions/ripgrep.fish >/dev/null
+mkdir -p ~/.local/bin
+ln -sf "$(command -v batcat)" ~/.local/bin/bat
+ln -sf "$(command -v fdfind)" ~/.local/bin/fd
 
 echo "Rebuilding bat cache..."
 bat cache --build
