@@ -35,22 +35,28 @@ fi
 echo "Installing packages..."
 sudo apt update -y
 sudo apt install -y \
+    bat \
     bind9-dnsutils \
     build-essential \
     caddy \
+    fd-find \
     fish \
     fzf \
+    git-delta \
     iotop \
     jq \
     keychain \
     msmtp msmtp-mta \
     neovim \
     nodejs \
+    ripgrep \
     sqlite3 \
     stow \
     sysstat \
+    tealdeer \
     tmux \
-    unbound
+    unbound \
+    zoxide
 
 if [[ "$LANG" != "en_US.UTF-8" ]]; then
     echo "Setting locale..."
@@ -75,21 +81,10 @@ fi
 echo "Stowing dotfiles..."
 make link
 
-if [[ ! -x $(command -v cargo-binstall) ]]; then
-    echo "Installing cargo-binstall..."
-    curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
-    grep -q cargo ~/.config/fish/config.fish.local || echo "fish_add_path -g ~/.cargo/bin" | tee -a ~/.config/fish/config.fish.local
-fi
-export PATH="$HOME/.cargo/bin:$PATH"
+echo "Linking bat and fd to their Debian binary names..."
+sudo ln -sf "$(command -v batcat)" /usr/local/bin/bat
+sudo ln -sf "$(command -v fdfind)" /usr/local/bin/fd
 
-echo "Installing prebuilt binaries..."
-cargo-binstall --no-confirm \
-    bat \
-    fd-find \
-    git-delta \
-    ripgrep \
-    tealdeer \
-    zoxide
 test -f /usr/share/fish/completions/bat.fish || bat --completion fish | sudo tee /usr/share/fish/completions/bat.fish >/dev/null
 test -f /usr/share/fish/completions/ripgrep.fish || rg --generate=complete-fish | sudo tee /usr/share/fish/completions/ripgrep.fish >/dev/null
 
