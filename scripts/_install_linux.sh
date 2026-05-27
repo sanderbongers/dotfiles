@@ -91,4 +91,6 @@ test -f /usr/share/fish/completions/ripgrep.fish || rg --generate=complete-fish 
 echo "Rebuilding bat cache..."
 bat cache --build
 
-[[ ${SHELL_CHANGED:-false} ]] && echo "Changed default shell to Fish, restart terminal to apply changes."
+if [[ ${SHELL_CHANGED:-false} == true ]]; then
+    echo "Changed default shell to Fish, restart terminal to apply changes."
+fi
