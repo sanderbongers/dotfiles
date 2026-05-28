@@ -1,5 +1,3 @@
-function find --description "Walk a file hierarchy, excluding macOS VFS"
-    set -l vfs_dir /System/Volumes/Data
-
-    command find $argv -not -path $vfs_dir
+function find
+    command find $argv -xdev 2>/dev/null
 end
