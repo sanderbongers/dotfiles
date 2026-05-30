@@ -4,4 +4,11 @@
 .sander
 .vscode
 
+###> Claude ###
+CLAUDE.local.md
 **/.claude/settings.local.json
+###< Claude ###
+
+###> WordPress ###
+wp-cli.local.yml
+###< WordPress ###
