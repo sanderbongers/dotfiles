@@ -2,7 +2,7 @@ string match -q (uname) Darwin; or return
 
 command -q brew; or set -x PATH "/opt/homebrew/bin:$PATH"
 if command -q brew
-    eval "$(brew shellenv)"
+    brew shellenv | source
 
     set -gx HOMEBREW_BUNDLE_DUMP_NO_VSCODE true
     set -gx HOMEBREW_BUNDLE_NO_UPGRADE true
