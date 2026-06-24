@@ -32,6 +32,7 @@ printf '%s\n' \
     "URIs: https://downloads.1password.com/linux/debian/$(dpkg --print-architecture)" \
     "Suites: stable" \
     "Components: main" \
+    "Architectures: $(dpkg --print-architecture)" \
     "Signed-By: /etc/apt/keyrings/1password.asc" | sudo tee /etc/apt/sources.list.d/1password.sources >/dev/null
 
 if [[ ! -x $(command -v nodejs) ]]; then
