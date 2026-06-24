@@ -26,6 +26,14 @@ printf '%s\n' \
     "Components: main" \
     "Signed-By: /etc/apt/keyrings/caddy.asc" | sudo tee /etc/apt/sources.list.d/caddy.sources >/dev/null
 
+curl -fsSL https://downloads.1password.com/linux/keys/1password.asc | sudo tee /etc/apt/keyrings/1password.asc >/dev/null
+printf '%s\n' \
+    "Types: deb" \
+    "URIs: https://downloads.1password.com/linux/debian/$(dpkg --print-architecture)" \
+    "Suites: stable" \
+    "Components: main" \
+    "Signed-By: /etc/apt/keyrings/1password.asc" | sudo tee /etc/apt/sources.list.d/1password.sources >/dev/null
+
 if [[ ! -x $(command -v nodejs) ]]; then
     echo "Installing Node.js..."
     curl -fsSL https://deb.nodesource.com/setup_lts.x -o nodesource_setup.sh
