@@ -46,11 +46,13 @@ sudo apt update -y
 sudo apt install -y \
     bat \
     bind9-dnsutils \
+    bsd-mailx \
     build-essential \
     caddy \
     fd-find \
     fish \
     fzf \
+    geoipupdate python3-maxminddb \
     git-delta \
     iotop \
     jq \
