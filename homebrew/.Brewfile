@@ -1,3 +1,7 @@
+# Open-source, cross-platform JavaScript runtime environment
+brew "node"
+# Browser automation CLI for AI agents
+brew "agent-browser"
 # Extendable version manager with support for Ruby, Node.js, Erlang & more
 brew "asdf"
 # Bourne-Again SHell, a UNIX command interpreter
@@ -50,8 +54,6 @@ brew "ffmpeg-full"
 brew "findutils"
 # User-friendly command-line shell for UNIX-like operating systems
 brew "fish"
-# Open-source, cross-platform JavaScript runtime environment
-brew "node"
 # LSP implementation for the fish shell language
 brew "fish-lsp"
 # Command-line fuzzy finder written in Go
@@ -122,6 +124,8 @@ brew "pv"
 brew "ripgrep"
 # Utility that provides fast incremental file transfer
 brew "rsync"
+# CLI proxy to minimize LLM token consumption
+brew "rtk"
 # Powerful, clean, object-oriented scripting language
 brew "ruby", link: false
 # Static analysis and lint tool, for (ba)sh scripts
