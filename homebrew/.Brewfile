@@ -42,8 +42,6 @@ brew "fd"
 brew "ffmpeg"
 # Transcode video stabilization plugin
 brew "libvidstab"
-# QR Code generation
-brew "qrencode"
 # OCR (Optical Character Recognition) engine
 brew "tesseract"
 # Port of OpenAI's Whisper model in C/C++
@@ -120,6 +118,8 @@ brew "postgresql@18"
 brew "prettier"
 # Monitor data's progress through a pipe
 brew "pv"
+# Utility for encoding or decoding QR code
+brew "qrtool"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 # Utility that provides fast incremental file transfer
@@ -160,8 +160,6 @@ brew "wget"
 brew "yarn"
 # Process YAML, JSON, XML, CSV and properties documents from the CLI
 brew "yq"
-# Suite of barcodes-reading tools
-brew "zbar"
 # Shell extension to navigate your filesystem faster
 brew "zoxide"
 # Command-line interface for 1Password
@@ -170,7 +168,5 @@ cask "1password-cli"
 cask "android-platform-tools"
 # Utility that prevents the system from going to sleep
 cask "caffeine"
-# Command-line agent for Cursor
-cask "cursor-cli"
 # Intercept, modify, replay, save HTTP/S traffic
 cask "mitmproxy"
