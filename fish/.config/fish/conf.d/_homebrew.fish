@@ -1,6 +1,6 @@
 string match -q (uname) Darwin; or return
 
-command -q brew; or set -x PATH "/opt/homebrew/bin:$PATH"
+command -q brew; or set -gx PATH /opt/homebrew/bin $PATH
 if command -q brew
     brew shellenv | source
 
