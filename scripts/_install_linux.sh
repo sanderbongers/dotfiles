@@ -74,8 +74,11 @@ echo "Installing Samba from backports..."
 sudo apt install -y -t trixie-backports samba
 
 echo "Installing Neovim from tarball..."
-NVIM_LATEST=$(curl -fsSL https://api.github.com/repos/neovim/neovim/releases/tags/stable | jq -r '.name' | grep -oE 'v[0-9.]+')
-if [[ "$(nvim --version 2>/dev/null | head -1 | grep -oE 'v[0-9.]+')" != "$NVIM_LATEST" ]]; then
+NVIM_LATEST=$(curl -fsSL https://api.github.com/repos/neovim/neovim/releases/latest | jq -r '.tag_name' || true)
+NVIM_CURRENT=$(nvim --version 2>/dev/null | head -1 | awk '{print $2}' || true)
+if [[ -z "$NVIM_LATEST" || "$NVIM_LATEST" == "null" ]]; then
+    echo "Could not determine latest Neovim version, skipping."
+elif [[ "$NVIM_CURRENT" != "$NVIM_LATEST" ]]; then
     sudo rm -rf /opt/nvim-linux-arm64
     curl -fsSL https://github.com/neovim/neovim/releases/download/stable/nvim-linux-arm64.tar.gz | sudo tar -xz -C /opt
     sudo ln -sfn /opt/nvim-linux-arm64 /opt/nvim
