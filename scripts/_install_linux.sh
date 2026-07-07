@@ -58,7 +58,6 @@ sudo apt install -y \
     jq \
     keychain \
     msmtp msmtp-mta \
-    neovim \
     nodejs \
     ripgrep \
     sqlite3 \
@@ -73,6 +72,15 @@ sudo apt install -y \
 # Once trixie stable ships >= 4.23, drop this and move samba into the list above.
 echo "Installing Samba from backports..."
 sudo apt install -y -t trixie-backports samba
+
+echo "Installing Neovim from tarball..."
+NVIM_LATEST=$(curl -fsSL https://api.github.com/repos/neovim/neovim/releases/tags/stable | jq -r '.name' | grep -oE 'v[0-9.]+')
+if [[ "$(nvim --version 2>/dev/null | head -1 | grep -oE 'v[0-9.]+')" != "$NVIM_LATEST" ]]; then
+    sudo rm -rf /opt/nvim-linux-arm64
+    curl -fsSL https://github.com/neovim/neovim/releases/download/stable/nvim-linux-arm64.tar.gz | sudo tar -xz -C /opt
+    sudo ln -sfn /opt/nvim-linux-arm64 /opt/nvim
+    sudo ln -sf /opt/nvim/bin/nvim /usr/local/bin/nvim
+fi
 
 if [[ "$LANG" != "en_US.UTF-8" ]]; then
     echo "Setting locale..."
