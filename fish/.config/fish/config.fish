@@ -5,7 +5,7 @@ set -gx LANG en_GB.UTF-8
 test -d ~/.local/bin; and fish_add_path -g ~/.local/bin
 
 # @fish-lsp-disable-next-line 1004
-test -f $__fish_config_dir/config.fish.local; and source $__fish_config_dir/config.fish.local
+test -f $__fish_config_dir/config.local.fish; and source $__fish_config_dir/config.local.fish
 
 # @fish-lsp-disable-next-line 1004
 test -f ~/.iterm2_shell_integration.fish; and source ~/.iterm2_shell_integration.fish

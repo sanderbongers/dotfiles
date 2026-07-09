@@ -1,4 +1,4 @@
 --map-syntax="**/config:Bourne Again Shell (bash)"
---map-syntax="**/config.fish.local:Fish"
+--map-syntax="**/config.local.fish:Fish"
 --style="plain"
 --theme="Catppuccin Mocha"
