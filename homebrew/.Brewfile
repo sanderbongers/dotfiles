@@ -1,5 +1,7 @@
 # Open-source, cross-platform JavaScript runtime environment
 brew "node"
+# Package acting as bridge between Node projects and their package managers
+brew "corepack"
 # Browser automation CLI for AI agents
 brew "agent-browser"
 # Extendable version manager with support for Ruby, Node.js, Erlang & more
@@ -156,8 +158,6 @@ brew "unar"
 brew "uv"
 # Internet file retriever
 brew "wget"
-# JavaScript package manager
-brew "yarn"
 # Process YAML, JSON, XML, CSV and properties documents from the CLI
 brew "yq"
 # Shell extension to navigate your filesystem faster
