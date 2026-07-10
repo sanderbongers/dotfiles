@@ -44,6 +44,7 @@ fi
 echo "Installing packages..."
 sudo apt update -y
 sudo apt install -y \
+    1password-cli \
     bat \
     bind9-dnsutils \
     bsd-mailx \
