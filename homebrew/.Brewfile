@@ -1,7 +1,5 @@
 # Open-source, cross-platform JavaScript runtime environment
 brew "node"
-# Package acting as bridge between Node projects and their package managers
-brew "corepack"
 # Browser automation CLI for AI agents
 brew "agent-browser"
 # Extendable version manager with support for Ruby, Node.js, Erlang & more
@@ -14,6 +12,8 @@ brew "bat"
 brew "p7zip"
 # Searches a binary image for embedded files and executable code
 brew "binwalk"
+# CLI of the open-source IDE For exploring and testing APIs
+brew "bruno-cli"
 # Powerful, enterprise-ready, open source web server with automatic HTTPS
 brew "caddy"
 # Cross-platform make
@@ -22,6 +22,8 @@ brew "cmake"
 brew "php"
 # Dependency Manager for PHP
 brew "composer"
+# Package acting as bridge between Node projects and their package managers
+brew "corepack"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
 # Measure DNS performance by simulating network conditions
@@ -44,8 +46,6 @@ brew "fd"
 brew "ffmpeg"
 # Transcode video stabilization plugin
 brew "libvidstab"
-# OCR (Optical Character Recognition) engine
-brew "tesseract"
 # Port of OpenAI's Whisper model in C/C++
 brew "whisper-cpp"
 # Play, record, convert, and stream many audio and video codecs
@@ -70,6 +70,8 @@ brew "gnu-tar"
 brew "gnu-which"
 # GNU grep, egrep and fgrep
 brew "grep"
+# HTTP load generator, ApacheBench (ab) replacement
+brew "hey"
 # Improved top (interactive process viewer)
 brew "htop"
 # Command-line benchmarking tool
@@ -90,8 +92,6 @@ brew "mailpit"
 brew "mariadb"
 # Fast, flexible, config-based cli for linting Markdown/CommonMark files
 brew "markdownlint-cli2"
-# Validating, recursive, caching DNS resolver
-brew "unbound"
 # SMTP client that can be used as an SMTP plugin for Mutt
 brew "msmtp"
 # CLI for MySQL with auto-completion and syntax highlighting
@@ -128,8 +128,6 @@ brew "ripgrep"
 brew "rsync"
 # CLI proxy to minimize LLM token consumption
 brew "rtk"
-# Powerful, clean, object-oriented scripting language
-brew "ruby", link: false
 # Static analysis and lint tool, for (ba)sh scripts
 brew "shellcheck"
 # Autoformat shell script source code
@@ -142,8 +140,6 @@ brew "sshuttle"
 brew "stow"
 # Build, run, and manage Symfony applications
 brew "symfony-cli"
-# Enables extra languages support for Tesseract
-brew "tesseract-lang"
 # Official documentation format of the GNU project
 brew "texinfo"
 # Official tldr client written in Rust
@@ -154,6 +150,8 @@ brew "tmux"
 brew "tree"
 # Command-line unarchiving tools supporting multiple formats
 brew "unar"
+# Validating, recursive, caching DNS resolver
+brew "unbound"
 # Extremely fast Python package installer and resolver, written in Rust
 brew "uv"
 # Internet file retriever
@@ -164,9 +162,13 @@ brew "yq"
 brew "zoxide"
 # Command-line interface for 1Password
 cask "1password-cli"
+# Browse, search and analyse your past AI coding sessions
+cask "agentsview"
 # Android SDK component
 cask "android-platform-tools"
 # Utility that prevents the system from going to sleep
 cask "caffeine"
 # Intercept, modify, replay, save HTTP/S traffic
 cask "mitmproxy"
+# Open-source code editor
+cask "visual-studio-code"
