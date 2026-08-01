@@ -11,9 +11,9 @@ if string match -q $os Darwin
 else if string match -q $os Linux
     if command -q keychain
         if test -f $ssh_key
-            for assignment in (keychain --quiet --quick --query $ssh_key)
-                set -gx (string split -m 1 = -- $assignment)
-            end
+            keychain --quiet --quick --eval $ssh_key \
+                | string replace -a 'set -x -U ' 'set -gx ' \
+                | source
         end
     end
 end
