@@ -13,6 +13,7 @@ if test $__os = Darwin
 else if test $__os = Linux
     if command -q keychain
         if test -f $ssh_key
+            # @fish-lsp-disable-next-line 7001
             keychain --quiet --quick --eval $ssh_key \
                 | string replace -a 'set -x -U ' 'set -gx ' \
                 | source
