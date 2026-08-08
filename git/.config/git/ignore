@@ -5,10 +5,12 @@
 .vscode
 
 ###> Claude ###
+**/.claude/.cc-writes/
 CLAUDE.local.md
-**/.claude/settings.local.json
+settings.local.json
 ###< Claude ###
 
 ###> WordPress ###
 wp-cli.local.yml
 ###< WordPress ###
+

@@ -1,3 +1,5 @@
-function ls --description "List contents of directory"
-    command ls -Apv --color $argv
+if status is-interactive
+    function ls --description "alias ls=ls -Apv --color"
+        command ls -Apv --color $argv
+    end
 end

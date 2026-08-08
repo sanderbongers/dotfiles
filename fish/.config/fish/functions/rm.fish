@@ -1,3 +1,5 @@
-function rm --description "alias rm=rm -Iv"
-    command rm -Iv $argv
+if status is-interactive
+    function rm --description "alias rm=rm -v"
+        command rm -v $argv
+    end
 end

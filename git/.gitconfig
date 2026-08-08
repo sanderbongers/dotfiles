@@ -1,7 +1,7 @@
 [user]
 	name = Sander Bongers
 	email = sander@bonge.rs
-	signingkey = ~/.ssh/id_ed25519.pub
+	signingkey = ~/.ssh/id_ed25519_signing.pub
 
 [init]
 	defaultBranch = main
@@ -37,6 +37,9 @@
 [gpg]
 	format = ssh
 
+[gpg "ssh"]
+	allowedSignersFile = ~/.ssh/allowed_signers
+
 [help]
 	autocorrect = prompt
 
@@ -64,6 +67,9 @@
 
 [tag]
 	sort = -version:refname
+
+[alias]
+	lg = log --graph --pretty=tformat:'%C(yellow)%h%C(reset)%x09 %C(cyan)%aD%C(reset) %C(blue)≈%C(reset) %ar%C(reset) %C(auto)%d%C(reset)%n %x09%x09 %s%n %x09%x09 %C(dim)%aN <%aE>%C(reset)%n'
 
 [include]
 	path = ~/.config/delta/delta.gitconfig

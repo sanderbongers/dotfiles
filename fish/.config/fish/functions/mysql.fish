@@ -1,4 +1,4 @@
-if command -q mycli
+if status is-interactive; and command -q mycli
     function mysql --wraps mycli --description "alias mysql=mycli"
         command mycli --no-warn $argv
     end

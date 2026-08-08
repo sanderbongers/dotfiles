@@ -9,7 +9,7 @@ function _agent_skills_link --description "Unify proprietary skills directories 
     for destination in $destinations
         set -l parent (dirname $destination)
         if test -d $parent
-            if test -L $destination -o -d $destination
+            if test -L $destination; or test -d $destination
                 command rm -r $destination
             end
             ln -sfn $skills_dir $destination

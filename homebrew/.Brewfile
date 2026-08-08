@@ -80,6 +80,8 @@ brew "hyperfine"
 brew "imagemagick"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
+# Helps you navigate your file system faster by learning your habits
+brew "jump"
 # Pager program similar to more
 brew "less"
 # CLI for SQLite Databases with auto-completion and syntax highlighting
@@ -126,8 +128,6 @@ brew "qrtool"
 brew "ripgrep"
 # Utility that provides fast incremental file transfer
 brew "rsync"
-# CLI proxy to minimize LLM token consumption
-brew "rtk"
 # Static analysis and lint tool, for (ba)sh scripts
 brew "shellcheck"
 # Autoformat shell script source code
@@ -152,8 +152,6 @@ brew "tree"
 brew "unar"
 # Validating, recursive, caching DNS resolver
 brew "unbound"
-# Extremely fast Python package installer and resolver, written in Rust
-brew "uv"
 # Internet file retriever
 brew "wget"
 # Process YAML, JSON, XML, CSV and properties documents from the CLI

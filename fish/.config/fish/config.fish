@@ -2,7 +2,7 @@ set -gx EDITOR (command -q nvim && echo nvim || echo vim)
 set -gx ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX true
 set -gx LANG en_GB.UTF-8
 
-test -d ~/.local/bin; and fish_add_path -g ~/.local/bin
+fish_add_path -g ~/.local/bin
 
 # @fish-lsp-disable-next-line 1004
 test -f $__fish_config_dir/config.local.fish; and source $__fish_config_dir/config.local.fish

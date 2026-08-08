@@ -1,0 +1,8 @@
+complete -c cat -n __completion_bypasses_wrapper -s b -d 'Number the non-blank output lines, starting at 1'
+complete -c cat -n __completion_bypasses_wrapper -s e -d 'Display non-printing characters (see the v option), and display a dollar sign…'
+complete -c cat -n __completion_bypasses_wrapper -s l -d 'Set an exclusive advisory lock on the standard output file descriptor'
+complete -c cat -n __completion_bypasses_wrapper -s n -d 'Number the output lines, starting at 1'
+complete -c cat -n __completion_bypasses_wrapper -s s -d 'Squeeze multiple adjacent empty lines, causing the output to be single spaced'
+complete -c cat -n __completion_bypasses_wrapper -s t -d 'Display non-printing characters (see the v option), and display tab character…'
+complete -c cat -n __completion_bypasses_wrapper -s u -d 'Disable output buffering'
+complete -c cat -n __completion_bypasses_wrapper -s v -d 'Display non-printing characters so they are visible'
