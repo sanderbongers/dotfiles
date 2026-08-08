@@ -4,10 +4,11 @@ if command -q brew
     # Load shell integration, cached until brew is updated.
     set -l cache $__fish_cache_dir/brew_shellenv.fish
     if not test -f $cache; or test (command -s brew) -nt $cache
-        mkdir -p $__fish_cache_dir
-        brew shellenv fish >$cache
+        set -l tmp $cache.$fish_pid.tmp
+        brew shellenv fish >$tmp
+        and command mv -f $tmp $cache; or command rm -f $tmp
     end
-    source $cache
+    test -f $cache; and source $cache
 
     set -gx HOMEBREW_BUNDLE_DUMP_NO_VSCODE true
     set -gx HOMEBREW_BUNDLE_NO_UPGRADE true
