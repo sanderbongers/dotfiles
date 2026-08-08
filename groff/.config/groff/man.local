@@ -1,0 +1,4 @@
+.\" Output -, ', `, ^ and ~ as copy-pasteable Unicode glyphs.
+.if '\*[.T]'utf8' \{\
+.  trin ~\[u007E]^\[u005E]`\[u0060]'\[u0027]-\[u002D]
+.\}

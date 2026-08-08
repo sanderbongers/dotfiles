@@ -28,6 +28,8 @@ function man --description "Format and display manual pages, preferring GNU man-
     if command -q gman
         # Emit overstrike like BSD man instead of SGR escapes, which col in MANPAGER mangles.
         set -lx GROFF_NO_SGR 1
+        # Load man.local/mdoc.local, which keep ASCII characters safe for search and copy-paste.
+        set -lx GROFF_TMAC_PATH ~/.config/groff
         command gman $argv
     else
         command man $argv

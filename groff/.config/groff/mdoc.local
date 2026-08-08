@@ -1,0 +1,2 @@
+.\" BSD-style (mdoc) pages need the same ASCII fixups as man(7) pages.
+.mso man.local
