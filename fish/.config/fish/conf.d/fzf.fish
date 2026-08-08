@@ -5,14 +5,14 @@ set -gx FZF_CTRL_R_OPTS "--header 'Copy: ⌃y' --bind 'ctrl-y:execute-silent(ech
 
 # Use ripgrep to find files
 if command -q rg
-    set -gx FZF_DEFAULT_COMMAND "command rg --ignore-file=~/.rgignore --files \$dir 2>/dev/null | sed 's@^\./@@'"
+    set -gx FZF_DEFAULT_COMMAND "command rg --ignore-file=$HOME/.rgignore --files \$dir 2>/dev/null | sed 's@^\./@@'"
     set -gx FZF_CTRL_T_COMMAND $FZF_DEFAULT_COMMAND
 end
 
 # Use fd to find directories
 set -l fd (command -s fd || command -s fdfind)
 if test -n "$fd"
-    set -gx FZF_ALT_C_COMMAND "$fd --ignore-file=~/.rgignore --type directory"
+    set -gx FZF_ALT_C_COMMAND "$fd --ignore-file=$HOME/.rgignore --type directory"
 end
 
 # Use bat to colorize previews
