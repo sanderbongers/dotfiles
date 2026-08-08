@@ -1,20 +1,19 @@
 status is-interactive; or return
 
-# Add abbreviations so typed GNU tool names expand to their g-prefixed counterparts. Scripts still get the BSD tools.
-for gnubin in /opt/homebrew/opt/*/libexec/gnubin /usr/local/opt/*/libexec/gnubin
-    for tool in $gnubin/*
-        set -l name (path basename $tool)
-        string match -qr '^[a-z0-9.-]+$' -- $name; or continue # skip names like [
-        builtin -q $name; and continue # Keep fish builtins (test, echo, pwd, realpath, ...)
-        # Keep own wrapper functions, but not fish's embedded defaults like grep
-        functions -q $name; and string match -q "$__fish_config_dir/*" (functions --details $name); and continue
-        command -q g$name; or continue # gnubin also holds non-tool entries like man page dirs
-        abbr -a $name g$name
-        abbr -a sudo:$name --command sudo --regex (string escape --style=regex $name) g$name
-    end
-end
+# Prefer GNU tools by expanding them to their g-prefixed binaries.
+set -l tools /opt/homebrew/opt/*/libexec/gnubin/* /usr/local/opt/*/libexec/gnubin/*
+set -q tools[1]; or return
 
-if command -q ggrep
-    abbr -a grep 'ggrep --color=auto'
-    abbr -a sudo:grep --command sudo --regex grep 'ggrep --color=auto'
+set -l names
+for name in (path basename $tools | string match -r '^[a-z0-9.-]+$') # skip names like [
+    builtin -q $name; and continue # Keep fish builtins (test, echo, pwd, realpath, ...)
+    # Keep own wrapper functions, but not fish's embedded defaults like grep.
+    functions -q $name; and string match -q "$__fish_config_dir/*" (functions --details $name); and continue
+    contains -- $name $names; or set -a names $name
 end
+set -q names[1]; or return
+
+set -l pattern '('(string join '|' (string escape --style=regex $names))')'
+abbr -a gnubin --regex $pattern --function __gnubin_expand
+abbr -a sudo:gnubin --command sudo --regex $pattern --function __gnubin_expand
+abbr -a man:gnubin --command man --command gman --regex $pattern --function __gnubin_expand_bare
