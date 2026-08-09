@@ -1,56 +1,38 @@
 # macOS
-.DS_Store
-.Trash/
 *~
-/Library/Containers/
-/Library/Daemon Containers/
-/Library/Group Containers/
+.DS_Store
+/.Trash/
+/Library/*Containers/
+/Library/Application Support/FileProvider/
+/Library/Developer/Xcode/DerivedData/
+/Library/Mobile Documents/
 /Library/Saved Application State/
 /Library/Trial/
 /Library/VoiceTrigger/
 /Library/WebKit/
-/private/var/
-/System/Library/Templates/
-/System/Volumes/Data/
-Library/Application Support/FileProvider/
-Library/Mobile Documents/
 
 # Bash
-.bash_history
+/.bash_history
 
 # Caches
-.cache/
-cache/
-caches/
-*Cache*/
-
-# Cursor
-.cursor/extensions/
-Library/Application Support/Cursor/logs/
-Library/Application Support/Cursor/User/History/
-Library/Application Support/Cursor/User/workspaceStorage/
+/.cache/
+/.codex/cache/
+/Library/**/*cache*/
+/Library/**/*Cache*/
 
 # Fish
-.local/share/fish/fish_history
+/.local/share/fish/fish_history
 
 # Git
 .git/
 
-# Ruby
-.gem/gems/
-
 # Sublime Text
 Auto Save Session.sublime_session
 
-# Time Machine backups
-/Volumes/.timemachine/
-/Volumes/Macintosh HD/
-
 # Vim
-.viminfo
+/.viminfo
 
 # Visual Studio Code
-.vscode/
 /Library/Application Support/Code/logs/
 /Library/Application Support/Code/User/History/
 /Library/Application Support/Code/User/workspaceStorage/

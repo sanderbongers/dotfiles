@@ -1,8 +1,5 @@
 *~
 .DS_Store
-.idea
-.sander
-.vscode
 
 ###> Claude ###
 **/.claude/.cc-writes/
@@ -10,7 +7,10 @@ CLAUDE.local.md
 settings.local.json
 ###< Claude ###
 
+###> JetBrains ###
+.idea
+####< JetBrains ###
+
 ###> WordPress ###
 wp-cli.local.yml
 ###< WordPress ###
-
