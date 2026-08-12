@@ -20,17 +20,15 @@ vim.o.relativenumber = true
 -- system clipboard through OSC 52 so yanks reach the SSH client's terminal.
 if vim.fn.executable('pbcopy') == 0
     and vim.env.DISPLAY == nil and vim.env.WAYLAND_DISPLAY == nil then
-  local ok, osc52 = pcall(require, 'vim.ui.clipboard.osc52')
-  if ok then
-    local function paste()
-      return vim.split(vim.fn.getreg('"'), '\n')
-    end
-    vim.g.clipboard = {
-      name = 'OSC 52',
-      copy = { ['+'] = osc52.copy('+'), ['*'] = osc52.copy('*') },
-      paste = { ['+'] = paste, ['*'] = paste },
-    }
+  local osc52 = require('vim.ui.clipboard.osc52')
+  local function paste()
+    return vim.split(vim.fn.getreg('"'), '\n')
   end
+  vim.g.clipboard = {
+    name = 'OSC 52',
+    copy = { ['+'] = osc52.copy('+'), ['*'] = osc52.copy('*') },
+    paste = { ['+'] = paste, ['*'] = paste },
+  }
 end
 
 -- Sync clipboard between OS and Neovim. Schedule the setting after `UiEnter` because it can
