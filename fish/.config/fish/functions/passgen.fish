@@ -28,7 +28,9 @@ function passgen --description "Generate a random password"
         set -l digit $digits[(math "$bytes[33] % 8 + 1")]
         set -l symbol $symbols[(math "$bytes[34] % 8 + 1")]
 
-        string join '' $upper $symbol $lower[1..5] $digit $lower[6..10]
+        set -l password (string join '' $upper $symbol $lower[1..5] $digit $lower[6..10])
+        echo $password
+        type -q pbcopy; and printf '%s' $password | pbcopy
         return
     end
 end
