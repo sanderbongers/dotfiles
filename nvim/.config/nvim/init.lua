@@ -16,6 +16,22 @@ vim.o.number = true
 -- option above, see `:h number_relativenumber`
 vim.o.relativenumber = true
 
+-- On a host with no native clipboard tool, route the system clipboard through OSC 52.
+if vim.fn.executable('pbcopy') == 0 and vim.fn.executable('wl-copy') == 0
+    and vim.fn.executable('xclip') == 0 and vim.fn.executable('xsel') == 0 then
+  local ok, osc52 = pcall(require, 'vim.ui.clipboard.osc52')
+  if ok then
+    local function paste()
+      return vim.split(vim.fn.getreg('"'), '\n')
+    end
+    vim.g.clipboard = {
+      name = 'OSC 52',
+      copy = { ['+'] = osc52.copy('+'), ['*'] = osc52.copy('*') },
+      paste = { ['+'] = paste, ['*'] = paste },
+    }
+  end
+end
+
 -- Sync clipboard between OS and Neovim. Schedule the setting after `UiEnter` because it can
 -- increase startup-time. Remove this option if you want your OS clipboard to remain independent.
 -- See `:help 'clipboard'`
