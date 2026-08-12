@@ -2,7 +2,10 @@ function pbcopy --description "Copy stdin to the clipboard, with fallback to OSC
     if command -q pbcopy
         command pbcopy $argv
     else
-        set -l b64 (base64 | tr -d '\n')
-        printf '\e]52;c;%s\a' $b64 >/dev/tty
+        begin
+            printf '\e]52;c;'
+            base64 | tr -d '\n'
+            printf '\a'
+        end >/dev/tty
     end
 end
