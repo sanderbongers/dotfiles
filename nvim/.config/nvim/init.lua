@@ -16,9 +16,10 @@ vim.o.number = true
 -- option above, see `:h number_relativenumber`
 vim.o.relativenumber = true
 
--- On a host with no native clipboard tool, route the system clipboard through OSC 52.
-if vim.fn.executable('pbcopy') == 0 and vim.fn.executable('wl-copy') == 0
-    and vim.fn.executable('xclip') == 0 and vim.fn.executable('xsel') == 0 then
+-- On a headless host (no pbcopy, and no display for xclip/xsel/wl-copy to reach) route the
+-- system clipboard through OSC 52 so yanks reach the SSH client's terminal.
+if vim.fn.executable('pbcopy') == 0
+    and vim.env.DISPLAY == nil and vim.env.WAYLAND_DISPLAY == nil then
   local ok, osc52 = pcall(require, 'vim.ui.clipboard.osc52')
   if ok then
     local function paste()
