@@ -4,7 +4,7 @@
 	signingkey = ~/.ssh/id_ed25519.pub
 
 [init]
-	defaultBranch = main
+	defaultbranch = main
 
 [blame]
 	coloring = highlightRecent
@@ -15,7 +15,7 @@
 	sort = -committerdate
 
 [color "blame"]
-	highlightRecent = 240, 2 years ago, 243, 1 year ago, 246, 6 months ago, 249, 1 month ago, 252, 1 week ago, 255
+	highlightrecent = 240, 2 years ago, 243, 1 year ago, 246, 6 months ago, 249, 1 month ago, 252, 1 week ago, 255
 
 [commit]
 	gpgsign = true
@@ -26,13 +26,13 @@
 
 [diff]
 	algorithm = histogram
-	colorMoved = plain
-	colorMovedWS = allow-indentation-change
-	mnemonicPrefix = true
+	colormoved = plain
+	colormovedws = allow-indentation-change
+	mnemonicprefix = true
 
 [fetch]
 	prune = true
-	pruneTags = true
+	prunetags = true
 
 [gpg]
 	format = ssh
@@ -50,19 +50,20 @@
 	rebase = true
 
 [push]
-	autoSetupRemote = true
-	followTags = true
+	autosetupremote = true
+	followtags = true
 
 [rebase]
-	autoSquash = true
-	autoStash = true
-	updateRefs = true
+	autosquash = true
+	autostash = true
+	updaterefs = true
 
 [rerere]
-	autoUpdate = true
+	autoupdate = true
 	enabled = true
 
 [tag]
+	gpgsign = true
 	sort = -version:refname
 
 [alias]
