@@ -1,4 +1,7 @@
 # Local config overrides
-.gitconfig.local
 config.local.fish
+.gitconfig.local
 
+# Per-machine state
+.machine-profile
+baseline/

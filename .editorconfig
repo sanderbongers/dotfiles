@@ -7,6 +7,24 @@ end_of_line = lf
 charset = utf-8
 trim_trailing_whitespace = true
 insert_final_newline = true
+max_line_length = 120
+
+# Make requires literal tabs in recipes, mirror it.
+[{Makefile,*.mk}]
+indent_style = tab
+
+# git writes its config with tabs, mirror it.
+[*.gitconfig]
+indent_style = tab
+
+# Two trailing spaces are a hard line break in Markdown, keep it.
+[*.md]
+trim_trailing_whitespace = false
+
+# Don't normalise generated files.
+[*.{plist,tmTheme,sublime-syntax}]
+trim_trailing_whitespace = false
+insert_final_newline = false
 
 [*.lua]
 align_array_table = false
@@ -16,3 +34,6 @@ align_continuous_rect_table_field = false
 align_if_branch = false
 quote_style = double
 trailing_table_separator = smart
+
+[*.sh]
+switch_case_indent = true

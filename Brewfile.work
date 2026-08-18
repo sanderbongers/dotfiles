@@ -1,0 +1,6 @@
+# Drop-in replacement for MySQL
+brew "mariadb"
+# CLI for MySQL with auto-completion and syntax highlighting
+brew "mycli"
+# Command-line interface for WordPress
+brew "wp-cli"

@@ -7,9 +7,9 @@ readonly script_dir
 
 case "$(uname)" in
     Linux*)
-        source "${script_dir}/_install_linux.sh"
+        source "${script_dir}/install/linux.sh"
         ;;
     Darwin*)
-        source "${script_dir}/_install_macos.sh"
+        source "${script_dir}/install/macos.sh"
         ;;
 esac

@@ -1,0 +1,4 @@
+--dir=stow
+--target=$HOME
+--ignore=\.DS_Store
+--ignore=\.linux-ignore

@@ -1,0 +1,22 @@
+# Memory training application
+cask "anki"
+# Multi-track audio editor and recorder
+cask "audacity"
+# 3D creation suite
+cask "blender"
+# E-books management software
+cask "calibre"
+# Voice and text chat software
+cask "discord"
+# Desktop reader for Kobo eBooks
+cask "kobo"
+# Intercept, modify, replay, save HTTP/S traffic
+cask "mitmproxy"
+# PDF reader, editor and annotator
+cask "pdf-expert"
+# Imaging utility to install operating systems to a microSD card
+cask "raspberry-pi-imager"
+# Open-source code editor
+cask "visual-studio-code"
+# Native desktop client for WhatsApp
+cask "whatsapp"

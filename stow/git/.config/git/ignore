@@ -1,0 +1,21 @@
+*~
+.DS_Store
+
+###> Asdf ###
+.tool-versions
+###< Asdf ###
+
+###> Claude ###
+**/.claude/.cc-writes/
+**/.claude/settings.local.json
+CLAUDE.local.md
+###< Claude ###
+
+###> JetBrains ###
+.idea
+###< JetBrains ###
+
+###> WordPress ###
+wp-cli.local.yml
+###< WordPress ###
+

@@ -1,0 +1,73 @@
+[user]
+	name = Sander Bongers
+	email = 14151411+sanderbongers@users.noreply.github.com
+	signingkey = ~/.ssh/id_ed25519.pub
+
+[init]
+	defaultBranch = main
+
+[blame]
+	coloring = highlightRecent
+	date = relative
+
+[branch]
+	autosetuprebase = always
+	sort = -committerdate
+
+[color "blame"]
+	highlightRecent = 240, 2 years ago, 243, 1 year ago, 246, 6 months ago, 249, 1 month ago, 252, 1 week ago, 255
+
+[commit]
+	gpgsign = true
+	verbose = true
+
+[credential]
+	helper = osxkeychain
+
+[diff]
+	algorithm = histogram
+	colorMoved = plain
+	colorMovedWS = allow-indentation-change
+	mnemonicPrefix = true
+
+[fetch]
+	prune = true
+	pruneTags = true
+
+[gpg]
+	format = ssh
+
+[help]
+	autocorrect = prompt
+
+[log]
+	date = relative
+
+[merge]
+	conflictstyle = zdiff3
+
+[pull]
+	rebase = true
+
+[push]
+	autoSetupRemote = true
+	followTags = true
+
+[rebase]
+	autoSquash = true
+	autoStash = true
+	updateRefs = true
+
+[rerere]
+	autoUpdate = true
+	enabled = true
+
+[tag]
+	sort = -version:refname
+
+[alias]
+	lg = log --graph --pretty=tformat:'%C(yellow)%h%C(reset)%x09 %C(cyan)%aD%C(reset) %C(blue)≈%C(reset) %ar%C(reset) %C(auto)%d%C(reset)%n %x09%x09 %s%n %x09%x09 %C(dim)%aN <%aE>%C(reset)%n'
+
+[include]
+	path = ~/.config/delta/delta.gitconfig
+	path = ~/.gitconfig.local
