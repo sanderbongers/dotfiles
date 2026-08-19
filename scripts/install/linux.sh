@@ -118,7 +118,7 @@ ln -sf "$(command -v batcat)" ~/.local/bin/bat
 ln -sf "$(command -v fdfind)" ~/.local/bin/fd
 
 echo "Rebuilding bat cache..."
-bat cache --build
+batcat cache --build
 
 if [[ ${SHELL_CHANGED:-false} == true ]]; then
     echo "Changed default shell to Fish, restart terminal to apply changes."
