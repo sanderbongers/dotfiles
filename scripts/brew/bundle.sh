@@ -2,6 +2,11 @@
 
 set -euo pipefail
 
+if [[ "$(uname)" != "Darwin" ]]; then
+    echo "brew/bundle: skipping Homebrew on $(uname)"
+    exit 0
+fi
+
 repo_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 profile_file="$repo_dir/.machine-profile"
 mode="${1:-install}"
