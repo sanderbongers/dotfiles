@@ -40,6 +40,8 @@ brew "exiftool"
 brew "fd"
 # Play, record, convert, and stream select audio and video codecs
 brew "ffmpeg"
+# Fast web fuzzer written in Go
+brew "ffuf"
 # Transcode video stabilization plugin
 brew "libvidstab"
 # Port of OpenAI's Whisper model in C/C++
@@ -70,6 +72,8 @@ brew "grep"
 brew "hey"
 # Improved top (interactive process viewer)
 brew "htop"
+# Fast and multi-purpose HTTP toolkit
+brew "httpx"
 # Command-line benchmarking tool
 brew "hyperfine"
 # Tools and libraries to manipulate images in select formats
