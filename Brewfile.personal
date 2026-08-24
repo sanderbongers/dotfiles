@@ -8,8 +8,6 @@ cask "blender"
 cask "calibre"
 # Voice and text chat software
 cask "discord"
-# Desktop reader for Kobo eBooks
-cask "kobo"
 # Intercept, modify, replay, save HTTP/S traffic
 cask "mitmproxy"
 # PDF reader, editor and annotator
