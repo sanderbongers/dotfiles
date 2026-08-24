@@ -1,0 +1,10 @@
+server:
+	local-data: "mijnmodem.kpn.      IN A 192.168.1.254"
+	local-data: "www.asusrouter.com. IN A 192.168.1.1"
+	local-data: "raspberrypi.        IN A 192.168.1.2"
+
+forward-zone:
+    name: "."
+    forward-addr: 94.140.14.49@853#MY_ADGUARD_ID.d.adguard-dns.com
+    forward-addr: 94.140.14.59@853#MY_ADGUARD_ID.d.adguard-dns.com
+    forward-tls-upstream: yes

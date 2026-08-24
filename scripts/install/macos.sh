@@ -42,10 +42,42 @@ echo "Stowing dotfiles..."
 echo "Installing Homebrew packages..."
 "${script_dir}/brew/bundle.sh" install
 
+echo "Configuring unbound..."
+unbound_src="${script_dir}/../system/unbound"
+unbound_etc="$(brew --prefix)/etc/unbound"
+if [[ -f "${unbound_etc}/unbound.conf" && ! -L "${unbound_etc}/unbound.conf" ]]; then
+    echo "Backing up existing unbound.conf to unbound.conf.default..."
+    mv "${unbound_etc}/unbound.conf" "${unbound_etc}/unbound.conf.default"
+fi
+ln -sf "${unbound_src}/unbound.conf" "${unbound_etc}/unbound.conf"
+if [[ ! -f "${unbound_etc}/unbound.local.conf" ]]; then
+    echo "Copying unbound.local.conf.example to unbound.local.conf..."
+    cp "${unbound_src}/unbound.local.conf.example" "${unbound_etc}/unbound.local.conf"
+fi
+[[ -f "${unbound_etc}/unbound_control.key" ]] || unbound-control-setup
+sudo brew services restart unbound
+
+if [[ ! -f /etc/resolver/test ]]; then
+    echo "Routing .test domains to local resolver..."
+    sudo install -d -m 755 /etc/resolver
+    printf 'nameserver 127.0.0.1\n' | sudo tee /etc/resolver/test >/dev/null
+fi
+
+echo "Switching Wi-Fi DNS to local unbound..."
+sudo networksetup -setdnsservers Wi-Fi 127.0.0.1
+sudo dscacheutil -flushcache
+sudo killall -HUP mDNSResponder || true
+if ! dscacheutil -q host -a name example.com | grep -q ip_address; then
+    echo "Resolution failed after switching DNS. Reverting Wi-Fi to DHCP DNS..."
+    sudo networksetup -setdnsservers Wi-Fi empty
+    echo "Fill in ${unbound_etc}/unbound.local.conf, then rerun:"
+    echo "  sudo networksetup -setdnsservers Wi-Fi 127.0.0.1"
+fi
+
 echo "Rebuilding bat cache..."
 bat cache --build
 
-echo "Applying adopted macOS defaults (commented checklist; no-op until you opt settings in)..."
+echo "Applying macOS defaults..."
 "${script_dir}/macos/apply-defaults.sh"
 
 repo_dir="${script_dir}/.."
@@ -57,5 +89,5 @@ if [[ "$(git -C "$repo_dir" remote get-url origin)" != "$ssh_url" ]] &&
 fi
 
 if [[ ${SHELL_CHANGED:-false} == true ]]; then
-    echo "Changed default shell to Fish, restart terminal to apply changes."
+    echo "Changed default shell to Fish. Restart terminal to apply."
 fi
