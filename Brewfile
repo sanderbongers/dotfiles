@@ -154,8 +154,6 @@ brew "dockutil"
 cask "1password-cli"
 # Browse, search and analyse your past AI coding sessions
 cask "agentsview"
-# Utility that prevents the system from going to sleep
-cask "caffeine"
 # Password manager that keeps all passwords secure behind one password
 cask "1password"
 # Stand alone ad blocker
