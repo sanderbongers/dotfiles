@@ -194,5 +194,5 @@ cask "spotify"
 cask "sublime-text"
 # Native GUI tool for relational databases
 cask "tableplus"
-# Messaging app with a focus on speed and security
-cask "telegram"
+# Desktop client for Telegram messenger
+cask "telegram-desktop"
