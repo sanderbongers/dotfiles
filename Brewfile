@@ -92,6 +92,8 @@ brew "luarocks"
 brew "mailpit"
 # Fast, flexible, config-based cli for linting Markdown/CommonMark files
 brew "markdownlint-cli2"
+# Mac App Store command-line interface
+brew "mas"
 # SMTP client that can be used as an SMTP plugin for Mutt
 brew "msmtp"
 # NCurses Disk Usage
@@ -196,3 +198,7 @@ cask "sublime-text"
 cask "tableplus"
 # Desktop client for Telegram messenger
 cask "telegram-desktop"
+# 1Password browser extension for Safari
+mas "1Password for Safari", id: 1569813296
+# Integrated development environment for Apple platforms
+mas "Xcode", id: 497799835

@@ -18,3 +18,9 @@ cask "raspberry-pi-imager"
 cask "visual-studio-code"
 # Native desktop client for WhatsApp
 cask "whatsapp"
+# Save articles to read later
+mas "Instapaper", id: 288545208
+# Look up phone numbers from the menu bar
+mas "QueryDial", id: 6478811925
+# Userscript manager for Safari
+mas "Userscripts", id: 1463298887
