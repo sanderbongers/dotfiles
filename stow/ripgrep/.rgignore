@@ -26,9 +26,6 @@
 # Git
 .git/
 
-# Sublime Text
-Auto Save Session.sublime_session
-
 # Vim
 /.viminfo
 

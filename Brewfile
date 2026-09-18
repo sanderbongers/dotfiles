@@ -180,8 +180,6 @@ cask "google-chrome"
 cask "iterm2"
 # Enable generative AI features in iTerm2
 cask "itermai"
-# Free cross-platform office suite, fresh version
-cask "libreoffice"
 # App to write, plan, collaborate, and get organised
 cask "notion"
 # Replacement for Docker Desktop
@@ -192,8 +190,6 @@ cask "phpstorm"
 cask "raycast"
 # Music streaming service
 cask "spotify"
-# Text editor for code, markup and prose
-cask "sublime-text"
 # Native GUI tool for relational databases
 cask "tableplus"
 # Desktop client for Telegram messenger
