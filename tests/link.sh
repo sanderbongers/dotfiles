@@ -33,10 +33,11 @@ test_fresh_link() {
     local tmp status=0
     tmp="$(mktemp -d)"
     trap 'rm -rf "$tmp"' RETURN
-    HOME="$tmp" "$link" >/dev/null 2>&1
-    HOME="$tmp" "$link" --check >/dev/null 2>&1 || status=$?
+    LINK_SH_OS=Darwin HOME="$tmp" "$link" >/dev/null 2>&1
+    LINK_SH_OS=Darwin HOME="$tmp" "$link" --check >/dev/null 2>&1 || status=$?
     check "fresh link converges" "$status" "0"
     check "fresh link creates .tmux.conf" "$([[ -L "$tmp/.tmux.conf" ]] && echo yes)" "yes"
+    check "fresh link leaves iTerm runtime directory unmanaged" "$([[ ! -e "$tmp/.config/iterm2" && ! -L "$tmp/.config/iterm2" ]] && echo yes)" "yes"
 }
 
 # Packages are auto-discovered from stow/*/. A newly added package must get linked automatically.
@@ -60,7 +61,7 @@ test_linux_ignore_filters_package() {
     trap 'rm -rf "$tmp"' RETURN
     out="$(LINK_SH_OS=Linux HOME="$tmp" "$link" 2>&1)" || status=$?
     check "simulated Linux run exits 0" "$status" "0"
-    check "iterm (marked .linux-ignore) is not linked" "$([[ -e "$tmp/.config/iterm2" ]] && echo yes)" ""
+    check "php-cs-fixer (marked .linux-ignore) is not linked" "$([[ -e "$tmp/.php-cs-fixer.dist.php" ]] && echo yes)" ""
     check "an unmarked package still links on simulated Linux" "$([[ -L "$tmp/.tmux.conf" ]] && echo yes)" "yes"
     check "the .linux-ignore marker itself is never linked" "$(printf '%s' "$out" | grep -c '\.linux-ignore')" "0"
 }

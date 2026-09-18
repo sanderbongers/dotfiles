@@ -13,9 +13,12 @@ cd ~/Developer/dotfiles
 make install
 ```
 
-The clone uses HTTPS because a fresh Mac has no SSH keys yet. `make install` prompts once for the machine's profile (work or personal, persisted in `.machine-profile`), enables Touch ID for sudo, installs Homebrew and the packages for that profile, snapshots the default settings into `baseline/`, and links the dotfiles with GNU Stow.
+The clone uses HTTPS because a fresh Mac has no SSH keys yet. `make install` prompts once for the machine's profile
+(work or personal, persisted in `.machine-profile`), enables Touch ID for sudo, installs Homebrew and the packages for
+that profile, snapshots the default settings into `baseline/`, and links the dotfiles with GNU Stow.
 
-When the 1Password SSH agent can authenticate to GitHub, a later `make install`/`make update` switches the `origin` remote to SSH automatically.
+When the 1Password SSH agent can authenticate to GitHub, a later `make install`/`make update` switches the `origin`
+remote to SSH automatically.
 
 ### Linux (Debian)
 
@@ -25,7 +28,8 @@ cd ~/Developer/dotfiles
 make install
 ```
 
-Sets up apt sources (fish, Caddy, 1Password, backports), installs packages, Neovim, sets locale and fish as the login shell, and links the dotfiles.
+Sets up apt sources (fish, Caddy, 1Password, backports), installs packages, Neovim, sets locale and fish as the login
+shell, and links the dotfiles.
 
 Packages marked with a `.linux-ignore` file in their `stow/` directory are skipped.
 
@@ -62,8 +66,17 @@ profile-specific files manually before committing.
 
 ## macOS settings
 
-1. Set the preference by hand in System Settings (launch the app at least once so its domain exists),
-   then run `make snapshot-macos`.
+### iTerm2
+
+Preferences live in `config/iterm2/`, outside Stow. Set this up manually:
+
+In **Settings → General → Settings**, enable **Load settings from a custom folder or URL**, select the `config/iterm2/`
+folder, then restart iTerm2.
+
+### System preferences
+
+1. Set the preference by hand in System Settings (launch the app at least once so its domain exists), then run
+   `make snapshot-macos`.
 2. Change the setting in the UI.
 3. Run `make snapshot-macos` again and diff the two new directories in `baseline/`.
 4. Uncomment the matching line in `scripts/macos/apply-defaults.sh` (or add a new `defaults write` derived from the
