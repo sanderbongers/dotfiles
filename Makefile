@@ -11,13 +11,16 @@ help: # Display help message
 install: # Install dotfiles and packages
 	scripts/install.sh
 
-update: # Update dotfiles and packages
+update: # Update dotfiles and install missing packages
 	git pull origin main
-	$(MAKE) install
+	bash scripts/update.sh
+
+upgrade: # Upgrade Homebrew or Linux packages
+	bash scripts/upgrade.sh
 
 doctor: # Check that dotfiles are linked, the machine profile is set, and Homebrew packages installed
 	scripts/link.sh --check
-	scripts/brew/bundle.sh check
+	scripts/packages/homebrew.sh check
 	scripts/check-fish.sh
 
 ##@ Symlinks
@@ -29,10 +32,10 @@ unlink: # Remove all dotfile symlinks
 
 ##@ Homebrew packages
 install-packages: # Install Homebrew packages for this machine
-	scripts/brew/bundle.sh install
+	scripts/packages/homebrew.sh install
 
 dump-packages: # Write installed Homebrew packages into the shared Brewfile
-	brew bundle dump --file=Brewfile --no-restart --force
+	brew bundle dump --file=homebrew/Brewfile --no-restart --force
 
 ##@ macOS defaults
 apply-macos-defaults: # Apply macOS user defaults and Dock layout
@@ -44,3 +47,6 @@ snapshot-macos: # Snapshot current macOS defaults into baseline/ for later diffi
 ##@ Development
 test-links: # Run the linker test suite
 	tests/link.sh
+
+test-update: # Test maintenance with mocked package and system commands
+	bash tests/update.sh

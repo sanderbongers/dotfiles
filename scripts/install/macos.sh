@@ -40,10 +40,10 @@ echo "Stowing dotfiles..."
 "${script_dir}/link.sh"
 
 echo "Installing Homebrew packages..."
-"${script_dir}/brew/bundle.sh" install
+"${script_dir}/packages/homebrew.sh" install
 
 echo "Configuring unbound..."
-unbound_src="${script_dir}/../system/unbound"
+unbound_src="${script_dir}/../config/unbound"
 unbound_etc="$(brew --prefix)/etc/unbound"
 if [[ -f "${unbound_etc}/unbound.conf" && ! -L "${unbound_etc}/unbound.conf" ]]; then
     echo "Backing up existing unbound.conf to unbound.conf.default..."

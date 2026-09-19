@@ -3,7 +3,7 @@
 set -euo pipefail
 
 if [[ "$(uname)" != "Darwin" ]]; then
-    echo "brew/bundle: skipping Homebrew on $(uname)"
+    echo "homebrew: skipping Homebrew on $(uname)"
     exit 0
 fi
 
@@ -13,9 +13,9 @@ mode="${1:-install}"
 
 # The profile determines which additional Brewfile.<profile> to merge. Prompt for it on install.
 case "$mode" in
-    check)
+    check | upgrade)
         if [[ ! -s "$profile_file" ]]; then
-            echo "brew/bundle: machine profile not set, run 'make install'" >&2
+            echo "homebrew: machine profile not set, run 'make install'" >&2
             exit 1
         fi
         ;;
@@ -24,17 +24,17 @@ case "$mode" in
             read -rp "Is this a personal or work machine? [personal/work] " answer
             case "$answer" in
                 personal | work) echo "$answer" >"$profile_file" ;;
-                *) echo "brew/bundle: invalid answer '$answer' (choose 'personal' or 'work')" >&2 ;;
+                *) echo "homebrew: invalid answer '$answer' (choose 'personal' or 'work')" >&2 ;;
             esac
         done
         ;;
     *)
-        echo "brew/bundle: unknown mode '$mode' (expected 'check' or 'install')" >&2
+        echo "homebrew: unknown mode '$mode' (expected 'check', 'install', or 'upgrade')" >&2
         exit 1
         ;;
 esac
 
-brewfile="$(cat "$repo_dir/Brewfile" "$repo_dir/Brewfile.$(cat "$profile_file")")"
+brewfile="$(cat "$repo_dir/homebrew/Brewfile" "$repo_dir/homebrew/Brewfile.$(cat "$profile_file")")"
 
 case "$mode" in
     check)
@@ -43,5 +43,8 @@ case "$mode" in
     install)
         echo "$brewfile" | brew bundle check --file=- --no-upgrade ||
             echo "$brewfile" | brew bundle install --file=- --no-upgrade
+        ;;
+    upgrade)
+        echo "$brewfile" | brew bundle install --file=- --upgrade
         ;;
 esac

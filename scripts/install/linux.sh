@@ -4,81 +4,11 @@ set -euo pipefail
 
 : "${script_dir:?script_dir must be exported by parent script}"
 
-sudo install -d -m 0755 /etc/apt/keyrings
+bash "${script_dir}/install/apt-sources.sh"
 
-printf '%s\n' \
-    "Types: deb" \
-    "URIs: http://deb.debian.org/debian/" \
-    "Suites: trixie-backports" \
-    "Components: main" \
-    "Signed-By: /usr/share/keyrings/debian-archive-keyring.pgp" | sudo tee /etc/apt/sources.list.d/backports.sources >/dev/null
+bash "${script_dir}/packages/apt.sh"
 
-curl -fsSL https://download.opensuse.org/repositories/shells:fish/Debian_13/Release.key | sudo tee /etc/apt/keyrings/fish.asc >/dev/null
-printf '%s\n' \
-    "Types: deb" \
-    "URIs: http://download.opensuse.org/repositories/shells:/fish/Debian_13/" \
-    "Suites: /" \
-    "Signed-By: /etc/apt/keyrings/fish.asc" | sudo tee /etc/apt/sources.list.d/fish.sources >/dev/null
-
-curl -fsSL 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | sudo tee /etc/apt/keyrings/caddy.asc >/dev/null
-printf '%s\n' \
-    "Types: deb" \
-    "URIs: https://dl.cloudsmith.io/public/caddy/stable/deb/debian/" \
-    "Suites: any-version" \
-    "Components: main" \
-    "Signed-By: /etc/apt/keyrings/caddy.asc" | sudo tee /etc/apt/sources.list.d/caddy.sources >/dev/null
-
-if [[ ! -x $(command -v nodejs) ]]; then
-    echo "Installing Node.js..."
-    curl -fsSL https://deb.nodesource.com/setup_lts.x -o nodesource_setup.sh
-    sudo bash nodesource_setup.sh
-fi
-
-echo "Installing packages..."
-sudo apt update -y
-sudo apt autoremove -y
-sudo apt install -y \
-    bat \
-    bind9-dnsutils \
-    bsd-mailx \
-    build-essential \
-    caddy \
-    fd-find \
-    fish \
-    fzf \
-    geoipupdate python3-maxminddb \
-    git-delta \
-    iotop \
-    jq \
-    keychain \
-    msmtp msmtp-mta \
-    ncdu \
-    nodejs \
-    ripgrep \
-    sqlite3 \
-    stow \
-    sysstat \
-    tealdeer \
-    tmux \
-    unbound \
-    zoxide
-
-# Backports needed to install Samba >= 4.23.
-# Once trixie stable ships >= 4.23, drop this and move samba into the list above.
-echo "Installing Samba from backports..."
-sudo apt install -y -t trixie-backports samba
-
-echo "Installing Neovim from tarball..."
-NVIM_LATEST=$(curl -fsSL https://api.github.com/repos/neovim/neovim/releases/latest | jq -r '.tag_name' || true)
-NVIM_CURRENT=$(nvim --version 2>/dev/null | head -1 | awk '{print $2}' || true)
-if [[ -z "$NVIM_LATEST" || "$NVIM_LATEST" == "null" ]]; then
-    echo "Could not determine latest Neovim version, skipping."
-elif [[ "$NVIM_CURRENT" != "$NVIM_LATEST" ]]; then
-    sudo rm -rf /opt/nvim-linux-arm64
-    curl -fsSL https://github.com/neovim/neovim/releases/download/stable/nvim-linux-arm64.tar.gz | sudo tar -xz -C /opt
-    sudo ln -sfn /opt/nvim-linux-arm64 /opt/nvim
-    sudo ln -sf /opt/nvim/bin/nvim /usr/local/bin/nvim
-fi
+bash "${script_dir}/packages/neovim.sh"
 
 if [[ "$LANG" != "en_US.UTF-8" ]]; then
     echo "Setting locale..."
