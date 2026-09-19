@@ -6,7 +6,6 @@ script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 repo_dir="$script_dir/.."
 platform="$(uname)"
 
-# make update pulls first, so this always runs the newly fetched maintenance code.
 case "$platform" in
     Darwin)
         if ! command -v brew >/dev/null || [[ ! -s "$repo_dir/.machine-profile" ]]; then
@@ -37,4 +36,4 @@ else
     batcat cache --build
 fi
 
-echo "Dotfiles updated. Review and commit any Fish plugin changes."
+echo "Dotfiles updated."
