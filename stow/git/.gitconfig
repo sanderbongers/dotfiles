@@ -1,24 +1,23 @@
 [user]
 	name = Sander Bongers
 	email = 14151411+sanderbongers@users.noreply.github.com
-	signingkey = ~/.ssh/id_ed25519.pub
+	signingKey = ~/.ssh/id_ed25519.pub
 
 [init]
-	defaultbranch = main
+	defaultBranch = main
 
 [blame]
 	coloring = highlightRecent
 	date = relative
 
 [branch]
-	autosetuprebase = always
 	sort = -committerdate
 
 [color "blame"]
-	highlightrecent = 240, 2 years ago, 243, 1 year ago, 246, 6 months ago, 249, 1 month ago, 252, 1 week ago, 255
+	highlightRecent = 240, 2 years ago, 243, 1 year ago, 246, 6 months ago, 249, 1 month ago, 252, 1 week ago, 255
 
 [commit]
-	gpgsign = true
+	gpgSign = true
 	verbose = true
 
 [credential]
@@ -26,44 +25,46 @@
 
 [diff]
 	algorithm = histogram
-	colormoved = plain
-	colormovedws = allow-indentation-change
-	mnemonicprefix = true
+	colorMoved = plain
+	colorMovedWS = allow-indentation-change
+	mnemonicPrefix = true
 
 [fetch]
 	prune = true
-	prunetags = true
 
 [gpg]
 	format = ssh
 
 [help]
-	autocorrect = prompt
+	autoCorrect = prompt
 
 [log]
 	date = relative
 
 [merge]
-	conflictstyle = zdiff3
+	conflictStyle = zdiff3
 
 [pull]
+	autoStash = true
 	rebase = true
 
 [push]
-	autosetupremote = true
-	followtags = true
+	autoSetupRemote = true
+	followTags = true
+	useForceIfIncludes = true
 
 [rebase]
-	autosquash = true
-	autostash = true
-	updaterefs = true
+	autoSquash = true
+	autoStash = true
+	missingCommitsCheck = error
+	updateRefs = true
 
 [rerere]
-	autoupdate = true
+	autoUpdate = true
 	enabled = true
 
 [tag]
-	gpgsign = true
+	gpgSign = true
 	sort = -version:refname
 
 [alias]
