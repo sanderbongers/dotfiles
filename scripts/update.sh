@@ -8,7 +8,7 @@ platform="$(uname)"
 
 case "$platform" in
     Darwin)
-        if ! command -v brew >/dev/null || [[ ! -s "$repo_dir/.machine-profile" ]]; then
+        if ! command -v brew || [[ ! -s "$repo_dir/.machine-profile" ]]; then
             echo "Run 'make install' to set up Homebrew and the machine profile first." >&2
             exit 1
         fi
@@ -20,7 +20,7 @@ case "$platform" in
         ;;
     Linux)
         bash "$script_dir/packages/apt.sh" --no-upgrade
-        if ! command -v nvim >/dev/null; then
+        if ! command -v nvim; then
             bash "$script_dir/packages/neovim.sh"
         fi
         ;;
