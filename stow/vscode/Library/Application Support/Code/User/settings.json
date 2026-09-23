@@ -1,0 +1,127 @@
+{
+  "[caddyfile]": {
+    "editor.defaultFormatter": "matthewpi.caddyfile-support"
+  },
+  "[css][scss][less]": {
+    "editor.defaultFormatter": "vscode.css-language-features"
+  },
+  "[csv]": {
+    "editor.inlayHints.maximumLength": 0
+  },
+  "[dynamic csv]": {
+    "editor.inlayHints.maximumLength": 0
+  },
+  "[fish]": {
+    "editor.defaultFormatter": "ndonfris.fish-lsp"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "[javascript][javascriptreact][typescript][typescriptreact]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "[json][jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[lua]": {
+    "editor.defaultFormatter": "sumneko.lua"
+  },
+  "[markdown]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.markdownlint": "explicit"
+    },
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[shellscript][ignore][properties][hosts][dockerfile]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml",
+    "editor.formatOnSaveMode": "modificationsIfAvailable"
+  },
+  "chat.titleBar.openInAgentsWindow.enabled": false,
+  "debug.allowBreakpointsEverywhere": true,
+  "diffEditor.experimental.showMoves": true,
+  "diffEditor.renderSideBySide": false,
+  "diffEditor.useInlineViewWhenSpaceIsLimited": true,
+  "editor.accessibilitySupport": "off",
+  "editor.fontFamily": "Menlo, 'SF Arabic', monospace",
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.rulers": [
+    120
+  ],
+  "editor.stickyTabStops": true,
+  "editor.tabCompletion": "on",
+  "editor.unicodeHighlight.ambiguousCharacters": false,
+  "explorer.autoRevealExclude": {
+    "**/var/{cache,log}": true,
+    "**/vendor": true
+  },
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "extensions.autoCheckUpdates": false,
+  "files.associations": {
+    ".gitconfig.local": "gitconfig",
+    ".rgignore": "ignore",
+    ".rgignore-root": "ignore",
+    ".ripgreprc": "properties",
+    ".xml.dist": "xml",
+    "*.sgmodule": "properties",
+    "Brewfile.*": "ruby",
+    "config": "properties",
+    "config.local.fish": "fish",
+    "crontab": "plaintext",
+    "fish_variables": "fish",
+    "ignore": "ignore"
+  },
+  "files.autoSave": "afterDelay",
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "fish-lsp.executablePath": "/usr/local/bin/fish-lsp",
+  "git.autofetch": true,
+  "git.autoStash": true,
+  "git.blame.editorDecoration.enabled": true,
+  "git.confirmSync": false,
+  "git.openRepositoryInParentFolders": "never",
+  "git.rebaseWhenSync": true,
+  "git.suggestSmartCommit": false,
+  "github.copilot.enable": {
+    "*": true,
+    "markdown": true,
+    "plaintext": false,
+    "scminput": false
+  },
+  "github.gitProtocol": "ssh",
+  "intelephense.completion.fullyQualifyGlobalConstantsAndFunctions": true,
+  "js/ts.updateImportsOnFileMove.enabled": "always",
+  "js/ts.validate.enabled": true,
+  "markdownlint.configFile": "~/.markdownlint.json",
+  "prettier.printWidth": 120,
+  "prettier.proseWrap": "always",
+  "projectManager.git.baseFolders": [
+    "~/Developer"
+  ],
+  "scm.alwaysShowRepositories": true,
+  "search.exclude": {
+    ".idea": true,
+    "**/*{-lock.json,.lock}": true,
+    "/var/folders/**": true
+  },
+  "search.useReplacePreview": false,
+  "shellformat.useEditorConfig": true,
+  "telemetry.telemetryLevel": "off",
+  "terminal.integrated.initialHint": false,
+  "terminal.integrated.scrollback": 10000,
+  "update.mode": "none",
+  "update.showReleaseNotes": false,
+  "window.newWindowDimensions": "maximized",
+  "window.openFoldersInNewWindow": "on",
+  "workbench.editor.empty.hint": "hidden",
+  "workbench.secondarySideBar.defaultVisibility": "hidden",
+  "workbench.startupEditor": "none",
+  "yaml.format.printWidth": 120,
+  "yaml.format.proseWrap": "always",
+  "yaml.format.singleQuote": true,
+  "extensions.autoUpdate": "off"
+}
