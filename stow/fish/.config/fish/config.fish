@@ -7,6 +7,6 @@ command -q composer; and set -a user_paths ~/.composer/vendor/bin
 command -q asdf; and set -a user_paths ~/.asdf/shims
 fish_add_path -g $user_paths
 
-for file in $__fish_config_dir/config.local.fish ~/.iterm2_shell_integration.fish
+for file in $__fish_config_dir/config.local.fish
     test -r $file; and source $file
 end
