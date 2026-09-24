@@ -55,7 +55,7 @@ case "$mode" in
                 }
                 close(profile)
 
-                # Rebuild both files, even if one ends up with no entries.
+                # Rebuild both files.
                 printf "" > profile
                 printf "" > shared
             }
@@ -72,7 +72,7 @@ case "$mode" in
     upgrade)
         # Install missing Brewfile packages...
         echo "$brewfile" | brew bundle install --file=- --no-upgrade
-        # ... but upgrade using brew upgrade, because brew bundle ignores the HOMEBREW_UPGRADE_GREEDY_CASKS setting.
+        # ...but upgrade using brew upgrade, because brew bundle ignores the HOMEBREW_UPGRADE_GREEDY_CASKS setting.
         brew upgrade
         if command -v code >/dev/null; then
             code --update-extensions
