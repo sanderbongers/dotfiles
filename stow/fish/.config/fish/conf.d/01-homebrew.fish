@@ -12,6 +12,8 @@ if test -x $brew
     end
     test -f $cache; and source $cache
 
+    set -gx HOMEBREW_NO_ANALYTICS true
+
     if status is-interactive
         abbr -a bi "brew install"
         abbr -a bs "brew services"
