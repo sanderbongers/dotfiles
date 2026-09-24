@@ -20,6 +20,8 @@ make install
 
 On macOS, choose `personal` or `work` when prompted. The choice is saved in `.machine-profile`.
 
+iTerm2 is configured to use the settings in `config/iterm2/`. Restart iTerm2 if it was running.
+
 ## Updates
 
 ```sh
@@ -39,13 +41,11 @@ Stow packages with a `.linux-ignore` file are skipped on Linux.
 
 ## Homebrew
 
-Use `make dump-packages` to write installed packages to the shared `homebrew/Brewfile`. Then optionally move out
-profile-specific entries to `Brewfile.personal` or `Brewfile.work`.
+Use `make dump-packages` to write installed packages to the Brewfiles. New entries get added to the shared
+`homebrew/Brewfile`, from where they can optionally be moved to `Brewfile.personal` or `Brewfile.work`.
 
-## iTerm2
-
-In **Settings → General → Settings**, enable **Load settings from a custom folder or URL**. Select the settings in this
-repository's `config/iterm2/` folder, then restart iTerm2.
+To minimise update dialogs, disable an app's own updater and make `make upgrade` keep it up to date by adding it to
+`HOMEBREW_UPGRADE_GREEDY_CASKS` in `stow/homebrew/.homebrew/brew.env`.
 
 ## macOS defaults
 

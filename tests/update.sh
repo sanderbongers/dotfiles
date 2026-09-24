@@ -28,7 +28,7 @@ case "$name" in
         esac
         ;;
     brew)
-        cat >/dev/null
+        if [[ "$1" == bundle ]]; then cat >/dev/null; fi
         if [[ "$2" == check ]]; then exit 1; fi
         exit "${TEST_PACKAGE_STATUS:-0}"
         ;;
@@ -115,14 +115,15 @@ reject_log 'bat cache'
 echo 'ok - Fish command failures stop maintenance'
 
 target=upgrade
-run_maintenance HOMEBREW_BUNDLE_NO_UPGRADE=1
-expect_log 'brew bundle install --file=- --upgrade'
+run_maintenance
+expect_log 'brew bundle install --file=- --no-upgrade'
+expect_log 'brew upgrade'
 expect_log 'bat cache --build'
 reject_log 'git '
 reject_log 'link'
 reject_log 'fish '
 reject_log 'sudo '
-echo 'ok - macOS explicitly upgrades the Brewfile packages'
+echo 'ok - macOS installs missing Brewfile packages, then upgrades'
 
 run_maintenance TEST_OS=Linux
 expect_log 'sudo apt-get update'

@@ -34,8 +34,8 @@ unlink: # Remove all dotfile symlinks
 install-packages: # Install Homebrew packages for this machine
 	scripts/packages/homebrew.sh install
 
-dump-packages: # Write installed Homebrew packages into the shared Brewfile
-	brew bundle dump --file=homebrew/Brewfile --no-restart --force
+dump-packages: # Write installed Homebrew packages into the Brewfiles
+	scripts/packages/homebrew.sh dump
 
 ##@ macOS defaults
 apply-macos-defaults: # Apply macOS user defaults and Dock layout
