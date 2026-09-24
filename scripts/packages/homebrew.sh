@@ -46,7 +46,7 @@ case "$mode" in
         ;;
     upgrade)
         echo "$brewfile" | brew bundle install --file=- --upgrade
-        if command -q code; then
+        if command -v code >/dev/null; then
             code --update-extensions
         fi
         ;;
