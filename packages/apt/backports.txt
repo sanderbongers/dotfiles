@@ -1,0 +1,2 @@
+# Samba >= 4.23 requires trixie-backports.
+samba

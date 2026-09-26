@@ -28,6 +28,8 @@ printf '%s\n' \
 
 if [[ ! -x $(command -v nodejs) ]]; then
     echo "Installing Node.js..."
-    curl -fsSL https://deb.nodesource.com/setup_lts.x -o nodesource_setup.sh
-    sudo bash nodesource_setup.sh
+    tmp_dir="$(mktemp -d)"
+    trap 'rm -rf "$tmp_dir"' EXIT
+    curl -fsSL https://deb.nodesource.com/setup_lts.x -o "$tmp_dir/nodesource_setup.sh"
+    sudo bash "$tmp_dir/nodesource_setup.sh"
 fi

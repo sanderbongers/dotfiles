@@ -32,7 +32,7 @@ make upgrade  # Upgrade packages
 ## Layout
 
 - `config/`: app and service configuration managed outside Stow
-- `homebrew/`: shared and machine-specific Brewfiles
+- `packages/`: Homebrew and apt package declarations
 - `scripts/`: setup and maintenance
 - `stow/`: dotfiles linked into my home directory
 - `tests/`: shell tests
@@ -42,10 +42,15 @@ Stow packages with a `.linux-ignore` file are skipped on Linux.
 ## Homebrew
 
 Use `make dump-packages` to write installed packages to the Brewfiles. New entries get added to the shared
-`homebrew/Brewfile`, from where they can optionally be moved to `Brewfile.personal` or `Brewfile.work`.
+`packages/homebrew/Brewfile`, from where they can optionally be moved to `Brewfile.personal` or `Brewfile.work`.
 
 To minimise update dialogs, disable an app's own updater and make `make upgrade` keep it up to date by adding it to
 `HOMEBREW_UPGRADE_GREEDY_CASKS` in `stow/homebrew/.homebrew/brew.env`.
+
+## Debian packages
+
+Edit `packages/apt/packages.txt` for regular packages and `packages/apt/backports.txt` for packages installed from
+Backports.
 
 ## macOS defaults
 

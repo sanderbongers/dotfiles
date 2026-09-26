@@ -2,35 +2,17 @@
 
 set -euo pipefail
 
+repo_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+
+install_packages() {
+    local manifest="$1"
+    shift
+    sed '/^[[:space:]]*#/d' "$manifest" | xargs -r sudo apt-get install -y "$@"
+}
+
 echo "Installing packages..."
 sudo apt-get update
-sudo apt-get install -y "$@" \
-    bat \
-    bind9-dnsutils \
-    bsd-mailx \
-    build-essential \
-    caddy \
-    fd-find \
-    fish \
-    fzf \
-    geoipupdate python3-maxminddb \
-    git-delta \
-    iotop \
-    jq \
-    keychain \
-    msmtp msmtp-mta \
-    ncdu \
-    nodejs \
-    ripgrep \
-    sqlite3 \
-    stow \
-    sysstat \
-    tealdeer \
-    tmux \
-    unbound \
-    zoxide
+install_packages "$repo_dir/packages/apt/packages.txt" "$@"
 
-# Trixie's Samba is older than the required 4.23. Once it ships >= 4.23, samba can be moved up.
-# Backports needed to install Samba >= 4.23.
-echo "Installing Samba from backports..."
-sudo apt-get install -y "$@" -t trixie-backports samba
+echo "Installing packages from backports..."
+install_packages "$repo_dir/packages/apt/backports.txt" "$@" -t trixie-backports

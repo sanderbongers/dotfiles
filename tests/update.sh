@@ -6,15 +6,16 @@ repo_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 tmp="$(mktemp -d)"
 trap 'rm -rf "$tmp"' EXIT HUP INT TERM
 fixture="$tmp/repo"
-mkdir -p "$fixture/scripts/packages" "$fixture/homebrew" "$tmp/bin" "$tmp/home"
+mkdir -p "$fixture/scripts/packages" "$fixture/packages/homebrew" "$tmp/bin" "$tmp/home"
 cp "$repo_dir/Makefile" "$fixture/Makefile"
 cp "$repo_dir/scripts/update.sh" "$fixture/scripts/"
 cp "$repo_dir/scripts/upgrade.sh" "$fixture/scripts/"
+cp -R "$repo_dir/packages/apt" "$fixture/packages/"
 cp "$repo_dir/scripts/packages/apt.sh" "$fixture/scripts/packages/"
 cp "$repo_dir/scripts/packages/homebrew.sh" "$fixture/scripts/packages/"
 printf 'personal\n' >"$fixture/.machine-profile"
-printf 'brew "bat"\n' >"$fixture/homebrew/Brewfile"
-printf 'brew "fish"\n' >"$fixture/homebrew/Brewfile.personal"
+printf 'brew "bat"\n' >"$fixture/packages/homebrew/Brewfile"
+printf 'brew "fish"\n' >"$fixture/packages/homebrew/Brewfile.personal"
 
 cat >"$tmp/bin/mock" <<'MOCK'
 #!/bin/bash

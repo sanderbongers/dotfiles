@@ -34,7 +34,7 @@ case "$mode" in
         ;;
 esac
 
-brewfile="$(cat "$repo_dir/homebrew/Brewfile" "$repo_dir/homebrew/Brewfile.$(cat "$profile_file")")"
+brewfile="$(cat "$repo_dir/packages/homebrew/Brewfile" "$repo_dir/packages/homebrew/Brewfile.$(cat "$profile_file")")"
 
 case "$mode" in
     check)
@@ -46,8 +46,8 @@ case "$mode" in
         ;;
     dump)
         dump="$(brew bundle dump --file=- --no-restart)"
-        echo "$dump" | awk -v shared="$repo_dir/homebrew/Brewfile" \
-            -v profile="$repo_dir/homebrew/Brewfile.$(cat "$profile_file")" '
+        echo "$dump" | awk -v shared="$repo_dir/packages/homebrew/Brewfile" \
+            -v profile="$repo_dir/packages/homebrew/Brewfile.$(cat "$profile_file")" '
             BEGIN {
                 # Entries already in this profile stay here if the dumped line is unchanged.
                 while ((getline line < profile) > 0) {
