@@ -30,6 +30,8 @@
 	<string>https://api.openai.com/v1/responses</string>
 	<key>AllowClipboardAccess</key>
 	<true/>
+	<key>AlphaForDeselectedCommandShade</key>
+	<real>0.05000000074505806</real>
 	<key>AutoHideTmuxClientSession</key>
 	<true/>
 	<key>ClaudeCodeWorkgroupUpsellSuppressed</key>
@@ -1618,6 +1620,8 @@
 			<key>Transparency</key>
 			<real>0.0</real>
 			<key>Unlimited Scrollback</key>
+			<false/>
+			<key>Use Active Pane Border</key>
 			<false/>
 			<key>Use Bold Font</key>
 			<true/>
