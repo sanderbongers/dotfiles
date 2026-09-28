@@ -57,7 +57,7 @@ for entry in "${dock_layout[@]}"; do
         *) dock_add "$entry" ;;
     esac
 done
-dockutil --add "$HOME/Downloads" --section others --view grid --display folder --sort dateadded --no-restart >/dev/null
+dockutil --add "$HOME/Downloads" --section others --view fan --display folder --sort dateadded --no-restart >/dev/null
 
 # Dock
 defaults write com.apple.dock show-recents -bool false
