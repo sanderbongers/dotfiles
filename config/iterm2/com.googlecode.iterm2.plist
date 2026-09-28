@@ -36,6 +36,8 @@
 	<true/>
 	<key>ClaudeCodeWorkgroupUpsellSuppressed</key>
 	<true/>
+	<key>CopySelection</key>
+	<false/>
 	<key>Custom Color Presets</key>
 	<dict>
 		<key>Custom</key>
