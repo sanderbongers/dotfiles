@@ -1,12 +1,13 @@
 status is-interactive; or return
 
 # Prefer GNU tools by expanding them to their g-prefixed binaries.
-# Caches the generated abbrs until a formula or wrapper changes.
+# Caches the generated abbrs and completions until a formula or wrapper changes.
 set -l cache $__fish_cache_dir/gnubin.fish
 if not test -f $cache
         or test /opt/homebrew/opt -nt $cache
         or test /usr/local/opt -nt $cache
         or test $__fish_config_dir/functions -nt $cache
+        or test $__fish_cache_dir/generated_completions -nt $cache
     set -l tools /opt/homebrew/opt/*/libexec/gnubin/* /usr/local/opt/*/libexec/gnubin/*
 
     set -l names
@@ -26,6 +27,10 @@ if not test -f $cache
                 "abbr -a gnubin --regex '$pattern' --function __gnubin_expand" \
                 "abbr -a sudo:gnubin --command sudo --regex '$pattern' --function __gnubin_expand" \
                 "abbr -a man:gnubin --command man --command gman --regex '$pattern' --function __gnubin_expand_bare"
+            # Wrap completions of g-prefixed GNU tools that lack their own
+            for name in $names
+                path filter -q $fish_complete_path/g$name.fish; or echo "complete -c g$name --wraps $name"
+            end
         else
             echo -n
         end
