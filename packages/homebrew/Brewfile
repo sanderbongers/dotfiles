@@ -158,8 +158,6 @@ cask "1password"
 cask "1password-cli"
 # Stand alone ad blocker
 cask "adguard"
-# VPN for privacy and security
-cask "adguard-vpn"
 # Image editing and design software
 cask "affinity"
 # Browse, search and analyse your past AI coding sessions

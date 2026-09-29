@@ -2,6 +2,8 @@
 cask "anki"
 # Multi-track audio editor and recorder
 cask "audacity"
+# VPN for privacy and security
+cask "adguard-vpn"
 # 3D creation suite
 cask "blender"
 # E-books management software
