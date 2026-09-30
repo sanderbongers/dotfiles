@@ -6,6 +6,8 @@ brew "asdf"
 brew "bash"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
+# 7-Zip (high compression file archiver) implementation
+brew "p7zip"
 # Searches a binary image for embedded files and executable code
 brew "binwalk"
 # CLI of the open-source IDE For exploring and testing APIs
@@ -58,6 +60,8 @@ brew "fish-lsp"
 brew "fzf"
 # GitHub command-line tool
 brew "gh"
+# Distributed revision control system
+brew "git"
 # Syntax-highlighting pager for git and diff output
 brew "git-delta"
 # Render markdown on the CLI
@@ -104,8 +108,6 @@ brew "neovim"
 brew "nikto"
 # Port scanning utility for large networks
 brew "nmap"
-# 7-Zip (high compression file archiver) implementation
-brew "p7zip"
 # Swiss-army knife of markup format conversion
 brew "pandoc"
 # CLI for Postgres with auto-completion and syntax highlighting
@@ -146,6 +148,8 @@ brew "tree"
 brew "unar"
 # Validating, recursive, caching DNS resolver
 brew "unbound"
+# Extremely fast Python package installer and resolver, written in Rust
+brew "uv"
 # Internet file retriever
 brew "wget"
 # Process YAML, JSON, XML, CSV and properties documents from the CLI
@@ -201,6 +205,9 @@ cask "telegram-desktop"
 # Open-source code editor
 cask "visual-studio-code"
 mas "1Password for Safari", id: 1569813296
+mas "Keynote", id: 361285480
+mas "Numbers", id: 361304891
+mas "Pages", id: 361309726
 mas "Xcode", id: 497799835
 vscode "alefragnani.project-manager"
 vscode "bmewburn.vscode-intelephense-client"

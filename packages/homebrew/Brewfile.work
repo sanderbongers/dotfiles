@@ -1,6 +1,25 @@
+tap "buddy/bdy"
+tap "shivammathur/php"
+tap "shopify/shopify"
 # Drop-in replacement for MySQL
 brew "mariadb"
 # CLI for MySQL with auto-completion and syntax highlighting
 brew "mycli"
+# General-purpose scripting language
+brew "php@8.1"
+# General-purpose scripting language
+brew "php@8.2"
+# General-purpose scripting language
+brew "php@8.3"
+# General-purpose scripting language
+brew "php@8.4"
 # Command-line interface for WordPress
 brew "wp-cli"
+# Buddy cli
+brew "buddy/bdy/bdy", trusted: true
+# General-purpose scripting language
+brew "shivammathur/php/php@7.4", trusted: true
+# A CLI tool to build for the Shopify platform
+brew "shopify/shopify/shopify-cli", trusted: true
+# Team communication and collaboration software
+cask "slack"
