@@ -45,7 +45,8 @@ case "$mode" in
             echo "$brewfile" | brew bundle install --file=- --no-upgrade
         ;;
     dump)
-        dump="$(brew bundle dump --file=- --no-restart)"
+        # Skip npm globals because asdf manages them.
+        dump="$(brew bundle dump --file=- --no-restart --no-npm)"
         echo "$dump" | awk -v shared="$repo_dir/packages/homebrew/Brewfile" \
             -v profile="$repo_dir/packages/homebrew/Brewfile.$(cat "$profile_file")" '
             BEGIN {
