@@ -70,6 +70,8 @@ case "$mode" in
             }'
         ;;
     upgrade)
+        # First, because Homebrew refuses to install or upgrade while Xcode is outdated.
+        mas upgrade
         # Install missing Brewfile packages...
         echo "$brewfile" | brew bundle install --file=- --no-upgrade
         # ...but upgrade using brew upgrade, because brew bundle ignores the HOMEBREW_UPGRADE_GREEDY_CASKS setting.
