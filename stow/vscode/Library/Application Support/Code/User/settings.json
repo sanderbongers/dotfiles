@@ -39,6 +39,7 @@
         "editor.defaultFormatter": "redhat.vscode-yaml",
         "editor.formatOnSaveMode": "modificationsIfAvailable"
     },
+    "chat.tips.enabled": false,
     "chat.titleBar.openInAgentsWindow.enabled": false,
     "debug.allowBreakpointsEverywhere": true,
     "diffEditor.experimental.showMoves": true,
