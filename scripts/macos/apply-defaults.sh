@@ -40,6 +40,43 @@ case "$(<"$profile_file")" in
         ;;
 esac
 
+# Language and region
+defaults write -g AppleLanguages -array "en-NL" "nl-NL"
+defaults write -g AppleLocale -string "en_NL"
+
+# Keyboard and input
+defaults write -g AppleKeyboardUIMode -int 2
+defaults write -g InitialKeyRepeat -int 15
+defaults write -g KeyRepeat -int 2
+defaults write -g NSAutomaticSpellingCorrectionEnabled -bool false
+defaults write -g WebAutomaticSpellingCorrectionEnabled -bool false
+
+# Trackpad
+defaults -currentHost write -g com.apple.mouse.tapBehavior -int 1
+defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+
+# Display and screen saver
+defaults -currentHost write com.apple.screensaver idleTime -int 0
+sudo pmset -c displaysleep 10
+
+# General UI
+defaults write -g AppleShowAllExtensions -bool true
+defaults write -g NSNavPanelExpandedStateForSaveMode -bool true
+defaults write -g SLSMenuBarUseBlurredAppearance -bool true
+
+# Window Manager
+defaults write com.apple.WindowManager EnableTiledWindowMargins -bool false
+
+# Control Center
+defaults -currentHost write com.apple.controlcenter Sound -int 16 # Always Show
+defaults -currentHost write com.apple.controlcenter AirplayReceiverEnabled -bool false
+
+# Dock
+defaults write com.apple.dock show-recents -bool false
+defaults write com.apple.dock showAppExposeGestureEnabled -bool true
+defaults write com.apple.dock tilesize -int 64
+
 dock_layout=(
     Firefox Mail "$chat" Calendar Reminders Notes Notion
     --
@@ -59,47 +96,6 @@ for entry in "${dock_layout[@]}"; do
 done
 dockutil --add "$HOME/Downloads" --section others --view fan --display folder --sort dateadded --no-restart >/dev/null
 
-# Dock
-defaults write com.apple.dock show-recents -bool false
-defaults write com.apple.dock showAppExposeGestureEnabled -bool true
-defaults write com.apple.dock tilesize -int 64
-
-# Language and region
-defaults write -g AppleLanguages -array "en-NL" "nl-NL"
-defaults write -g AppleLocale -string "en_NL"
-
-# Keyboard and input
-defaults write -g AppleKeyboardUIMode -int 2
-defaults write -g InitialKeyRepeat -int 15
-defaults write -g KeyRepeat -int 2
-defaults write -g NSAutomaticSpellingCorrectionEnabled -bool false
-defaults write -g WebAutomaticSpellingCorrectionEnabled -bool false
-
-# Trackpad
-defaults -currentHost write -g com.apple.mouse.tapBehavior -int 1
-defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
-
-# General UI
-defaults write -g AppleShowAllExtensions -bool true
-defaults write -g NSNavPanelExpandedStateForSaveMode -bool true
-defaults write -g SLSMenuBarUseBlurredAppearance -bool true
-
-# Activity Monitor
-defaults write com.apple.ActivityMonitor ShowCategory -int 100 # All Processes
-defaults write com.apple.ActivityMonitor UpdatePeriod -int 2
-
-# Window Manager
-defaults write com.apple.WindowManager EnableTiledWindowMargins -bool false
-
-# Control Center
-defaults -currentHost write com.apple.controlcenter Sound -int 16 # Always Show
-defaults -currentHost write com.apple.controlcenter AirplayReceiverEnabled -bool false
-
-# Display and screen saver
-defaults -currentHost write com.apple.screensaver idleTime -int 0
-sudo pmset -c displaysleep 10
-
 # Finder
 defaults write com.apple.finder _FXSortFoldersFirst -bool true
 defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
@@ -117,6 +113,10 @@ defaults write com.apple.screencapture disable-shadow -bool true
 defaults write com.apple.screencapture include-date -bool false
 defaults write com.apple.screencapture location -string "$HOME/Downloads"
 defaults write com.apple.screencapture show-thumbnail -bool false
+
+# Activity Monitor
+defaults write com.apple.ActivityMonitor ShowCategory -int 100 # All Processes
+defaults write com.apple.ActivityMonitor UpdatePeriod -int 2
 
 # Calendar
 defaults write com.apple.iCal "TimeZone support enabled" -bool true
