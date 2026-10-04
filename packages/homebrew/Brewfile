@@ -6,8 +6,6 @@ brew "asdf"
 brew "bash"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
-# 7-Zip (high compression file archiver) implementation
-brew "p7zip"
 # Searches a binary image for embedded files and executable code
 brew "binwalk"
 # CLI of the open-source IDE For exploring and testing APIs
@@ -74,6 +72,8 @@ brew "gnu-which"
 brew "grep"
 # HTTP load generator, ApacheBench (ab) replacement
 brew "hey"
+# CLI email client written in Rust
+brew "himalaya"
 # Improved top (interactive process viewer)
 brew "htop"
 # Fast and multi-purpose HTTP toolkit
@@ -108,6 +108,8 @@ brew "neovim"
 brew "nikto"
 # Port scanning utility for large networks
 brew "nmap"
+# 7-Zip (high compression file archiver) implementation
+brew "p7zip"
 # Swiss-army knife of markup format conversion
 brew "pandoc"
 # CLI for Postgres with auto-completion and syntax highlighting
@@ -172,6 +174,8 @@ cask "appcleaner"
 cask "bruno"
 # Web security testing toolkit
 cask "burp-suite"
+# OpenAI's official ChatGPT desktop app
+cask "chatgpt"
 # Anthropic's official Claude AI desktop app
 cask "claude"
 # Terminal-based AI coding assistant
