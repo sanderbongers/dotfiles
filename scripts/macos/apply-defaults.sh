@@ -85,6 +85,10 @@ defaults write -g AppleShowAllExtensions -bool true
 defaults write -g NSNavPanelExpandedStateForSaveMode -bool true
 defaults write -g SLSMenuBarUseBlurredAppearance -bool true
 
+# Activity Monitor
+defaults write com.apple.ActivityMonitor ShowCategory -int 100 # All Processes
+defaults write com.apple.ActivityMonitor UpdatePeriod -int 2
+
 # Window Manager
 defaults write com.apple.WindowManager EnableTiledWindowMargins -bool false
 
