@@ -54,7 +54,8 @@ Backports.
 
 ## macOS defaults
 
-Edit `scripts/macos/apply-defaults.sh`, then run `make apply-macos-defaults`.
+Edit `scripts/macos/apply-defaults.sh`, give Full Disk Access to iTerm2 in System Settings > Privacy & Security, then
+run `make apply-macos-defaults`.
 
 To find a setting, run `make snapshot-macos` before and after changing it in the UI. Compare the snapshots in
 `baseline/`.
