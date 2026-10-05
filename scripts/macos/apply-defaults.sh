@@ -1,44 +1,79 @@
 #!/usr/bin/env bash
 
+# Apply macOS user preferences.
+
 set -euo pipefail
 
-script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-iterm2_prefs="$(cd "$script_dir/../../config/iterm2" && pwd)"
-profile_file="$script_dir/../../.machine-profile"
+# --- Helper functions ---
 
-# Sandboxed apps store preferences inside their containers (Full Disk Access needed).
+# Sandboxed apps store preferences inside their containers. Requires Full Disk Access.
 container_prefs() {
     printf '%s/Library/Containers/%s/Data/Library/Preferences/%s' "$HOME" "$1" "$1"
 }
-coteditor_prefs="$(container_prefs com.coteditor.CotEditor)"
-mail_prefs="$(container_prefs com.apple.mail)"
-notes_prefs="$(container_prefs com.apple.Notes)"
-safari_prefs="$(container_prefs com.apple.Safari)"
-textedit_prefs="$(container_prefs com.apple.TextEdit)"
 
-dock_add() {
+write_container_default() {
+    local domain="$1"
+    shift
+    if defaults write "$(container_prefs "$domain")" "$@"; then
+        return 0
+    fi
+    echo "macos/apply-defaults: could not write $domain/$1; skipping this preference." >&2
+}
+
+dock_app_path() {
     local name="$1" dir
     for dir in /System/Applications /Applications; do
         if [[ -d "$dir/$name.app" ]]; then
-            dockutil --add "$dir/$name.app" --section apps --no-restart >/dev/null
+            printf '%s\n' "$dir/$name.app"
             return
         fi
     done
-    echo "macos/apply-defaults: could not find $name.app, skipping dock entry" >&2
+    echo "macos/apply-defaults: could not find $name.app; skipping dock entry." >&2
+    return 1
 }
 
 dock_spacer() {
     dockutil --add '' --type small-spacer --section apps --no-restart >/dev/null
 }
 
-case "$(<"$profile_file")" in
-    personal) chat=Messages ide="Visual Studio Code" ai=ChatGPT infra= ;;
-    work) chat=Slack ide=PhpStorm ai=Claude infra=OrbStack ;;
-    *)
-        echo "macos/apply-defaults: $profile_file must contain 'personal' or 'work'" >&2
+load_machine_profile() {
+    local profile_path="$1"
+
+    if [[ ! -r "$profile_path" || ! -s "$profile_path" ]]; then
+        echo "macos/apply-defaults: $profile_path is missing, empty, or unreadable; run 'make install' first." >&2
         exit 1
-        ;;
-esac
+    fi
+
+    case "$(<"$profile_path")" in
+        personal)
+            dock_chat_app=Messages
+            dock_ide_app="Visual Studio Code"
+            dock_ai_app=ChatGPT
+            dock_infra_app=
+            ;;
+        work)
+            dock_chat_app=Slack
+            dock_ide_app=PhpStorm
+            dock_ai_app=Claude
+            dock_infra_app=OrbStack
+            ;;
+    esac
+}
+
+# --- Setup ---
+
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+iterm2_prefs="$(cd "$script_dir/../../config/iterm2" && pwd)"
+profile_file="$script_dir/../../.machine-profile"
+
+load_machine_profile "$profile_file"
+
+if ! command -v dockutil >/dev/null; then
+    echo "macos/apply-defaults: 'dockutil' is required; run 'brew install dockutil' first." >&2
+    exit 1
+fi
+
+# --- System settings ---
 
 # Language and region
 defaults write -g AppleLanguages -array "en-NL" "nl-NL"
@@ -77,21 +112,24 @@ defaults write com.apple.dock show-recents -bool false
 defaults write com.apple.dock showAppExposeGestureEnabled -bool true
 defaults write com.apple.dock tilesize -int 64
 
+# Dock contents
 dock_layout=(
-    Firefox Mail "$chat" Calendar Reminders Notes Notion
+    Firefox Mail "$dock_chat_app" Calendar Reminders Notes Notion Spotify Affinity
     --
-    iTerm "$ide" "$ai" TablePlus Bruno "Burp Suite" "$infra"
-    Affinity Spotify "System Settings"
+    "$dock_infra_app" "Burp Suite" Bruno TablePlus "$dock_ai_app" "$dock_ide_app" iTerm "System Settings"
     --
 )
 
-# Dock contents
 dockutil --remove all --no-restart >/dev/null
 for entry in "${dock_layout[@]}"; do
     case "$entry" in
         '') ;;
         --) dock_spacer ;;
-        *) dock_add "$entry" ;;
+        *)
+            if app_path="$(dock_app_path "$entry")"; then
+                dockutil --add "$app_path" --section apps --no-restart >/dev/null
+            fi
+            ;;
     esac
 done
 dockutil --add "$HOME/Downloads" --section others --view fan --display folder --sort dateadded --no-restart >/dev/null
@@ -114,6 +152,8 @@ defaults write com.apple.screencapture include-date -bool false
 defaults write com.apple.screencapture location -string "$HOME/Downloads"
 defaults write com.apple.screencapture show-thumbnail -bool false
 
+# --- Application settings ---
+
 # Activity Monitor
 defaults write com.apple.ActivityMonitor ShowCategory -int 100 # All Processes
 defaults write com.apple.ActivityMonitor UpdatePeriod -int 2
@@ -124,35 +164,40 @@ defaults write com.apple.iCal "Show Week Numbers" -bool true
 defaults write com.apple.iCal enableTravelAdvisoriesForAutomaticBehavior -bool false
 
 # Mail
-defaults write "$mail_prefs" AddLinkPreviews -bool false
+write_container_default com.apple.mail AddLinkPreviews -bool false
 
 # Notes
-defaults write "$notes_prefs" ShouldCorrectSpellingAutomatically -bool false
+write_container_default com.apple.Notes ShouldCorrectSpellingAutomatically -bool false
 
 # Reminders
 defaults write com.apple.remindd shouldIncludeRemindersDueTodayInBadgeCount -bool false
 defaults write com.apple.remindd showRemindersAsOverdue -bool true
 
 # Safari
-defaults write "$safari_prefs" AlwaysRestoreSessionAtLaunch -bool true
-defaults write "$safari_prefs" AutoOpenSafeDownloads -bool false
-defaults write "$safari_prefs" EnableEnhancedPrivacyInRegularBrowsing -bool true
-defaults write "$safari_prefs" IncludeDevelopMenu -bool true
-defaults write "$safari_prefs" ShowFullURLInSmartSearchField -bool true
-defaults write "$safari_prefs" WebKitDeveloperExtrasEnabledPreferenceKey -bool true
-defaults write "$safari_prefs" WebKitPreferences.developerExtrasEnabled -bool true
-defaults write "$safari_prefs" WebKitPreferences.privateClickMeasurementEnabled -bool false
+write_container_default com.apple.Safari AlwaysRestoreSessionAtLaunch -bool true
+write_container_default com.apple.Safari AutoOpenSafeDownloads -bool false
+write_container_default com.apple.Safari EnableEnhancedPrivacyInRegularBrowsing -bool true
+write_container_default com.apple.Safari IncludeDevelopMenu -bool true
+write_container_default com.apple.Safari ShowFullURLInSmartSearchField -bool true
+write_container_default com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
+write_container_default com.apple.Safari WebKitPreferences.developerExtrasEnabled -bool true
+write_container_default com.apple.Safari WebKitPreferences.privateClickMeasurementEnabled -bool false
 defaults write com.apple.Safari.SandboxBroker ShowDevelopMenu -bool true
 
 # TextEdit
-defaults write "$textedit_prefs" RichText -bool false
+write_container_default com.apple.TextEdit RichText -bool false
 
 # iTerm2
 defaults write com.googlecode.iterm2 PrefsCustomFolder -string "$iterm2_prefs"
 defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true
 
+# TablePlus
+defaults write com.tinyapp.TablePlus EnableQueryParams -bool true
+
+# --- Update and telemetry policies ---
+
 # Disable auto-updates (Homebrew manages it for these, see stow/homebrew/.homebrew/brew.env)
-defaults write "$coteditor_prefs" SUEnableAutomaticChecks -bool false
+write_container_default com.coteditor.CotEditor SUEnableAutomaticChecks -bool false
 defaults write com.adguard.mac.vpn SUEnableAutomaticChecks -bool false
 defaults write com.googlecode.iterm2 SUEnableAutomaticChecks -bool false
 defaults write com.tinyapp.TablePlus SUEnableAutomaticChecks -bool false
@@ -175,7 +220,8 @@ defaults write com.adguard.mac.adguard SendTelemetry -bool false
 defaults write com.adguard.mac.vpn gs-send-statistics -bool false
 defaults write com.apple.AdLib allowApplePersonalizedAdvertising -bool false
 
-# Apply
+# --- Reload and expose the user Library ---
+
 killall Dock
 killall Finder
 chflags nohidden ~/Library
