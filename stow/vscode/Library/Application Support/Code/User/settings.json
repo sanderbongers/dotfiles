@@ -18,10 +18,12 @@
         "editor.defaultFormatter": "vscode.html-language-features"
     },
     "[javascript][javascriptreact][typescript][typescriptreact]": {
-        "editor.defaultFormatter": "vscode.typescript-language-features"
+        "editor.defaultFormatter": "vscode.typescript-language-features",
+        "editor.tabSize": 2
     },
     "[json][jsonc]": {
-        "editor.defaultFormatter": "vscode.json-language-features"
+        "editor.defaultFormatter": "vscode.json-language-features",
+        "editor.tabSize": 2
     },
     "[lua]": {
         "editor.defaultFormatter": "sumneko.lua"
