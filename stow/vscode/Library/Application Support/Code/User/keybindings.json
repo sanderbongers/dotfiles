@@ -1,0 +1,48 @@
+[
+  {
+    "command": "editor.action.commentLine",
+    "key": "cmd+/",
+    "when": "editorLangId == fish && editorTextFocus && !editorReadonly"
+  },
+  {
+    "command": "editor.action.sortLinesAscending",
+    "key": "alt+s",
+    "when": "editorLangId != json && editorLangId != jsonc"
+  },
+  {
+    "command": "editor.action.sortLinesDescending",
+    "key": "shift+alt+s"
+  },
+  {
+    "command": "json.sort",
+    "key": "alt+s",
+    "when": "editorLangId == json || editorLangId == jsonc"
+  },
+  {
+    "args": "sweetpad: launch",
+    "command": "workbench.action.tasks.runTask",
+    "key": "cmd+r"
+  },
+  {
+    "command": "workbench.action.openSettingsJson",
+    "key": "cmd+,",
+    "when": "inSettingsEditor"
+  },
+  {
+    "command": "composerMode.chat",
+    "key": "cmd+i"
+  },
+  {
+    "command": "search.action.clearSearchResults",
+    "key": "escape",
+    "when": "inputBoxFocus && searchViewletVisible"
+  },
+  {
+    "args": {
+      "text": "\u001b\r"
+    },
+    "command": "workbench.action.terminal.sendSequence",
+    "key": "shift+enter",
+    "when": "terminalFocus"
+  },
+]
