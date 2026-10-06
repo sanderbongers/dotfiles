@@ -4,30 +4,45 @@
 
 set -euo pipefail
 
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+iterm2_prefs="$(cd "$script_dir/../../config/iterm2" && pwd)"
+profile_file="$script_dir/../../.machine-profile"
+
 # --- Helper functions ---
 
-# Sandboxed apps store preferences inside their containers. Requires Full Disk Access.
+# Sandboxed apps store preferences inside their containers (requires Full Disk Access).
 container_prefs() {
     printf '%s/Library/Containers/%s/Data/Library/Preferences/%s' "$HOME" "$1" "$1"
 }
 
 write_container_default() {
     local domain="$1"
+
     shift
     if defaults write "$(container_prefs "$domain")" "$@"; then
         return 0
     fi
+
     echo "macos/apply-defaults: could not write $domain/$1; skipping this preference." >&2
 }
 
 dock_app_path() {
     local name="$1" dir
+
     for dir in /System/Applications /Applications; do
         if [[ -d "$dir/$name.app" ]]; then
             printf '%s\n' "$dir/$name.app"
             return
         fi
     done
+}
+
+dock_app() {
+    if app_path="$(dock_app_path "$1")"; then
+        dockutil --add "$app_path" --section apps --no-restart >/dev/null
+        return
+    fi
+
     echo "macos/apply-defaults: could not find $name.app; skipping dock entry." >&2
     return 1
 }
@@ -36,15 +51,18 @@ dock_spacer() {
     dockutil --add '' --type small-spacer --section apps --no-restart >/dev/null
 }
 
-load_machine_profile() {
-    local profile_path="$1"
-
-    if [[ ! -r "$profile_path" || ! -s "$profile_path" ]]; then
-        echo "macos/apply-defaults: $profile_path is missing, empty, or unreadable; run 'make install' first." >&2
+setup_dock() {
+    if ! command -v dockutil >/dev/null; then
+        echo "macos/apply-defaults: 'dockutil' is required; run 'brew install dockutil' first." >&2
         exit 1
     fi
 
-    case "$(<"$profile_path")" in
+    if [[ ! -r "$profile_file" || ! -s "$profile_file" ]]; then
+        echo "macos/apply-defaults: $profile_file is missing, empty, or unreadable; run 'make install' first." >&2
+        exit 1
+    fi
+
+    case "$(<"$profile_file")" in
         personal)
             dock_chat_app=Messages
             dock_ide_app="Visual Studio Code"
@@ -58,20 +76,24 @@ load_machine_profile() {
             dock_infra_app=OrbStack
             ;;
     esac
+
+    dock_layout=(
+        Firefox Mail "$dock_chat_app" Calendar Reminders Notes Notion Spotify Affinity
+        --
+        "$dock_infra_app" "Burp Suite" Bruno TablePlus "$dock_ide_app" "$dock_ai_app" iTerm "System Settings"
+        --
+    )
+
+    dockutil --remove all --no-restart >/dev/null
+    for entry in "${dock_layout[@]}"; do
+        case "$entry" in
+            '') ;;
+            --) dock_spacer ;;
+            *) dock_app "$entry" ;;
+        esac
+    done
+    dockutil --add "$HOME/Downloads" --section others --view fan --display folder --sort dateadded --no-restart >/dev/null
 }
-
-# --- Setup ---
-
-script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-iterm2_prefs="$(cd "$script_dir/../../config/iterm2" && pwd)"
-profile_file="$script_dir/../../.machine-profile"
-
-load_machine_profile "$profile_file"
-
-if ! command -v dockutil >/dev/null; then
-    echo "macos/apply-defaults: 'dockutil' is required; run 'brew install dockutil' first." >&2
-    exit 1
-fi
 
 # --- System settings ---
 
@@ -113,26 +135,7 @@ defaults write com.apple.dock showAppExposeGestureEnabled -bool true
 defaults write com.apple.dock tilesize -int 64
 
 # Dock contents
-dock_layout=(
-    Firefox Mail "$dock_chat_app" Calendar Reminders Notes Notion Spotify Affinity
-    --
-    "$dock_infra_app" "Burp Suite" Bruno TablePlus "$dock_ai_app" "$dock_ide_app" iTerm "System Settings"
-    --
-)
-
-dockutil --remove all --no-restart >/dev/null
-for entry in "${dock_layout[@]}"; do
-    case "$entry" in
-        '') ;;
-        --) dock_spacer ;;
-        *)
-            if app_path="$(dock_app_path "$entry")"; then
-                dockutil --add "$app_path" --section apps --no-restart >/dev/null
-            fi
-            ;;
-    esac
-done
-dockutil --add "$HOME/Downloads" --section others --view fan --display folder --sort dateadded --no-restart >/dev/null
+setup_dock
 
 # Finder
 defaults write com.apple.finder _FXSortFoldersFirst -bool true
