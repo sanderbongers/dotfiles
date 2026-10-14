@@ -21,5 +21,7 @@ brew "buddy/bdy/bdy", trusted: true
 brew "shivammathur/php/php@7.4", trusted: true
 # A CLI tool to build for the Shopify platform
 brew "shopify/shopify/shopify-cli", trusted: true
+# Desktop client for GitHub repositories
+cask "github"
 # Team communication and collaboration software
 cask "slack"
