@@ -123,6 +123,7 @@
   "window.newWindowDimensions": "maximized",
   "window.openFoldersInNewWindow": "on",
   "workbench.editor.empty.hint": "hidden",
+  "workbench.editor.useModal": "off",
   "workbench.secondarySideBar.defaultVisibility": "hidden",
   "workbench.startupEditor": "none",
   "yaml.format.printWidth": 120,
