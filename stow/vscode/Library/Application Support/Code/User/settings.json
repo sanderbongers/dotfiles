@@ -86,7 +86,7 @@
   "files.autoSave": "afterDelay",
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
-  "fish-lsp.executablePath": "/opt/homebrew/bin/fish-lsp",
+  "fish-lsp.useGlobalExecutable": true,
   "git.autofetch": true,
   "git.autoStash": true,
   "git.blame.editorDecoration.enabled": true,
