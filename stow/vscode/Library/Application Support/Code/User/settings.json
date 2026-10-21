@@ -17,6 +17,9 @@
   "[html]": {
     "editor.defaultFormatter": "vscode.html-language-features"
   },
+  "[ignore][properties]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
   "[javascript][javascriptreact][typescript][typescriptreact]": {
     "editor.defaultFormatter": "vscode.typescript-language-features",
     "editor.tabSize": 2
@@ -34,13 +37,15 @@
     },
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "[shellscript][ignore][properties][hosts][dockerfile]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format"
+  "[shellscript]": {
+    "editor.defaultFormatter": "mads-hartmann.bash-ide-vscode"
   },
   "[yaml]": {
     "editor.defaultFormatter": "redhat.vscode-yaml",
     "editor.formatOnSaveMode": "modificationsIfAvailable"
   },
+  "bashIde.shellcheckPath": "",
+  "bashIde.shfmt.caseIndent": true,
   "chat.tips.enabled": false,
   "chat.titleBar.openInAgentsWindow.enabled": false,
   "debug.allowBreakpointsEverywhere": true,
@@ -71,7 +76,6 @@
     ".rgignore-root": "ignore",
     ".ripgreprc": "properties",
     ".xml.dist": "xml",
-    "*.sgmodule": "properties",
     "Brewfile.*": "ruby",
     "config": "properties",
     "config.local.fish": "fish",
