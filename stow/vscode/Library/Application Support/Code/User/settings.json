@@ -76,6 +76,7 @@
     ".rgignore-root": "ignore",
     ".ripgreprc": "properties",
     ".xml.dist": "xml",
+    "**/userscripts/bin/publish": "fish",
     "Brewfile.*": "ruby",
     "config": "properties",
     "config.local.fish": "fish",
