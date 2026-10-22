@@ -208,6 +208,8 @@ cask "tableplus"
 cask "telegram-desktop"
 # Open-source code editor
 cask "visual-studio-code"
+# Native desktop client for WhatsApp
+cask "whatsapp"
 mas "1Password for Safari", id: 1569813296
 mas "Keynote", id: 361285480
 mas "Numbers", id: 361304891

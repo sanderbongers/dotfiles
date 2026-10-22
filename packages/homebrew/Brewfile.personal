@@ -16,8 +16,6 @@ cask "mitmproxy"
 cask "pdf-expert"
 # Imaging utility to install operating systems to a microSD card
 cask "raspberry-pi-imager"
-# Native desktop client for WhatsApp
-cask "whatsapp"
 mas "Instapaper", id: 288545208
 mas "QueryDial", id: 6478811925
 mas "Userscripts", id: 1463298887
