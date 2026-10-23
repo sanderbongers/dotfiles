@@ -60,6 +60,23 @@ run `make apply-macos-defaults`.
 To find a setting, run `make snapshot-macos` before and after changing it in the UI. Compare the snapshots in
 `baseline/`.
 
-## Commands
+### Caps Lock delay
 
-Run `make help` for all commands.
+`stow/macos/Library/LaunchAgents/local.caps-lock-delay.plist` removes the Caps Lock activation delay at login.
+Keep Raycast's Hyper Key disabled, as it still filters short taps. The `macos` Stow package is skipped on Linux.
+
+Link and activate it once:
+
+```fish
+bin/link
+launchctl bootstrap gui/(id -u) ~/Library/LaunchAgents/local.caps-lock-delay.plist
+```
+
+To change the delay, edit `CapsLockDelayOverride` in the plist (milliseconds), then reload:
+
+```fish
+launchctl bootout gui/(id -u)/local.caps-lock-delay
+launchctl bootstrap gui/(id -u) ~/Library/LaunchAgents/local.caps-lock-delay.plist
+```
+
+Note: remapping Caps Lock (e.g. with Raycast's Hyper Key) overrides this setting.
