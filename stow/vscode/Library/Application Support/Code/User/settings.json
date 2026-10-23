@@ -131,6 +131,8 @@
   "workbench.editor.useModal": "off",
   "workbench.secondarySideBar.defaultVisibility": "hidden",
   "workbench.startupEditor": "none",
+  "xml.format.enforceQuoteStyle": "preferred",
+  "xml.format.maxLineWidth": 120,
   "yaml.format.printWidth": 120,
   "yaml.format.proseWrap": "always",
   "yaml.format.singleQuote": true
