@@ -1,48 +1,48 @@
 {
   "[caddyfile]": {
-    "editor.defaultFormatter": "matthewpi.caddyfile-support"
+    "editor.defaultFormatter": "matthewpi.caddyfile-support",
   },
   "[css][scss][less]": {
-    "editor.defaultFormatter": "vscode.css-language-features"
+    "editor.defaultFormatter": "vscode.css-language-features",
   },
   "[csv]": {
-    "editor.inlayHints.maximumLength": 0
+    "editor.inlayHints.maximumLength": 0,
   },
   "[dynamic csv]": {
-    "editor.inlayHints.maximumLength": 0
+    "editor.inlayHints.maximumLength": 0,
   },
   "[fish]": {
-    "editor.defaultFormatter": "ndonfris.fish-lsp"
+    "editor.defaultFormatter": "ndonfris.fish-lsp",
   },
   "[html]": {
-    "editor.defaultFormatter": "vscode.html-language-features"
+    "editor.defaultFormatter": "vscode.html-language-features",
   },
   "[ignore][properties]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format"
+    "editor.defaultFormatter": "foxundermoon.shell-format",
   },
   "[javascript][javascriptreact][typescript][typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.tabSize": 2
+    "editor.tabSize": 2,
   },
   "[json][jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.tabSize": 2
+    "editor.tabSize": 2,
   },
   "[lua]": {
-    "editor.defaultFormatter": "sumneko.lua"
+    "editor.defaultFormatter": "sumneko.lua",
   },
   "[markdown]": {
     "editor.codeActionsOnSave": {
-      "source.fixAll.markdownlint": "explicit"
+      "source.fixAll.markdownlint": "explicit",
     },
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "[shellscript]": {
-    "editor.defaultFormatter": "mads-hartmann.bash-ide-vscode"
+    "editor.defaultFormatter": "mads-hartmann.bash-ide-vscode",
   },
   "[yaml]": {
     "editor.defaultFormatter": "redhat.vscode-yaml",
-    "editor.formatOnSaveMode": "modificationsIfAvailable"
+    "editor.formatOnSaveMode": "modificationsIfAvailable",
   },
   "bashIde.shellcheckPath": "",
   "bashIde.shfmt.caseIndent": true,
@@ -54,20 +54,18 @@
   "diffEditor.useInlineViewWhenSpaceIsLimited": true,
   "editor.accessibilitySupport": "off",
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit"
+    "source.fixAll.eslint": "explicit",
   },
   "editor.fontFamily": "Menlo, 'SF Arabic', monospace",
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
-  "editor.rulers": [
-    120
-  ],
+  "editor.rulers": [120],
   "editor.stickyTabStops": true,
   "editor.tabCompletion": "on",
   "editor.unicodeHighlight.ambiguousCharacters": false,
   "explorer.autoRevealExclude": {
     "**/var/{cache,log}": true,
-    "**/vendor": true
+    "**/vendor": true,
   },
   "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": false,
@@ -85,7 +83,7 @@
     "config.local.fish": "fish",
     "crontab": "plaintext",
     "fish_variables": "fish",
-    "ignore": "ignore"
+    "ignore": "ignore",
   },
   "files.autoSave": "afterDelay",
   "files.insertFinalNewline": true,
@@ -102,7 +100,7 @@
     "*": true,
     "markdown": true,
     "plaintext": false,
-    "scminput": false
+    "scminput": false,
   },
   "github.gitProtocol": "ssh",
   "intelephense.completion.fullyQualifyGlobalConstantsAndFunctions": true,
@@ -110,16 +108,13 @@
   "js/ts.validate.enabled": true,
   "markdownlint.configFile": "~/.markdownlint.json",
   "prettier.printWidth": 120,
-  "prettier.proseWrap": "always",
-  "projectManager.git.baseFolders": [
-    "~/Developer"
-  ],
+  "projectManager.git.baseFolders": ["~/Developer"],
   "python.analysis.typeCheckingMode": "standard",
   "scm.alwaysShowRepositories": true,
   "search.exclude": {
     ".idea": true,
     "**/*{-lock.json,.lock}": true,
-    "/var/folders/**": true
+    "/var/folders/**": true,
   },
   "search.useReplacePreview": false,
   "shellformat.useEditorConfig": true,
@@ -138,5 +133,5 @@
   "xml.format.maxLineWidth": 120,
   "yaml.format.printWidth": 120,
   "yaml.format.proseWrap": "always",
-  "yaml.format.singleQuote": true
+  "yaml.format.singleQuote": true,
 }
