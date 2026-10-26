@@ -7,7 +7,6 @@ fd-find
 fish
 fzf
 geoipupdate
-python3-maxminddb
 git-delta
 iotop
 jq
@@ -16,6 +15,7 @@ msmtp
 msmtp-mta
 ncdu
 nodejs
+python3-maxminddb
 ripgrep
 sqlite3
 stow
