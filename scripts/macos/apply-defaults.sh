@@ -10,41 +10,28 @@ profile_file="$script_dir/../../.machine-profile"
 
 # --- Helper functions ---
 
-# Sandboxed apps store preferences inside their containers (requires Full Disk Access).
-container_prefs() {
-    printf '%s/Library/Containers/%s/Data/Library/Preferences/%s' "$HOME" "$1" "$1"
-}
-
 write_container_default() {
     local domain="$1"
+    local path="$HOME/Library/Containers/$domain/Data/Library/Preferences/$domain"
 
     shift
-    if defaults write "$(container_prefs "$domain")" "$@"; then
+    if defaults write "$path" "$@"; then
         return 0
     fi
 
-    echo "macos/apply-defaults: could not write $domain/$1; skipping this preference." >&2
+    echo "Could not write $domain/$1. Skipping this preference." >&2
 }
 
-dock_app_path() {
+dock_app() {
     local name="$1" dir
 
     for dir in /System/Applications /Applications; do
         if [[ -d "$dir/$name.app" ]]; then
-            printf '%s\n' "$dir/$name.app"
+            dockutil --add "$dir/$name.app" --section apps --no-restart >/dev/null
             return
         fi
     done
-}
-
-dock_app() {
-    if app_path="$(dock_app_path "$1")"; then
-        dockutil --add "$app_path" --section apps --no-restart >/dev/null
-        return
-    fi
-
-    echo "macos/apply-defaults: could not find $name.app; skipping dock entry." >&2
-    return 1
+    echo "Could not find $name.app. Skipping dock entry." >&2
 }
 
 dock_spacer() {
@@ -53,12 +40,12 @@ dock_spacer() {
 
 setup_dock() {
     if ! command -v dockutil >/dev/null; then
-        echo "macos/apply-defaults: 'dockutil' is required; run 'brew install dockutil' first." >&2
+        echo "dockutil is required. Run 'brew install dockutil' first." >&2
         exit 1
     fi
 
     if [[ ! -r "$profile_file" || ! -s "$profile_file" ]]; then
-        echo "macos/apply-defaults: $profile_file is missing, empty, or unreadable; run 'make install' first." >&2
+        echo "Machine profile is missing or unreadable. Run bin/install first." >&2
         exit 1
     fi
 
@@ -74,6 +61,10 @@ setup_dock() {
             dock_ide_app=PhpStorm
             dock_ai_app=Claude
             dock_infra_app=OrbStack
+            ;;
+        *)
+            echo "Invalid .machine-profile: expected personal or work.." >&2
+            exit 1
             ;;
     esac
 
@@ -229,4 +220,4 @@ killall Dock
 killall Finder
 chflags nohidden ~/Library
 
-echo "macOS user defaults applied."
+echo "macOS preferences applied."
