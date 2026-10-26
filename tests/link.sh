@@ -3,7 +3,6 @@
 set -euo pipefail
 
 repo_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-link="$repo_dir/scripts/link.sh"
 pass=0
 fail=0
 
@@ -30,14 +29,17 @@ make_fixture_link() {
 }
 
 test_fresh_link() {
-    local tmp status=0
+    local tmp home flink status=0
     tmp="$(mktemp -d)"
     trap 'rm -rf "$tmp"' RETURN
-    LINK_SH_OS=Darwin HOME="$tmp" "$link" >/dev/null 2>&1
-    LINK_SH_OS=Darwin HOME="$tmp" "$link" --check >/dev/null 2>&1 || status=$?
+    flink="$(make_fixture_link "$tmp/repo")"
+    home="$tmp/home"
+    mkdir -p "$home"
+    LINK_SH_OS=Darwin HOME="$home" "$flink" >/dev/null 2>&1
+    LINK_SH_OS=Darwin HOME="$home" "$flink" --check >/dev/null 2>&1 || status=$?
     check "fresh link converges" "$status" "0"
-    check "fresh link creates .tmux.conf" "$([[ -L "$tmp/.tmux.conf" ]] && echo yes)" "yes"
-    check "fresh link leaves iTerm runtime directory unmanaged" "$([[ ! -e "$tmp/.config/iterm2" && ! -L "$tmp/.config/iterm2" ]] && echo yes)" "yes"
+    check "fresh link creates .tmux.conf" "$([[ -L "$home/.tmux.conf" ]] && echo yes)" "yes"
+    check "fresh link leaves iTerm runtime directory unmanaged" "$([[ ! -e "$home/.config/iterm2" && ! -L "$home/.config/iterm2" ]] && echo yes)" "yes"
 }
 
 # Packages are auto-discovered from stow/*/. A newly added package must get linked automatically.
@@ -56,13 +58,16 @@ test_new_package_auto_discovered() {
 
 # On Linux, packages with .linux-ignore are skipped, unmarked packages still link, and the marker file is never linked.
 test_linux_ignore_filters_package() {
-    local tmp status=0 out
+    local tmp home flink status=0 out
     tmp="$(mktemp -d)"
     trap 'rm -rf "$tmp"' RETURN
-    out="$(LINK_SH_OS=Linux HOME="$tmp" "$link" 2>&1)" || status=$?
+    flink="$(make_fixture_link "$tmp/repo")"
+    home="$tmp/home"
+    mkdir -p "$home"
+    out="$(LINK_SH_OS=Linux HOME="$home" "$flink" 2>&1)" || status=$?
     check "simulated Linux run exits 0" "$status" "0"
-    check "php-cs-fixer (marked .linux-ignore) is not linked" "$([[ -e "$tmp/.php-cs-fixer.dist.php" ]] && echo yes)" ""
-    check "an unmarked package still links on simulated Linux" "$([[ -L "$tmp/.tmux.conf" ]] && echo yes)" "yes"
+    check "php-cs-fixer (marked .linux-ignore) is not linked" "$([[ -e "$home/.php-cs-fixer.dist.php" ]] && echo yes)" ""
+    check "an unmarked package still links on simulated Linux" "$([[ -L "$home/.tmux.conf" ]] && echo yes)" "yes"
     check "the .linux-ignore marker itself is never linked" "$(printf '%s' "$out" | grep -c '\.linux-ignore')" "0"
 }
 

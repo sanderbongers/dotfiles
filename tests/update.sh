@@ -7,9 +7,9 @@ tmp="$(mktemp -d)"
 trap 'rm -rf "$tmp"' EXIT HUP INT TERM
 fixture="$tmp/repo"
 mkdir -p "$fixture/scripts/packages" "$fixture/packages/homebrew" "$tmp/bin" "$tmp/home"
-cp "$repo_dir/Makefile" "$fixture/Makefile"
-cp "$repo_dir/scripts/update.sh" "$fixture/scripts/"
-cp "$repo_dir/scripts/upgrade.sh" "$fixture/scripts/"
+mkdir -p "$fixture/bin"
+cp "$repo_dir/bin/update" "$repo_dir/bin/upgrade" "$fixture/bin/"
+cp "$repo_dir/scripts/args.sh" "$fixture/scripts/"
 cp -R "$repo_dir/packages/apt" "$fixture/packages/"
 cp "$repo_dir/scripts/packages/apt.sh" "$fixture/scripts/packages/"
 cp "$repo_dir/scripts/packages/homebrew.sh" "$fixture/scripts/packages/"
@@ -25,7 +25,12 @@ case "$name" in
     uname) echo "${TEST_OS:-Darwin}" ;;
     git)
         case "$1" in
-            pull) exit "${TEST_PULL_STATUS:-0}" ;;
+            pull)
+                if [[ ${TEST_REPLACE_SCRIPT:-0} == 1 ]]; then
+                    printf '%s\n' '#!/bin/bash' 'echo updated-script >> "$TEST_LOG"' > bin/update
+                fi
+                exit "${TEST_PULL_STATUS:-0}"
+                ;;
         esac
         ;;
     brew)
@@ -46,7 +51,7 @@ case "$name" in
 esac
 MOCK
 chmod +x "$tmp/bin/mock"
-for command in uname git brew sudo bat batcat nvim fish; do
+for command in uname git brew sudo bat batcat nvim fish mas code; do
     ln -s mock "$tmp/bin/$command"
 done
 cat >"$fixture/scripts/link.sh" <<'LINK'
@@ -62,11 +67,11 @@ NEOVIM
 
 export TEST_LOG="$tmp/commands.log"
 export HOME="$tmp/home" PATH="$tmp/bin:/usr/bin:/bin"
-cd "$fixture"
+cd "$tmp"
 
 run_maintenance() {
     : >"$TEST_LOG"
-    env "$@" make "${target:-update}" >"$tmp/output" 2>&1
+    env "$@" "$fixture/bin/${target:-update}" >"$tmp/output" 2>&1
 }
 expect_failure() {
     if run_maintenance "$@"; then
@@ -75,8 +80,14 @@ expect_failure() {
         exit 1
     fi
 }
-expect_log() { grep -Fq -- "$1" "$TEST_LOG" || { cat "$tmp/output" "$TEST_LOG"; exit 1; }; }
-reject_log() { if grep -Fq -- "$1" "$TEST_LOG"; then cat "$TEST_LOG"; exit 1; fi; }
+expect_log() { grep -Fq -- "$1" "$TEST_LOG" || {
+    cat "$tmp/output" "$TEST_LOG"
+    exit 1
+}; }
+reject_log() { if grep -Fq -- "$1" "$TEST_LOG"; then
+    cat "$TEST_LOG"
+    exit 1
+fi; }
 
 run_maintenance
 expect_log 'git pull origin main'
@@ -117,8 +128,10 @@ echo 'ok - Fish command failures stop maintenance'
 
 target=upgrade
 run_maintenance
+expect_log 'mas upgrade'
 expect_log 'brew bundle install --file=- --no-upgrade'
 expect_log 'brew upgrade'
+expect_log 'code --update-extensions'
 expect_log 'bat cache --build'
 reject_log 'git '
 reject_log 'link'
@@ -159,3 +172,8 @@ reject_log 'brew '
 reject_log 'link'
 reject_log 'fish '
 echo 'ok - package failures or missing setup stop maintenance'
+
+run_maintenance TEST_REPLACE_SCRIPT=1
+expect_log 'updated-script'
+reject_log 'link'
+echo 'ok - update runs the newly pulled script instead of continuing the old version'

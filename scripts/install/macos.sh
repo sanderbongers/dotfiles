@@ -4,6 +4,16 @@ set -euo pipefail
 
 : "${script_dir:?script_dir must be exported by parent script}"
 
+fish_dir="$HOME/.config/fish"
+if [[ -e "$fish_dir" && ! -L "$fish_dir" ]]; then
+    if [[ ! -d "$fish_dir" ]]; then
+        echo "$fish_dir is not a directory. Move it aside before running bin/install." >&2
+        exit 1
+    fi
+    trash "$fish_dir"
+    echo "Moved the previous Fish configuration to Trash."
+fi
+
 if ! grep -qs pam_tid.so /etc/pam.d/sudo_local; then
     echo "Enabling Touch ID for sudo..."
     if [[ ! -f /etc/pam.d/sudo_local ]]; then
@@ -28,11 +38,6 @@ if [[ $(basename "$SHELL") != "fish" ]]; then
     grep -q "$(which fish)" /etc/shells || which fish | sudo tee -a /etc/shells
     chsh -s "$(which fish)"
     SHELL_CHANGED=true
-fi
-
-if [ -d ~/.config/fish ] && [ ! -L ~/.config/fish ]; then
-    echo "Removing default Fish configuration..."
-    rm -rf ~/.config/fish
 fi
 
 echo "Stowing dotfiles..."

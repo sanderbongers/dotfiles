@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+repo_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+# shellcheck source=../scripts/args.sh
+source "$repo_dir/scripts/args.sh"
+
+check_args 'Write installed Homebrew packages into the Brewfiles.' "$@"
+
+exec bash "$repo_dir/scripts/packages/homebrew.sh" dump

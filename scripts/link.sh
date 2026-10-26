@@ -27,7 +27,24 @@ done
 cd "$repo_dir"
 
 case "${1:-}" in
-    --check) stow -n --verbose --restow "${packages[@]}" ;;
+    --check)
+        stow -n --verbose "${packages[@]}"
+        status=0
+        for package in "${packages[@]}"; do
+            while IFS= read -r -d '' source; do
+                case "${source##*/}" in .DS_Store | .linux-ignore) continue ;; esac
+                target="$HOME/${source#"$repo_dir/stow/$package/"}"
+                if [[ -d "$source" && ! -L "$source" ]]; then
+                    [[ -d "$target" ]] && continue
+                elif [[ "$source" -ef "$target" ]]; then
+                    continue
+                fi
+                echo "Missing or incorrect link: $target" >&2
+                status=1
+            done < <(find "$repo_dir/stow/$package" -mindepth 1 -print0)
+        done
+        exit "$status"
+        ;;
     --unlink) stow --verbose --delete "${packages[@]}" ;;
     *) stow --verbose --restow "${packages[@]}" ;;
 esac

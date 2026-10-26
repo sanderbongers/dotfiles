@@ -15,7 +15,7 @@ mode="${1:-install}"
 case "$mode" in
     check | dump | upgrade)
         if [[ ! -s "$profile_file" ]]; then
-            echo "homebrew: machine profile not set, run 'make install'" >&2
+            echo "homebrew: machine profile not set, run 'bin/install'" >&2
             exit 1
         fi
         ;;

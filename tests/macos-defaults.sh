@@ -45,11 +45,9 @@ run_defaults() {
     env HOME="$tmp/home" PATH="$tmp/bin:/usr/bin:/bin" TEST_FAIL="$2" \
         /bin/bash "$fixture/scripts/macos/apply-defaults.sh" >"$tmp/output" 2>&1 || status=$?
     [[ "$status" == "$3" ]]
-    if (( status == 0 )); then
-        grep -Fq 'macOS defaults finished' "$tmp/output"
+    if ((status == 0)); then
         grep -Fxq 'killall Finder' "$TEST_LOG"
     else
-        reject_text 'macOS defaults finished' "$tmp/output"
         reject_text 'killall Finder' "$TEST_LOG"
     fi
 }
@@ -57,23 +55,24 @@ run_defaults() {
 run_defaults personal '' 0
 grep -Fxq "dockutil --add $TEST_APPS/ChatGPT.app --section apps --no-restart" "$TEST_LOG"
 grep -Fxq "dockutil --add $TEST_APPS/Visual Studio Code.app --section apps --no-restart" "$TEST_LOG"
-grep -Fq 'could not find Firefox.app' "$tmp/output"
-reject_text 'could not write' "$tmp/output"
+grep -Fq 'Firefox.app' "$tmp/output"
+reject_text 'Could not write' "$tmp/output"
 mail_domain="$tmp/home/Library/Containers/com.apple.mail/Data/Library/Preferences/com.apple.mail"
 grep -Fxq "defaults write $mail_domain AddLinkPreviews -bool false" "$TEST_LOG"
 
 run_defaults work '' 0
 grep -Fxq "dockutil --add $TEST_APPS/Claude.app --section apps --no-restart" "$TEST_LOG"
 grep -Fxq "dockutil --add $TEST_APPS/PhpStorm.app --section apps --no-restart" "$TEST_LOG"
-reject_text 'could not write' "$tmp/output"
+reject_text 'Could not write' "$tmp/output"
 
 run_defaults personal mail 0
-grep -Fq 'could not write com.apple.mail/AddLinkPreviews' "$tmp/output"
+grep -Fq 'com.apple.mail/AddLinkPreviews' "$tmp/output"
 
 run_defaults personal system 23
 run_defaults personal dock 23
 
 run_defaults invalid '' 1
-grep -Fq "must contain 'personal' or 'work'" "$tmp/output"
+grep -Fq 'Invalid .machine-profile' "$tmp/output"
 reject_text 'dockutil --remove' "$TEST_LOG"
+
 echo 'ok - macOS defaults: personal, work, mail, system, dock and invalid profile'

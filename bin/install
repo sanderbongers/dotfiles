@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+repo_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+# shellcheck source=../scripts/args.sh
+source "$repo_dir/scripts/args.sh"
+
+check_args 'Install dotfiles and packages, and configure this machine.' "$@"
+
+script_dir="$repo_dir/scripts"
+readonly script_dir
+
+case "$(uname)" in
+    Linux*)
+        # shellcheck source=../scripts/install/linux.sh
+        source "$script_dir/install/linux.sh"
+        ;;
+    Darwin*)
+        # shellcheck source=../scripts/install/macos.sh
+        source "$script_dir/install/macos.sh"
+        ;;
+esac

@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+repo_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+# shellcheck source=../scripts/args.sh
+source "$repo_dir/scripts/args.sh"
+
+check_args 'Run all tests in a temporary directory.' "$@"
+
+for tool in bash fish stow; do
+    if ! command -v "$tool" >/dev/null; then
+        echo "Tests require $tool. Install the test prerequisites first." >&2
+        exit 1
+    fi
+done
+
+tmp="$(mktemp -d)"
+trap 'rm -rf "$tmp"' EXIT
+trap 'exit 130' INT
+trap 'exit 143' TERM HUP
+mkdir -p "$tmp/home" "$tmp/config" "$tmp/runtime"
+chmod 700 "$tmp/runtime"
+cd "$tmp"
+
+run_test() {
+    env -i HOME="$tmp/home" PATH="$PATH" TERM=dumb LANG=C.UTF-8 TMPDIR="$tmp" \
+        XDG_CONFIG_HOME="$tmp/config" XDG_RUNTIME_DIR="$tmp/runtime" "$@"
+}
+
+for suite in "$repo_dir"/tests/*.sh; do
+    echo "Running ${suite##*/}"
+    run_test bash "$suite"
+done
+
+echo 'Running Fish syntax and startup checks'
+run_test bash "$repo_dir/scripts/check-fish.sh"
+
+echo 'All tests passed.'

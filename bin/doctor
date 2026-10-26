@@ -1,0 +1,93 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+repo_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+# shellcheck source=../scripts/args.sh
+source "$repo_dir/scripts/args.sh"
+
+check_args 'Diagnose links, package installation and Fish syntax without repairing the machine.' "$@"
+
+script_dir="$repo_dir/scripts"
+status=0
+
+check() {
+    local label="$1"
+    shift
+    if "$@"; then
+        echo "PASS: $label"
+    else
+        echo "FAIL: $label" >&2
+        status=1
+    fi
+}
+
+check_profile() {
+    if [[ ! -r "$repo_dir/.machine-profile" ]]; then
+        echo 'Machine profile is missing or unreadable. Run bin/install first.' >&2
+        return 1
+    fi
+    case "$(cat "$repo_dir/.machine-profile")" in
+        personal | work) ;;
+        *)
+            echo 'Invalid .machine-profile: expected personal or work.' >&2
+            return 1
+            ;;
+    esac
+}
+
+# Called through check so independent diagnostics can continue after failure.
+# shellcheck disable=SC2329
+check_apt() {
+    local manifest package installed status=0
+    command -v dpkg-query >/dev/null || {
+        echo 'dpkg-query is required for Debian package checks.' >&2
+        return 1
+    }
+    for manifest in "$repo_dir/packages/apt/packages.txt" "$repo_dir/packages/apt/backports.txt"; do
+        while IFS= read -r package || [[ -n "$package" ]]; do
+            package="${package%%#*}"
+            [[ -n "$package" ]] || continue
+            if ! installed="$(LC_ALL=C dpkg-query -W -f='${db:Status-Status}' "$package" 2>/dev/null)" ||
+                [[ "$installed" != installed ]]; then
+                echo "Missing Debian package: $package" >&2
+                status=1
+            fi
+        done <"$manifest"
+    done
+    return "$status"
+}
+
+if command -v stow >/dev/null; then
+    check 'Dotfile links' bash "$script_dir/link.sh" --check
+else
+    echo 'FAIL: Stow is not installed. Links could not be checked.' >&2
+    status=1
+fi
+
+platform="$(uname)"
+case "$platform" in
+    Darwin)
+        if ! check_profile; then
+            status=1
+        elif ! command -v brew >/dev/null; then
+            echo 'FAIL: Homebrew is not installed. Packages could not be checked.' >&2
+            status=1
+        else
+            check 'Homebrew packages' env HOMEBREW_NO_AUTO_UPDATE=1 HOMEBREW_NO_ANALYTICS=1 \
+                bash "$script_dir/packages/homebrew.sh" check
+        fi
+        ;;
+    Linux)
+        check 'Debian packages' check_apt
+        ;;
+    *)
+        echo "FAIL: Unsupported platform: $platform." >&2
+        status=1
+        ;;
+esac
+
+check 'Fish syntax' bash "$script_dir/check-fish.sh" --syntax-only
+echo 'Note: Fish startup is checked separately by bin/test.'
+
+exit "$status"

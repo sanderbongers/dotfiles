@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+repo_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+# shellcheck source=../scripts/args.sh
+source "$repo_dir/scripts/args.sh"
+
+check_args 'Upgrade installed packages and rebuild caches.' "$@"
+
+script_dir="$repo_dir/scripts"
+
+platform="$(uname)"
+case "$platform" in
+    Darwin)
+        "$script_dir/packages/homebrew.sh" upgrade
+        bat cache --build
+        ;;
+    Linux)
+        sudo apt-get update
+        sudo apt-get upgrade --with-new-pkgs -y
+        bash "$script_dir/packages/neovim.sh"
+        sudo apt-get autoremove -y
+        batcat cache --build
+        ;;
+    *)
+        echo "Unsupported platform: $platform" >&2
+        exit 1
+        ;;
+esac
