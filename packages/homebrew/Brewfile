@@ -156,6 +156,8 @@ brew "uv"
 brew "wget"
 # Process YAML, JSON, XML, CSV and properties documents from the CLI
 brew "yq"
+# Feature-rich command-line audio/video downloader
+brew "yt-dlp"
 # Shell extension to navigate your filesystem faster
 brew "zoxide"
 # Password manager that keeps all passwords secure behind one password
@@ -186,6 +188,7 @@ cask "codex"
 cask "coteditor"
 # Web browser
 cask "firefox"
+cask "font-fredoka"
 # Web browser
 cask "google-chrome"
 # Terminal emulator as alternative to Apple's Terminal app
@@ -230,6 +233,7 @@ vscode "esbenp.prettier-vscode"
 vscode "foxundermoon.shell-format"
 vscode "jaguadoromero.vscode-php-create-class"
 vscode "junstyle.php-cs-fixer"
+vscode "mads-hartmann.bash-ide-vscode"
 vscode "matthewpi.caddyfile-support"
 vscode "mechatroner.rainbow-csv"
 vscode "mehedidracula.php-namespace-resolver"
@@ -242,6 +246,7 @@ vscode "ms-vscode-remote.remote-ssh"
 vscode "ms-vscode-remote.remote-ssh-edit"
 vscode "ms-vscode.remote-explorer"
 vscode "ndonfris.fish-lsp"
+vscode "redhat.vscode-xml"
 vscode "redhat.vscode-yaml"
 vscode "rmvcoder.rmv-min-theme"
 vscode "sanderronde.phpstan-vscode"
@@ -255,3 +260,4 @@ vscode "xadillax.viml"
 vscode "xdebug.php-debug"
 vscode "yoavbls.pretty-ts-errors"
 vscode "yy0931.gitconfig-lsp"
+uv "tg-cli", source: "git+https://github.com/olomix/tg-cli"
