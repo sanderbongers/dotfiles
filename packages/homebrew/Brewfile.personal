@@ -1,5 +1,7 @@
 # VPN for privacy and security
 cask "adguard-vpn"
+# Tools for building Android applications
+cask "android-studio"
 # Memory training application
 cask "anki"
 # Multi-track audio editor and recorder
