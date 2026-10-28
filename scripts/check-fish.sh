@@ -29,6 +29,28 @@ run_fish() {
 while IFS= read -r -d '' file; do
     run_fish --no-config -n "$file"
 done < <(find "$tmp/config/fish" -type f -name '*.fish' -print0)
+
+# Autoloaded function files must always define their function.
+# A top-level `status is-interactive; or return` makes the first call from inside another function silently do nothing.
+top_level_returns="$tmp/top-level-returns"
+while IFS= read -r -d '' file; do
+    case "${file##*/}" in
+        fisher.fish | _autopair_*.fish | *sponge*.fish) continue ;;
+    esac
+    run_fish --no-config -c fish_indent <"$file" | awk -v file="${file#"$tmp/config/fish/"}" '
+        /^function[[:space:]]/ { in_function = 1; next }
+        /^end([[:space:];]|$)/ { in_function = 0; next }
+        /^[[:space:]]*#/ { next }
+        !in_function && /(^[[:space:]]*|[;&|][[:space:]]*|(^|[[:space:]])(and|or|not)[[:space:]]+)return([[:space:];]|$)/ {
+            sub(/^[[:space:]]+/, "")
+            print file ": top-level `" $0 "`; define the function unconditionally and branch inside it"
+        }
+    ' >>"$top_level_returns"
+done < <(find "$tmp/config/fish" -type f -path '*/functions/*' -name '*.fish' -print0)
+if [[ -s "$top_level_returns" ]]; then
+    cat "$top_level_returns" >&2
+    exit 1
+fi
 [[ ${1:-} != --syntax-only ]] || exit 0
 
 # Run twice: the first pass may populate caches, the second must start clean.

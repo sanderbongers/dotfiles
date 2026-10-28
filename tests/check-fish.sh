@@ -10,6 +10,9 @@ config="$fixture/stow/fish/.config/fish"
 mkdir -p "$fixture/scripts" "$config/functions/nested" "$tmp/host/config/fish"
 cp "$repo_dir/scripts/check-fish.sh" "$fixture/scripts/"
 printf 'do not modify\n' >"$tmp/host/sentinel"
+# A return inside a function and a comment are fine.
+printf '# status is-interactive; or return\nfunction good\n    set -q argv[1]; or return\nend\n' \
+    >"$config/functions/good.fish"
 cat >"$config/config.fish" <<EOFISH
 if set -q DOTFILES_LEAK_TEST
     echo 'Inherited caller environment' >&2
@@ -53,4 +56,19 @@ if run_check; then
     exit 1
 fi
 grep -q 'startup-error' "$tmp/output"
-echo 'ok - Fish checks isolate home and state, run twice, clean up and detect syntax and startup errors'
+printf 'status is-interactive; or return\n\nfunction guarded\nend\n' >"$config/functions/guarded.fish"
+if run_check --syntax-only; then
+    echo 'Top-level return guard in a function file was not detected.' >&2
+    exit 1
+fi
+grep -qF "functions/guarded.fish: top-level \`status is-interactive; or return\`" "$tmp/output"
+printf 'if not status is-interactive\n    return\nend\n\nfunction guarded\nend\n' >"$config/functions/guarded.fish"
+if run_check --syntax-only; then
+    echo 'Return in a top-level block of a function file was not detected.' >&2
+    exit 1
+fi
+mv "$config/functions/guarded.fish" "$config/functions/fisher.fish"
+run_check --syntax-only
+rm "$config/functions/fisher.fish"
+echo 'ok - Fish checks isolate home and state, run twice, clean up and detect syntax and startup errors' \
+    'and top-level returns in function files'
