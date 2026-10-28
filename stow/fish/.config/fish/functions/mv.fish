@@ -1,5 +1,7 @@
-status is-interactive; or return
-
 function mv --description "alias mv=mv -v"
-    command mv -v $argv
+    if status is-interactive
+        command mv -v $argv
+    else
+        command mv $argv
+    end
 end

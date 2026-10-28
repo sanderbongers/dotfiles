@@ -1,5 +1,7 @@
-status is-interactive; and command -q pgcli; or return
-
 function psql --wraps pgcli --description "alias psql=pgcli"
-    pgcli $argv
+    if status is-interactive; and command -q pgcli
+        pgcli $argv
+    else
+        command psql $argv
+    end
 end

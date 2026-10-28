@@ -1,5 +1,7 @@
-status is-interactive; or return
-
 function ls --description "alias ls=ls -Apv --color"
-    command ls -Apv --color $argv
+    if status is-interactive
+        command ls -Apv --color $argv
+    else
+        command ls $argv
+    end
 end

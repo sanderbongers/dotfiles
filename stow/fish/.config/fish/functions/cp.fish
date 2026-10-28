@@ -1,5 +1,7 @@
-status is-interactive; or return
-
 function cp --description "alias cp=cp -v"
-    command cp -v $argv
+    if status is-interactive
+        command cp -v $argv
+    else
+        command cp $argv
+    end
 end

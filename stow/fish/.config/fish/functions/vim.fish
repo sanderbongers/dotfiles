@@ -1,5 +1,7 @@
-status is-interactive; and command -q nvim; or return
-
 function vim --wraps nvim --description "alias vim=nvim"
-    nvim $argv
+    if status is-interactive; and command -q nvim
+        nvim $argv
+    else
+        command vim $argv
+    end
 end

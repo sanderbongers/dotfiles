@@ -1,5 +1,7 @@
-status is-interactive; or return
-
 function mkdir --description "alias mkdir=mkdir -pv"
-    command mkdir -pv $argv
+    if status is-interactive
+        command mkdir -pv $argv
+    else
+        command mkdir $argv
+    end
 end

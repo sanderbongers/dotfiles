@@ -1,5 +1,7 @@
-status is-interactive; and command -q bat; or return
-
 function cat --wraps bat --description "alias cat=bat"
-    bat $argv --no-pager
+    if status is-interactive; and command -q bat
+        bat $argv --no-pager
+    else
+        command cat $argv
+    end
 end
