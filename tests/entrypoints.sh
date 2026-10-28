@@ -49,6 +49,7 @@ for entry in "$fixture"/bin/*; do
         install-packages) expected='homebrew.sh install' ;;
         dump-packages) expected='homebrew.sh dump' ;;
         install) expected='macos.sh ' ;;
+        apply-macos-defaults) expected='apply-defaults.sh ' ;;
         *) expected="${entry##*/}.sh " ;;
     esac
     [[ $(cat "$TEST_LOG") == "$expected" ]]
