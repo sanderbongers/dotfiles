@@ -50,7 +50,11 @@ To find potential settings to save: run `bin/snapshot-macos` before and after a 
 ```fish
 # Activate
 bin/link
-launchctl bootstrap gui/(id -u) ~/Library/LaunchAgents/local.caps-lock-delay.plist
+if launchctl print gui/(id -u)/local.caps-lock-delay >/dev/null 2>&1
+    echo "Caps Lock delay agent is already loaded."
+else
+    launchctl bootstrap gui/(id -u) ~/Library/LaunchAgents/local.caps-lock-delay.plist
+end
 ```
 
 ```fish
