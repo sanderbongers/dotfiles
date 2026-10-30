@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>Label</key>
+        <string>local.mailpit</string>
+        <key>ProgramArguments</key>
+        <array>
+            <string>/opt/homebrew/opt/mailpit/bin/mailpit</string>
+            <string>--listen</string>
+            <string>127.0.0.1:8025</string>
+            <string>--smtp</string>
+            <string>127.0.0.1:1025</string>
+        </array>
+        <key>KeepAlive</key>
+        <true />
+        <key>RunAtLoad</key>
+        <true />
+        <key>StandardOutPath</key>
+        <string>/opt/homebrew/var/log/mailpit.log</string>
+        <key>StandardErrorPath</key>
+        <string>/opt/homebrew/var/log/mailpit.log</string>
+    </dict>
+</plist>

@@ -47,6 +47,16 @@ echo "Stowing dotfiles..."
 echo "Installing Homebrew packages..."
 "${script_dir}/packages/homebrew.sh" install
 
+mariadb_conf_dir="$(brew --prefix)/etc/my.cnf.d"
+if [[ -d "$mariadb_conf_dir" ]]; then
+    echo "Configuring MariaDB..."
+    mariadb_conf="$(cd "${script_dir}/../config/mariadb" && pwd)/bind-localhost.cnf"
+    if [[ ! "$mariadb_conf" -ef "${mariadb_conf_dir}/bind-localhost.cnf" ]]; then
+        ln -sf "$mariadb_conf" "${mariadb_conf_dir}/bind-localhost.cnf"
+        echo "Restart MariaDB to apply: brew services restart mariadb"
+    fi
+fi
+
 echo "Configuring unbound..."
 unbound_src="${script_dir}/../config/unbound"
 unbound_etc="$(brew --prefix)/etc/unbound"
