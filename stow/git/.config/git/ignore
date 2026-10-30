@@ -12,6 +12,10 @@
 CLAUDE.local.md
 ###< Claude ###
 
+###> Docker ###
+docker-compose.override.yml
+###< Docker ###
+
 ###> JetBrains ###
 .idea
 ###< JetBrains ###
