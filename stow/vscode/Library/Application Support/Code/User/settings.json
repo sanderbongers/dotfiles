@@ -102,12 +102,6 @@
   "git.openRepositoryInParentFolders": "never",
   "git.rebaseWhenSync": true,
   "git.suggestSmartCommit": false,
-  "github.copilot.enable": {
-    "*": true,
-    "markdown": true,
-    "plaintext": false,
-    "scminput": false,
-  },
   "github.gitProtocol": "ssh",
   "intelephense.completion.fullyQualifyGlobalConstantsAndFunctions": true,
   "js/ts.updateImportsOnFileMove.enabled": "always",
