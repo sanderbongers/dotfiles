@@ -113,8 +113,7 @@
   "scm.alwaysShowRepositories": true,
   "search.exclude": {
     ".idea": true,
-    "**/*{-lock.json,.lock}": true,
-    "/var/folders/**": true,
+    "**/*{-lock.json,-lock.yaml,.lock}": true
   },
   "search.useReplacePreview": false,
   "shellformat.useEditorConfig": true,
