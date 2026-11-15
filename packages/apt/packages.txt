@@ -1,3 +1,4 @@
+atop
 bat
 bind9-dnsutils
 bsd-mailx

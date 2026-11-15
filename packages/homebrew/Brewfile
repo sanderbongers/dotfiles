@@ -144,6 +144,8 @@ brew "symfony-cli"
 brew "tlrc"
 # Terminal multiplexer
 brew "tmux"
+# Upgrade all the things
+brew "topgrade"
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
 # Command-line unarchiving tools supporting multiple formats
@@ -188,9 +190,19 @@ cask "codex"
 cask "coteditor"
 # Web browser
 cask "firefox"
+cask "font-bagel-fat-one"
+cask "font-balsamiq-sans"
 cask "font-fredoka"
+cask "font-playwrite-it-trad"
+cask "font-poetsen-one"
+cask "font-sniglet"
+cask "font-sour-gummy"
+cask "font-vazirmatn"
+cask "font-zain"
 # Web browser
 cask "google-chrome"
+# Desktop app for terminals and coding agents
+cask "herdr-app"
 # Terminal emulator as alternative to Apple's Terminal app
 cask "iterm2"
 # Enable generative AI features in iTerm2
