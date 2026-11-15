@@ -141,6 +141,7 @@ defaults write com.apple.finder WarnOnEmptyTrash -bool false
 
 # Screenshots
 defaults write com.apple.screencapture captureHDR -bool false
+defaults write com.apple.screencapture captureSystemAudio -bool true
 defaults write com.apple.screencapture disable-shadow -bool true
 defaults write com.apple.screencapture include-date -bool false
 defaults write com.apple.screencapture location -string "$HOME/Downloads"
