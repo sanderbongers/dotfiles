@@ -76,7 +76,7 @@ case "$mode" in
         # Install missing Brewfile packages...
         echo "$brewfile" | brew bundle install --file=- --no-upgrade
         # ...but upgrade using brew upgrade, because brew bundle ignores the HOMEBREW_UPGRADE_GREEDY_CASKS setting.
-        brew upgrade
+        brew upgrade --no-ask
         if command -v code >/dev/null; then
             code --update-extensions
         fi

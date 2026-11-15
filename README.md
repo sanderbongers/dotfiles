@@ -19,8 +19,7 @@ Existing Fish configuration is moved to Trash. Symlinks are left untouched.
 ## Commands
 
 ```fish
-bin/update            # Pull remote changes, relink dotfiles, install missing packages and update Fish plugins
-bin/upgrade           # Upgrade packages
+bin/update            # Pull remote changes, install and upgrade packages, relink dotfiles and update Fish plugins
 bin/dump-packages     # Save installed Homebrew packages to Brewfiles
 bin/install-packages  # Install missing Homebrew packages, without upgrading existing ones
 bin/doctor            # Check system for potential problems
@@ -32,7 +31,7 @@ Additionally, `bin/unlink` and `bin/link` can be used to remove and recreate sym
 New Homebrew packages go into `packages/homebrew/Brewfile`. Move profile-specific packages to `Brewfile.personal` or
 `Brewfile.work`.
 
-For cask updates via `bin/upgrade`, add casks to `HOMEBREW_UPGRADE_GREEDY_CASKS` in `stow/homebrew/.homebrew/brew.env`
+For cask updates via `bin/update`, add casks to `HOMEBREW_UPGRADE_GREEDY_CASKS` in `stow/homebrew/.homebrew/brew.env`
 and disable their built-in updaters.
 
 Debian packages are in `packages/apt/packages.txt` and `packages/apt/backports.txt`.

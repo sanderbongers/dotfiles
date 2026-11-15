@@ -9,7 +9,7 @@ source "$repo_dir/scripts/args.sh"
 script_dir="$repo_dir/scripts"
 # Reload after pulling because the pull may replace this script.
 if [[ ${1:-} != --after-pull ]]; then
-    check_args 'Pull remote changes, relink dotfiles, install missing packages and update Fish plugins.' "$@"
+    check_args 'Pull remote changes, install and upgrade packages, relink dotfiles and update Fish plugins.' "$@"
     cd "$repo_dir"
     git pull origin main
     exec bash "$repo_dir/bin/update" --after-pull
@@ -29,13 +29,13 @@ case "$platform" in
                 exit 1
                 ;;
         esac
-        "$script_dir/packages/homebrew.sh" install
+        "$script_dir/packages/homebrew.sh" upgrade
         ;;
     Linux)
         bash "$script_dir/packages/apt.sh" --no-upgrade
-        if ! command -v nvim >/dev/null; then
-            bash "$script_dir/packages/neovim.sh"
-        fi
+        sudo apt-get upgrade --with-new-pkgs -y
+        bash "$script_dir/packages/neovim.sh"
+        sudo apt-get autoremove -y
         ;;
     *)
         echo "Unsupported platform: $platform" >&2
