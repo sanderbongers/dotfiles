@@ -2,6 +2,10 @@
 .DS_Store
 .local/
 
+###> Agents ###
+/STATE.local.md
+###< Agents ###
+
 ###> Asdf ###
 .tool-versions
 ###< Asdf ###
