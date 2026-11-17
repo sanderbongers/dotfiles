@@ -10,7 +10,9 @@ mkdir -p "$fixture/scripts/packages" "$fixture/packages/homebrew" "$tmp/bin" "$t
 mkdir -p "$fixture/bin"
 cp "$repo_dir/bin/update" "$fixture/bin/"
 cp "$repo_dir/scripts/args.sh" "$fixture/scripts/"
-cp -R "$repo_dir/packages/apt" "$fixture/packages/"
+mkdir -p "$fixture/packages/apt"
+printf 'atop\nbat\n' >"$fixture/packages/apt/packages.txt"
+printf 'samba\n' >"$fixture/packages/apt/backports.txt"
 cp "$repo_dir/scripts/packages/apt.sh" "$fixture/scripts/packages/"
 cp "$repo_dir/scripts/packages/homebrew.sh" "$fixture/scripts/packages/"
 printf 'personal\n' >"$fixture/.machine-profile"
@@ -114,8 +116,8 @@ reject_log 'sudo '
 echo 'ok - macOS pulls, installs missing packages, upgrades, links and updates plugins; builds cache once'
 
 run_maintenance TEST_OS=Linux
-expect_log 'sudo apt-get install -y --no-upgrade bat'
-expect_log 'sudo apt-get install -y --no-upgrade -t trixie-backports samba'
+expect_once 'sudo apt-get install -y --no-upgrade atop bat'
+expect_once 'sudo apt-get install -y --no-upgrade -t trixie-backports samba'
 expect_order 'git pull origin main' 'sudo apt-get update' 'sudo apt-get upgrade --with-new-pkgs -y' \
     'install-neovim' 'sudo apt-get autoremove -y' 'link' 'fish -c fisher update' 'batcat cache --build'
 expect_once 'sudo apt-get update'
@@ -155,7 +157,7 @@ reject_log 'autoremove'
 reject_log 'link'
 reject_log 'batcat cache'
 expect_failure TEST_OS=Linux TEST_FAIL_APT_COMMAND=upgrade
-expect_log 'sudo apt-get install -y --no-upgrade bat'
+expect_once 'sudo apt-get install -y --no-upgrade atop bat'
 expect_log 'sudo apt-get upgrade --with-new-pkgs -y'
 reject_log 'autoremove'
 reject_log 'install-neovim'
