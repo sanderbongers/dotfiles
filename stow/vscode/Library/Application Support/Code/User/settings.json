@@ -106,6 +106,17 @@
   "intelephense.completion.fullyQualifyGlobalConstantsAndFunctions": true,
   "js/ts.updateImportsOnFileMove.enabled": "always",
   "js/ts.validate.enabled": true,
+  "json.schemaDownload.trustedDomains": {
+    "https://developer.microsoft.com/json-schemas/": true,
+    "https://json-schema.org/": true,
+    "https://json.schemastore.org/": true,
+    "https://raw.githubusercontent.com/devcontainers/spec/": true,
+    "https://raw.githubusercontent.com/microsoft/vscode/": true,
+    "https://schemastore.azurewebsites.net/": true,
+    "https://spec.openapis.org/": true,
+    "https://www.raycast.com/schemas/extension.json": true,
+    "https://www.schemastore.org/": true,
+  },
   "markdownlint.configFile": "~/.markdownlint.json",
   "prettier.printWidth": 120,
   "projectManager.git.baseFolders": ["~/Developer"],
@@ -113,7 +124,7 @@
   "scm.alwaysShowRepositories": true,
   "search.exclude": {
     ".idea": true,
-    "**/*{-lock.json,-lock.yaml,.lock}": true
+    "**/*{-lock.json,-lock.yaml,.lock}": true,
   },
   "search.useReplacePreview": false,
   "shellformat.useEditorConfig": true,
