@@ -20,8 +20,8 @@ Existing Fish configuration is moved to Trash. Symlinks are left untouched.
 
 ```fish
 bin/update            # Pull remote changes, install and upgrade packages, relink dotfiles and update Fish plugins
-bin/dump-packages     # Save installed Homebrew packages to Brewfiles
-bin/install-packages  # Install missing Homebrew packages, without upgrading existing ones
+bin/dump-packages     # Save installed Homebrew packages to Brewfiles and PhpStorm plugins to packages/phpstorm
+bin/install-packages  # Install missing Homebrew packages and PhpStorm plugins, without upgrading existing ones
 bin/doctor            # Check system for potential problems
 bin/test              # Run isolated tests in a temporary directory
 ```
@@ -35,6 +35,18 @@ For cask updates via `bin/update`, add casks to `HOMEBREW_UPGRADE_GREEDY_CASKS` 
 and disable their built-in updaters.
 
 Debian packages are in `packages/apt/packages.txt` and `packages/apt/backports.txt`.
+
+## PhpStorm
+
+PhpStorm's settings live in `stow/phpstorm/Library/Application Support/JetBrains/PhpStorm<version>/` and are shared by
+both profiles. JetBrains Backup and Sync stays off. Whole folders (`codestyles`, `inspection`, `keymaps`, `colors`,
+`templates`) are linked, so new schemes land in the repository. From `options/` only individual settings files are
+linked, because the rest is machine state. Add a file there when it holds a setting, then run `bin/link`.
+
+Plugins are listed in `packages/phpstorm/plugins.txt`. `bin/install-packages` installs missing ones and skips that step
+while PhpStorm runs. PhpStorm asks once to accept third-party plugins on its first launch. `bin/doctor` warns about
+uncommitted settings and about a newer `PhpStorm*` config folder. After a major upgrade, rename the version folder in
+the package with `git mv`, trash the migrated copies in `~/Library/Application Support/JetBrains/` and run `bin/link`.
 
 ## macOS preferences
 

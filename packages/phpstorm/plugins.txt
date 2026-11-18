@@ -1,0 +1,14 @@
+com.anthropic.code.plugin
+com.chylex.intellij.inspectionlens
+com.github.toxdev.fish
+com.github.xepozz.caddy
+com.intellij.lang.liquid
+com.kalessil.phpStorm.phpInspectionsEA
+com.redhat.devtools.lsp4ij
+de.espend.idea.php.annotation
+fr.adrienbrault.idea.symfony2plugin
+io.agnix.jetbrains
+net.seesharpsoft.intellij.plugins.csv
+org.intellij.prisma
+org.toml.lang
+zielu.gittoolbox

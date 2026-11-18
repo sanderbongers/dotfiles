@@ -6,6 +6,7 @@ repo_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 # shellcheck source=../scripts/args.sh
 source "$repo_dir/scripts/args.sh"
 
-check_args 'Write installed Homebrew packages into the Brewfiles.' "$@"
+check_args 'Write installed Homebrew packages into the Brewfiles and PhpStorm plugins into packages/phpstorm.' "$@"
 
-exec bash "$repo_dir/scripts/packages/homebrew.sh" dump
+bash "$repo_dir/scripts/packages/homebrew.sh" dump
+exec bash "$repo_dir/scripts/packages/phpstorm.sh" dump

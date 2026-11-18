@@ -10,7 +10,7 @@ mkdir -p "$fixture/bin" "$fixture/scripts/macos" "$fixture/scripts/packages" "$f
 cp "$repo_dir"/bin/* "$fixture/bin/"
 cp "$repo_dir/scripts/args.sh" "$fixture/scripts/"
 export TEST_LOG="$tmp/calls"
-for script in link macos/apply-defaults packages/homebrew install/macos install/linux; do
+for script in link macos/apply-defaults packages/homebrew packages/phpstorm install/macos install/linux; do
     cat >"$fixture/scripts/$script.sh" <<'STUB'
 #!/bin/bash
 printf '%s %s\n' "${BASH_SOURCE[0]##*/}" "$*" >> "$TEST_LOG"
@@ -46,8 +46,8 @@ for entry in "$fixture"/bin/*; do
     case "${entry##*/}" in
         unlink) expected='link.sh --unlink' ;;
         link) expected='link.sh ' ;;
-        install-packages) expected='homebrew.sh install' ;;
-        dump-packages) expected='homebrew.sh dump' ;;
+        install-packages) expected=$'homebrew.sh install\nphpstorm.sh install' ;;
+        dump-packages) expected=$'homebrew.sh dump\nphpstorm.sh dump' ;;
         install) expected='macos.sh ' ;;
         apply-macos-defaults) expected='apply-defaults.sh ' ;;
         *) expected="${entry##*/}.sh " ;;

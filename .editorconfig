@@ -28,6 +28,12 @@ trim_trailing_whitespace = false
 trim_trailing_whitespace = false
 insert_final_newline = false
 
+# PhpStorm writes these files itself.
+[stow/phpstorm/**]
+indent_size = 2
+trim_trailing_whitespace = false
+insert_final_newline = false
+
 [*.lua]
 align_array_table = false
 align_continuous_assign_statement = false

@@ -1,0 +1,276 @@
+<application>
+  <component name="PluginUpdateSources">
+    <sources>
+      <entry pluginId="com.jetbrains.php.workshop">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="com.jetbrains.php.codeception">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="com.jetbrains.gateway">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="org.jetbrains.plugins.docker.gateway">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="org.jetbrains.security.package-checker">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="org.jetbrains.plugins.vue">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="io.agnix.jetbrains">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="Git4Idea">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="NodeJS">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="tanvd.grazi">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="com.pestphp.pest-intellij">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="net.seesharpsoft.intellij.plugins.csv">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="org.jetbrains.plugins.vagrant">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="Docker">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="zielu.gittoolbox">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="XPathView">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="com.jetbrains.php.blade">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="name.kropp.intellij.makefile">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="org.jetbrains.plugins.phpstorm-docker">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="com.intellij.platform.daemon">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="gherkin">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="com.intellij.jsonpath">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="com.intellij.ko">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="Karma">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="com.intellij.modules.jcef">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="com.intellij.swagger">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="com.jetbrains.performancePlugin">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="com.jetbrains.restClient">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="intellij.webp">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="com.laravel_idea.plugin">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="org.toml.lang">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="Refactor-X">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="com.intellij.mcpServer">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="com.jetbrains.php.phpspec">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="com.jetbrains.plugins.webDeployment">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="intellij.nextjs">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="com.intellij.php.tools.quality.phpstan">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="cucumber-javascript">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="com.intellij.php.psalm">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="intellij.prettierJS">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="intellij.vitejs">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="com.github.xepozz.caddy">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="com.intellij.settingsSync">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="com.intellij.tasks.timeTracking">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="HtmlTools">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="com.jetbrains.station">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="com.intellij.stylelint">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="com.jetbrains.sh">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="com.jetbrains.php.wordPress">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="com.intellij.react">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="com.intellij.plugins.webcomponents">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="de.espend.idea.php.annotation">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="com.intellij.diagram">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="com.intellij.zh">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="com.deadlock.scsyntax">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="com.kalessil.phpStorm.phpInspectionsEA">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="com.anthropic.code.plugin">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="fr.adrienbrault.idea.symfony2plugin">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="com.jetbrains.twig">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="com.redhat.devtools.lsp4ij">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="org.jetbrains.plugins.remote-run">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="com.jetbrains.php">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="com.intellij.tasks">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="org.jetbrains.plugins.terminal">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="JavaScript">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="org.jetbrains.plugins.node-remote-interpreter">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="org.intellij.plugins.markdown">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="com.intellij.database">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="org.jetbrains.plugins.gitlab">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="com.intellij.ideolog">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="com.intellij.php.phpt">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="com.intellij.lang.liquid">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="JavaScriptDebugger">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="org.jetbrains.plugins.yaml">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="intellij.webpack">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="org.intellij.prisma">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="org.editorconfig.editorconfigjetbrains">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="com.jetbrains.php.dql">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="com.intellij.ja">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="com.jetbrains.php.drupal">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="com.github.toxdev.fish">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="com.intellij.copyright">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="com.chylex.intellij.inspectionlens">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="org.jetbrains.plugins.phpstorm-remote-interpreter">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="org.jetbrains.plugins.textmate">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="ru.adelf.idea.dotenv">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="tslint">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="com.jetbrains.php.behat">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="org.jetbrains.completion.full.line">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+      <entry pluginId="org.jetbrains.plugins.github">
+        <updateSource host="https://plugins.jetbrains.com/pluginManager" />
+      </entry>
+    </sources>
+  </component>
+</application>

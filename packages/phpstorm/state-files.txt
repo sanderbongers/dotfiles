@@ -1,0 +1,28 @@
+# Files in PhpStorm's options/ folder that hold machine state, not settings. Everything else must be linked from
+# stow/phpstorm. Entries are shell patterns. Add one here when bin/doctor reports an unclassified file that is state.
+CommonFeedbackSurveyService.xml
+DontShowAgainFeedbackService.xml
+EventLogAllowedList.xml
+actionSummary.xml
+agent.xml
+air*.xml
+databaseDrivers.xml
+features.usage.statistics.xml
+find.xml
+gitlab.xml
+ide.general.local.xml
+llm.*.xml
+log-categories.xml
+nodejs.xml
+other.xml
+php-tools.xml
+profilerRunConfigurations.xml
+recentProjects.xml
+settingsSync.xml
+trace_license_storage.xml
+trusted-paths.xml
+updates.xml
+usage.statistics.xml
+window.layouts.xml
+window.state.xml
+wsl-survey.xml

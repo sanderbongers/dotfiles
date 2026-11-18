@@ -1,0 +1,22 @@
+<application>
+  <component name="ProjectManager">
+    <defaultProject>
+      <component name="InspectionProjectProfileManager">
+        <option name="PROJECT_PROFILE" value="Default" />
+        <option name="USE_PROJECT_PROFILE" value="false" />
+        <version value="1.0" />
+      </component>
+      <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.general&quot;
+  }
+}</component>
+      <component name="WindowStateProjectService">
+        <state x="537" y="282" key="SettingsEditor" timestamp="1794993414828">
+          <screen x="0" y="40" width="2056" height="1199" />
+        </state>
+        <state x="537" y="282" key="SettingsEditor/0.40.2056.1199" timestamp="1794993414828" />
+      </component>
+    </defaultProject>
+  </component>
+</application>

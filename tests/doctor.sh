@@ -10,6 +10,11 @@ mkdir -p "$fixture/scripts/packages" "$fixture/packages" "$fixture/bin" "$tmp/bi
 cp "$repo_dir/bin/doctor" "$fixture/bin/"
 cp "$repo_dir/scripts/args.sh" "$repo_dir/scripts/link.sh" "$repo_dir/scripts/check-fish.sh" "$fixture/scripts/"
 cp "$repo_dir/scripts/packages/homebrew.sh" "$fixture/scripts/packages/"
+cat >"$fixture/scripts/packages/phpstorm.sh" <<'PHPSTORM'
+#!/bin/bash
+printf 'phpstorm.sh %s\n' "$*" >>"$HOME/calls"
+exit "${TEST_PHPSTORM_STATUS:-0}"
+PHPSTORM
 cp -R "$repo_dir/packages/apt" "$fixture/packages/"
 mkdir -p "$fixture/packages/homebrew" "$fixture/stow/fish/.config/fish" "$tmp/home/.config"
 printf 'brew "fish"\n' >"$fixture/packages/homebrew/Brewfile"
@@ -48,8 +53,18 @@ cd "$tmp"
 "$fixture/bin/doctor" >"$tmp/output" 2>&1
 grep -q 'PASS: Dotfile links' "$tmp/output"
 grep -q 'PASS: Homebrew packages' "$tmp/output"
+grep -qx 'phpstorm.sh check' "$HOME/calls"
+if TEST_PHPSTORM_STATUS=1 "$fixture/bin/doctor" >"$tmp/output" 2>&1; then
+    echo 'Doctor ignored a failing PhpStorm check.' >&2
+    exit 1
+fi
+: >"$HOME/calls"
 TEST_OS=Linux "$fixture/bin/doctor" >"$tmp/output" 2>&1
 grep -q 'PASS: Debian packages' "$tmp/output"
+if grep -q phpstorm "$HOME/calls"; then
+    echo 'Doctor checked PhpStorm on Linux.' >&2
+    exit 1
+fi
 if grep -q 'Homebrew' "$tmp/output"; then
     echo 'Doctor reported Homebrew checks on Linux.' >&2
     exit 1

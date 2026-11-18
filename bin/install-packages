@@ -6,6 +6,7 @@ repo_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 # shellcheck source=../scripts/args.sh
 source "$repo_dir/scripts/args.sh"
 
-check_args 'Install missing Homebrew packages for this Mac.' "$@"
+check_args 'Install missing Homebrew packages and PhpStorm plugins for this Mac.' "$@"
 
-exec bash "$repo_dir/scripts/packages/homebrew.sh" install
+bash "$repo_dir/scripts/packages/homebrew.sh" install
+exec bash "$repo_dir/scripts/packages/phpstorm.sh" install
