@@ -118,6 +118,8 @@ brew "pgcli"
 brew "php-code-sniffer"
 # Tool to automatically fix PHP coding standards issues
 brew "php-cs-fixer"
+# CLI for Playwright: record/generate code, inspect selectors, take screenshots
+brew "playwright-cli"
 # PDF rendering library (based on the xpdf-3.0 code base)
 brew "poppler"
 # Object-relational database system
@@ -207,6 +209,8 @@ cask "herdr-app"
 cask "iterm2"
 # Enable generative AI features in iTerm2
 cask "itermai"
+# Discover, download, and run local LLMs
+cask "lm-studio"
 # App to write, plan, collaborate, and get organised
 cask "notion"
 # Replacement for Docker Desktop
