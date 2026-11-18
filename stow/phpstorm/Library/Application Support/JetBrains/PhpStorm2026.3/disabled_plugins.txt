@@ -1,6 +1,7 @@
 AngularJS
 Karma
 com.intellij.air
+com.intellij.ml.llm
 com.intellij.php.psalm
 com.intellij.plugins.webcomponents
 com.jetbrains.php.blade
