@@ -9,7 +9,7 @@ source "$repo_dir/scripts/args.sh"
 script_dir="$repo_dir/scripts"
 # Reload after pulling because the pull may replace this script.
 if [[ ${1:-} != --after-pull ]]; then
-    check_args 'Pull remote changes, install and upgrade packages, relink dotfiles and update Fish plugins.' "$@"
+    check_args 'Pull, install and upgrade packages and PhpStorm plugins, relink dotfiles and update Fish plugins.' "$@"
     cd "$repo_dir"
     git pull origin main
     exec bash "$repo_dir/bin/update" --after-pull
@@ -30,6 +30,7 @@ case "$platform" in
                 ;;
         esac
         "$script_dir/packages/homebrew.sh" upgrade
+        bash "$script_dir/packages/phpstorm.sh" install
         ;;
     Linux)
         bash "$script_dir/packages/apt.sh" --no-upgrade

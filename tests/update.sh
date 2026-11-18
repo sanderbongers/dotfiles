@@ -62,6 +62,11 @@ cat >"$fixture/scripts/link.sh" <<'LINK'
 echo link >>"$TEST_LOG"
 LINK
 chmod +x "$fixture/scripts/link.sh"
+cat >"$fixture/scripts/packages/phpstorm.sh" <<'PHPSTORM'
+#!/bin/bash
+echo "phpstorm-plugins $1" >>"$TEST_LOG"
+exit "${TEST_PHPSTORM_STATUS:-0}"
+PHPSTORM
 cat >"$fixture/scripts/packages/neovim.sh" <<'NEOVIM'
 #!/bin/bash
 echo install-neovim >>"$TEST_LOG"
@@ -109,11 +114,13 @@ expect_order() {
 
 run_maintenance
 expect_order 'git pull origin main' 'mas upgrade' 'brew bundle install --file=- --no-upgrade' \
-    'brew upgrade --no-ask' 'code --update-extensions' 'link' 'fish -c fisher update' 'bat cache --build'
+    'brew upgrade --no-ask' 'code --update-extensions' 'phpstorm-plugins install' 'link' 'fish -c fisher update' \
+    'bat cache --build'
 expect_once 'brew bundle install --file=- --no-upgrade'
 expect_once 'bat cache --build'
+expect_once 'phpstorm-plugins install'
 reject_log 'sudo '
-echo 'ok - macOS pulls, installs missing packages, upgrades, links and updates plugins; builds cache once'
+echo 'ok - macOS pulls, installs packages and PhpStorm plugins, upgrades, links, updates plugins, builds cache once'
 
 run_maintenance TEST_OS=Linux
 expect_once 'sudo apt-get install -y --no-upgrade atop bat'
@@ -123,6 +130,7 @@ expect_order 'git pull origin main' 'sudo apt-get update' 'sudo apt-get upgrade 
 expect_once 'sudo apt-get update'
 expect_once 'batcat cache --build'
 reject_log 'brew '
+reject_log 'phpstorm-plugins'
 reject_log 'dist-upgrade'
 echo 'ok - Linux installs manifest packages, upgrades APT and Neovim, cleans dependencies and updates dotfiles'
 
@@ -149,6 +157,12 @@ expect_failure TEST_FISH_STATUS=1
 expect_log 'fish -c fisher update'
 reject_log 'bat cache'
 echo 'ok - Fish command failures stop maintenance'
+
+expect_failure TEST_PHPSTORM_STATUS=1
+expect_log 'phpstorm-plugins install'
+reject_log 'link'
+reject_log 'fish '
+echo 'ok - PhpStorm plugin installation failures stop maintenance'
 
 expect_failure TEST_OS=Linux TEST_PACKAGE_STATUS=1
 reject_log 'sudo apt-get upgrade'
