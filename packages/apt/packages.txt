@@ -9,6 +9,7 @@ docker-buildx-plugin
 docker-ce
 docker-ce-cli
 docker-compose-plugin
+docker-model-plugin
 fail2ban
 fd-find
 fish
