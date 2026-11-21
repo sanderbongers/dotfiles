@@ -28,9 +28,12 @@ run_test() {
         XDG_CONFIG_HOME="$tmp/config" XDG_RUNTIME_DIR="$tmp/runtime" "$@"
 }
 
-for suite in "$repo_dir"/tests/*.sh; do
+for suite in "$repo_dir"/tests/*.sh "$repo_dir"/tests/*.fish; do
     echo "Running ${suite##*/}"
-    run_test bash "$suite"
+    case "$suite" in
+        *.fish) run_test fish --no-config "$suite" ;;
+        *) run_test bash "$suite" ;;
+    esac
 done
 
 echo 'Running Fish syntax and startup checks'

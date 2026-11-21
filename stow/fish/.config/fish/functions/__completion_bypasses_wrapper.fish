@@ -1,3 +1,5 @@
-function __completion_bypasses_wrapper --description "True when invoked by path, bypassing a wrapper like vim=nvim, so the real binary's completions apply"
-    string match -q '*/*' -- (commandline -opc)[1]
+function __completion_bypasses_wrapper --argument-names replacement --description "Use native completions for bypasses"
+    set -l tokens (commandline -xpc)
+    string match -q '*/*' -- $tokens[1]; and return 0
+    not command -q $replacement
 end
