@@ -26,6 +26,18 @@ printf '%s\n' \
     "Components: main" \
     "Signed-By: /etc/apt/keyrings/caddy.asc" | sudo tee /etc/apt/sources.list.d/caddy.sources >/dev/null
 
+if [[ ! -e /etc/apt/sources.list.d/docker.list && ! -e /etc/apt/sources.list.d/docker.sources ]]; then
+    curl -fsSL https://download.docker.com/linux/debian/gpg | sudo tee /etc/apt/keyrings/docker.asc >/dev/null
+    sudo chmod 0644 /etc/apt/keyrings/docker.asc
+    printf '%s\n' \
+        "Types: deb" \
+        "URIs: https://download.docker.com/linux/debian" \
+        "Suites: trixie" \
+        "Components: stable" \
+        "Architectures: $(dpkg --print-architecture)" \
+        "Signed-By: /etc/apt/keyrings/docker.asc" | sudo tee /etc/apt/sources.list.d/docker.sources >/dev/null
+fi
+
 if [[ ! -x $(command -v nodejs) ]]; then
     echo "Installing Node.js..."
     tmp_dir="$(mktemp -d)"
