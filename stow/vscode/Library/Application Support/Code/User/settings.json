@@ -127,6 +127,7 @@
     "**/*{-lock.json,-lock.yaml,.lock}": true,
   },
   "search.useReplacePreview": false,
+  "security.promptForLocalFileProtocolHandling": false,
   "shellformat.useEditorConfig": true,
   "telemetry.telemetryLevel": "off",
   "terminal.integrated.initialHint": false,
