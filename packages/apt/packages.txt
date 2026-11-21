@@ -31,6 +31,7 @@ stow
 sysstat
 tealdeer
 tmux
+tree
 unattended-upgrades
 unbound
 zoxide
