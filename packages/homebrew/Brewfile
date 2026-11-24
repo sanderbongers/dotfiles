@@ -8,8 +8,6 @@ brew "asdf"
 brew "bash"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
-# 7-Zip (high compression file archiver) implementation
-brew "p7zip"
 # Searches a binary image for embedded files and executable code
 brew "binwalk"
 # CLI of the open-source IDE For exploring and testing APIs
@@ -116,6 +114,8 @@ brew "nikto"
 brew "nmap"
 # HTTP/DNS scanner configurable via YAML templates
 brew "nuclei"
+# 7-Zip (high compression file archiver) implementation
+brew "p7zip"
 # Swiss-army knife of markup format conversion
 brew "pandoc"
 # CLI for Postgres with auto-completion and syntax highlighting
@@ -225,6 +225,8 @@ cask "itermai"
 cask "lm-studio"
 # App to write, plan, collaborate, and get organised
 cask "notion"
+# Knowledge base that works on top of a local folder of plain text Markdown files
+cask "obsidian"
 # Replacement for Docker Desktop
 cask "orbstack"
 # PHP IDE by JetBrains

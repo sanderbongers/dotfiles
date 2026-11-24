@@ -69,7 +69,7 @@ setup_dock() {
     esac
 
     dock_layout=(
-        Firefox Mail "$dock_chat_app" Calendar Reminders Notes Notion Spotify Affinity
+        Firefox Mail "$dock_chat_app" Calendar Reminders Notes Obsidian Notion Spotify Affinity
         --
         "$dock_infra_app" "Burp Suite" Bruno TablePlus "$dock_ide_app" "$dock_ai_app" iTerm "System Settings"
         --
