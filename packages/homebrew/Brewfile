@@ -1,11 +1,15 @@
 # Browser automation CLI for AI agents
 brew "agent-browser"
+# ARP scanning and fingerprinting tool
+brew "arp-scan"
 # Extendable version manager with support for Ruby, Node.js, Erlang & more
 brew "asdf"
 # Bourne-Again SHell, a UNIX command interpreter
 brew "bash"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
+# 7-Zip (high compression file archiver) implementation
+brew "p7zip"
 # Searches a binary image for embedded files and executable code
 brew "binwalk"
 # CLI of the open-source IDE For exploring and testing APIs
@@ -98,6 +102,8 @@ brew "mailpit"
 brew "markdownlint-cli2"
 # Mac App Store command-line interface
 brew "mas"
+# UPnP IGD client library and daemon
+brew "miniupnpc"
 # SMTP client that can be used as an SMTP plugin for Mutt
 brew "msmtp"
 # NCurses Disk Usage
@@ -108,8 +114,8 @@ brew "neovim"
 brew "nikto"
 # Port scanning utility for large networks
 brew "nmap"
-# 7-Zip (high compression file archiver) implementation
-brew "p7zip"
+# HTTP/DNS scanner configurable via YAML templates
+brew "nuclei"
 # Swiss-army knife of markup format conversion
 brew "pandoc"
 # CLI for Postgres with auto-completion and syntax highlighting
@@ -126,12 +132,16 @@ brew "poppler"
 brew "postgresql@18"
 # Code formatter for JavaScript, CSS, JSON, GraphQL, Markdown, YAML
 brew "prettier"
+# Static type checker for Python
+brew "pyright"
 # Utility for encoding or decoding QR code
 brew "qrtool"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 # Utility that provides fast incremental file transfer
 brew "rsync"
+# Extremely fast Python linter, written in Rust
+brew "ruff"
 # Static analysis and lint tool, for (ba)sh scripts
 brew "shellcheck"
 # Autoformat shell script source code
@@ -158,6 +168,8 @@ brew "unbound"
 brew "uv"
 # Internet file retriever
 brew "wget"
+# Network analyzer and capture tool - without graphical user interface
+brew "wireshark"
 # Process YAML, JSON, XML, CSV and properties documents from the CLI
 brew "yq"
 # Feature-rich command-line audio/video downloader
